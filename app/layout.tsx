@@ -13,35 +13,6 @@ const inter = Inter({
   weight: "400",
 })
 
-// const oxanium = Oxanium({
-//   subsets: ['latin'],
-//   display: 'auto',
-//   weight: "800",
-// })
-//
-// const playwrite = Playwrite_IN({
-//   display: 'auto',
-//   weight: "100"
-// })
-//
-// const poppins = Poppins({
-//   display: 'auto',
-//   weight: "400"
-// })
-//
-//
-// const roboto = Roboto({
-//   subsets: ['latin'],
-//   display: 'auto',
-//   weight: "400"
-// })
-//
-// const montserrat = Montserrat({
-//   subsets: ['latin'],
-//   display: 'auto',
-//   weight: "400"
-// })
-
 export const metadata: Metadata = {
   title: "Devvoir",
   description: "Track your development activity with ease.",
