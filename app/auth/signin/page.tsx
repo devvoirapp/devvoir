@@ -38,15 +38,17 @@ export default function AuthPage() {
         <div className="text-center">
           <div className="inline-flex items-center justify-center gap-3 mb-6">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
+              <div className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
               <Icon icon={"lucide:git-commit-horizontal"} className="w-10 h-10 relative text-purple-600"/>
             </div>
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
+            <h1 className="text-5xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
               Devvoir
               <div className="absolute -right-16 -top-1 transform rotate-12">
                 <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg opacity-75 blur group-hover:blur-md transition-all duration-300"></div>
-                  <span className="relative block px-2 py-1 text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                  <div
+                      className="absolute inset-0 bg-linear-to-r from-purple-600 to-blue-600 rounded-lg opacity-75 blur-sm group-hover:blur-md transition-all duration-300"></div>
+                  <span
+                      className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
                     BETA
                   </span>
                 </div>
@@ -58,11 +60,12 @@ export default function AuthPage() {
         {/* Main Card */}
         <div className="relative">
           {/* Card glow effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
+          <div
+              className="absolute -inset-1 bg-linear-to-r from-purple-600 to-blue-600 rounded-2xl blur-sm opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
           
           <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden">
             {/* Top Banner */}
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4">
+            <div className="bg-linear-to-r from-purple-600 to-blue-600 text-white px-8 py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Icon icon={"lucide:bot"} className="w-5 h-5"/>
@@ -112,13 +115,15 @@ export default function AuthPage() {
               <div className="mt-8 pt-8 border-t border-gray-100">
                 <div className="flex justify-center gap-6">
                   <div className="text-center">
-                    <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
+                    <div
+                        className="text-2xl font-bold bg-linear-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
                       2,000+
                     </div>
                     <div className="text-sm text-gray-600">Active Users</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    <div
+                        className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                       40%
                     </div>
                     <div className="text-sm text-gray-600">Time Saved</div>

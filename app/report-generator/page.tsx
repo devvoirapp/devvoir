@@ -576,7 +576,7 @@ function ReportGenerator() {
         <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             {/* {error && (
-                        <div className="fixed top-20 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                        <div className="fixed top-20 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-sm" role="alert">
                             <strong className="font-bold">Error: </strong>
                             <span className="block sm:inline">{error}</span>
                             <button 
@@ -593,12 +593,14 @@ function ReportGenerator() {
             <div className="flex items-center gap-2">
                 <Icon icon={"lucide:git-commit-horizontal"} className="w-8 h-8 text-purple-600"/>
               <div className="relative">
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   Devvoir
                   <div className="absolute -right-16 -top-1 transform rotate-12 group">
                     <div className="relative">
-                      <span className="absolute inset-0 bg-purple-600 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></span>
-                      <span className="relative block px-2 py-1 text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                        <span
+                            className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
+                        <span
+                            className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
                         BETA
                       </span>
                       <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>
@@ -610,10 +612,11 @@ function ReportGenerator() {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => router.push("/account")}
-                className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
               >
                 {/* Background shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700" />
+                  <div
+                      className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700"/>
 
                 {/* Content wrapper */}
                 <div className="relative flex items-center gap-2">
@@ -626,11 +629,12 @@ function ReportGenerator() {
                 </div>
               </button>
               <button
-                className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                  className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
                 onClick={() => signOut({ callbackUrl: "/" })}
               >
                 {/* Background shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700" />
+                  <div
+                      className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700"/>
 
                 {/* Content wrapper */}
                 <div className="relative flex items-center gap-2">
@@ -653,7 +657,8 @@ function ReportGenerator() {
 
           <main className={"container mx-auto px-4 pb-12 pt-8"}>
           <div className="max-w-3xl mx-auto space-y-8">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200/80 p-8 shadow-xl shadow-purple-500/5">
+              <div
+                  className="bg-white/80 backdrop-blur-xs rounded-2xl border border-gray-200/80 p-8 shadow-xl shadow-purple-500/5">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Account Selection Dropdown */}
                 <Dropdown
@@ -694,7 +699,7 @@ function ReportGenerator() {
                 {/* Show other fields only when repository is selected */}
                 {
                   <div className="space-y-6 animate-fadeIn">
-                    {/*<div className={`relative flex rounded-lg px-5 py-4 shadow-md focus:outline-none border-2 border-gray-200 */}
+                      {/*<div className={`relative flex rounded-lg px-5 py-4 shadow-md focus:outline-hidden border-2 border-gray-200 */}
                     {/*    bg-gray-50/50 cursor-not-allowed transition-all duration-300 mt-6`}*/}
                     {/*>*/}
                     {/*    <span className="absolute -top-2.5 right-3 inline-flex items-center text-[8px] font-bold tracking-wider uppercase*/}
@@ -717,15 +722,15 @@ function ReportGenerator() {
                     {/*        </div>*/}
                     {/*    </div>*/}
                     {/*</div>*/}
-                    {/*<div className="flex items-center bg-gradient-to-r from-purple-50 to-blue-50 rounded-md px-3 py-2 -mt-2 mb-4 border border-purple-100">*/}
-                    {/*    <InfoIcon className="h-4 w-4 text-purple-600 mr-2 flex-shrink-0" />*/}
+                      {/*<div className="flex items-center bg-linear-to-r from-purple-50 to-blue-50 rounded-md px-3 py-2 -mt-2 mb-4 border border-purple-100">*/}
+                      {/*    <InfoIcon className="h-4 w-4 text-purple-600 mr-2 shrink-0" />*/}
                     {/*    <span className="text-sm text-gray-700">*/}
                     {/*        All pull requests are currently included. Date filtering will be enabled soon.*/}
                     {/*    </span>*/}
                     {/*</div>*/}
 
                     <div
-                      className={`relative flex rounded-lg px-5 py-4 shadow-md focus:outline-none border-2 border-gray-200 
+                        className={`relative flex rounded-lg px-5 py-4 shadow-md focus:outline-hidden border-2 border-gray-200 
                                         bg-gray-50/50 cursor-not-allowed transition-all duration-300 mt-6`}
                     >
                       <span
@@ -775,8 +780,9 @@ function ReportGenerator() {
                       disabled={!repository}
                       position="top"
                     />
-                    <div className="flex items-center bg-gradient-to-r from-purple-50 to-blue-50 rounded-md px-3 py-2 mt-2 mb-4 border border-purple-100">
-                        <Icon icon={"lucide:info"} className="h-4 w-4 text-purple-600 mr-2 flex-shrink-0"/>
+                      <div
+                          className="flex items-center bg-linear-to-r from-purple-50 to-blue-50 rounded-md px-3 py-2 mt-2 mb-4 border border-purple-100">
+                          <Icon icon={"lucide:info"} className="h-4 w-4 text-purple-600 mr-2 shrink-0"/>
                       <span className="text-sm text-gray-700">
                         Reports can be generated for pull requests with up to 10
                         file changes.
@@ -798,7 +804,7 @@ function ReportGenerator() {
                                               !loading &&
                                               selectedPR.length > 0 &&
                                               !aiSummary
-                                                ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-sm hover:shadow-lg hover:shadow-purple-500/20"
+                                                  ? "bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-xs hover:shadow-lg hover:shadow-purple-500/20"
                                                 : "bg-gray-100 text-gray-400 cursor-not-allowed"
                                             }
                                         `}
@@ -830,7 +836,7 @@ function ReportGenerator() {
               <div className="mt-8 space-y-6">
                 <div className="flex flex-col space-y-4">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                      <h2 className="text-xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                       Pull Request Changes
                     </h2>
                     <div className="flex items-center gap-4">
@@ -901,7 +907,7 @@ function ReportGenerator() {
                       placeholder="Search files..."
                       value={fileSearchTerm}
                       onChange={(e) => setFileSearchTerm(e.target.value)}
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white text-black placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-purple-500 focus:ring-offset-2 focus:border-purple-500 sm:text-sm"
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white text-black placeholder-gray-500 focus:outline-hidden focus:placeholder-gray-400 focus:ring-1 focus:ring-purple-500 focus:ring-offset-2 focus:border-purple-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -1094,22 +1100,28 @@ function ReportGenerator() {
             {(aiSummary || isGeneratingSummary || error) && (
               <div ref={reportRef} className="mt-8 relative">
                 {/* Decorative background elements */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-indigo-50/50 rounded-2xl" />
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl opacity-10 blur-sm group-hover:opacity-20 transition-opacity duration-500" />
+                  <div
+                      className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-indigo-50/50 rounded-2xl"/>
+                  <div
+                      className="absolute -inset-0.5 bg-linear-to-r from-purple-500 to-indigo-500 rounded-2xl opacity-10 blur-xs group-hover:opacity-20 transition-opacity duration-500"/>
 
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-100/50 shadow-xl shadow-purple-100/30 relative z-0">
-                  <div className="bg-gradient-to-br from-white via-white to-purple-50/30 px-8 py-6 border-b border-gray-100/50">
+                  <div
+                      className="bg-white/90 backdrop-blur-xs rounded-2xl overflow-hidden border border-gray-100/50 shadow-xl shadow-purple-100/30 relative z-0">
+                      <div
+                          className="bg-linear-to-br from-white via-white to-purple-50/30 px-8 py-6 border-b border-gray-100/50">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                         <div className="relative z-0 group/icon">
-                          <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full opacity-75 blur group-hover/icon:opacity-100 transition-all duration-300" />
-                          <div className="relative z-0 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 ring-2 ring-purple-400/50">
+                            <div
+                                className="absolute -inset-0.5 bg-linear-to-r from-purple-600 to-indigo-600 rounded-full opacity-75 blur-sm group-hover/icon:opacity-100 transition-all duration-300"/>
+                            <div
+                                className="relative z-0 flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-purple-600 to-indigo-600 ring-2 ring-purple-400/50">
                               <Icon icon={"lucide:brain"}
                                     className="w-5 h-5 text-white transform group-hover/icon:scale-110 transition-transform duration-300"/>
                           </div>
                         </div>
                         <div>
-                          <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                            <h3 className="text-xl font-semibold bg-linear-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                             AI Generated Report
                           </h3>
                           <p className="text-sm text-gray-500 mt-0.5">
@@ -1136,11 +1148,12 @@ function ReportGenerator() {
                               setShowRegenerateOptions(!showRegenerateOptions)
                             }
                             disabled={regenerateLoading}
-                            className="relative overflow-hidden group flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="relative overflow-hidden group flex items-center gap-2 px-4 py-2 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20 focus:outline-hidden focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                             title="Regenerate report with different options"
                           >
                             {/* Background shine effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700" />
+                              <div
+                                  className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700"/>
 
                             {/* Content wrapper */}
                             <div className="relative flex items-center gap-2">
@@ -1165,12 +1178,13 @@ function ReportGenerator() {
 
                           {/* Regenerate Options Dropdown */}
                           {showRegenerateOptions && (
-                            <div className="absolute right-0 mt-2 w-80 bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl border border-purple-100/50 overflow-hidden z-50 animate-fadeIn">
+                              <div
+                                  className="absolute right-0 mt-2 w-80 bg-white/90 backdrop-blur-xs rounded-2xl shadow-2xl border border-purple-100/50 overflow-hidden z-50 animate-fadeIn">
                               {/* Header with gradient background */}
                               <div className="relative">
-                                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-blue-600/5" />
+                                  <div className="absolute inset-0 bg-linear-to-r from-purple-600/5 to-blue-600/5"/>
                                 <div className="px-6 py-4 relative">
-                                  <h4 className="text-base font-semibold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                                    <h4 className="text-base font-semibold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                     Regenerate Options
                                   </h4>
                                 </div>
@@ -1191,12 +1205,15 @@ function ReportGenerator() {
                                   }}
                                   className="w-full group relative"
                                 >
-                                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-blue-500/0 group-hover:from-purple-500/5 group-hover:to-blue-500/5 rounded-xl transition-all duration-300" />
+                                    <div
+                                        className="absolute inset-0 bg-linear-to-r from-purple-500/0 to-blue-500/0 group-hover:from-purple-500/5 group-hover:to-blue-500/5 rounded-xl transition-all duration-300"/>
                                   <div className="relative flex items-center gap-4 p-3">
                                     {/* Icon Container */}
-                                    <div className="relative flex-shrink-0">
-                                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl opacity-10 group-hover:opacity-20 blur-sm transition-opacity duration-300" />
-                                      <div className="relative h-10 w-10 flex items-center justify-center bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl shadow-sm">
+                                      <div className="relative shrink-0">
+                                          <div
+                                              className="absolute inset-0 bg-linear-to-r from-purple-500 to-blue-500 rounded-xl opacity-10 group-hover:opacity-20 blur-xs transition-opacity duration-300"/>
+                                          <div
+                                              className="relative h-10 w-10 flex items-center justify-center bg-linear-to-r from-purple-50 to-blue-50 rounded-xl shadow-xs">
                                           <Icon icon={"lucide:refresh-ccw"}
                                                 className="w-5 h-5 text-purple-600 group-hover:rotate-180 transition-transform duration-500"/>
                                       </div>
@@ -1223,12 +1240,15 @@ function ReportGenerator() {
                                   }}
                                   className="w-full group relative"
                                 >
-                                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-blue-500/0 group-hover:from-purple-500/5 group-hover:to-blue-500/5 rounded-xl transition-all duration-300" />
+                                    <div
+                                        className="absolute inset-0 bg-linear-to-r from-purple-500/0 to-blue-500/0 group-hover:from-purple-500/5 group-hover:to-blue-500/5 rounded-xl transition-all duration-300"/>
                                   <div className="relative flex items-center gap-4 p-3">
                                     {/* Icon Container */}
-                                    <div className="relative flex-shrink-0">
-                                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl opacity-10 group-hover:opacity-20 blur-sm transition-opacity duration-300" />
-                                      <div className="relative h-10 w-10 flex items-center justify-center bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl shadow-sm">
+                                      <div className="relative shrink-0">
+                                          <div
+                                              className="absolute inset-0 bg-linear-to-r from-purple-500 to-blue-500 rounded-xl opacity-10 group-hover:opacity-20 blur-xs transition-opacity duration-300"/>
+                                          <div
+                                              className="relative h-10 w-10 flex items-center justify-center bg-linear-to-r from-purple-50 to-blue-50 rounded-xl shadow-xs">
                                           <Icon icon={"lucide:git-pull-request"}
                                                 className="w-5 h-5 text-purple-600 transform group-hover:scale-110 transition-transform duration-300"/>
                                       </div>
@@ -1246,10 +1266,12 @@ function ReportGenerator() {
                                 </button>
 
                                 {/* Info Section */}
-                                <div className="relative mt-3 mx-3 p-4 bg-gradient-to-r from-purple-50/50 to-blue-50/50 rounded-xl border border-purple-100/50">
+                                  <div
+                                      className="relative mt-3 mx-3 p-4 bg-linear-to-r from-purple-50/50 to-blue-50/50 rounded-xl border border-purple-100/50">
                                   <div className="flex items-start gap-3">
-                                    <div className="relative flex-shrink-0">
-                                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-10 blur-[2px]" />
+                                      <div className="relative shrink-0">
+                                          <div
+                                              className="absolute inset-0 bg-linear-to-r from-purple-500 to-blue-500 rounded-full opacity-10 blur-[2px]"/>
                                       <div className="relative">
                                           <Icon icon={"lucide:info"} className="w-4 h-4 text-purple-600"/>
                                       </div>
@@ -1271,7 +1293,7 @@ function ReportGenerator() {
                         <button
                           onClick={handleCopyReport}
                           disabled={copyLoading}
-                          className="relative overflow-hidden flex items-center justify-center w-8 h-8 bg-gray-50 hover:bg-gray-100 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200 focus:outline-none"
+                          className="relative overflow-hidden flex items-center justify-center w-8 h-8 bg-gray-50 hover:bg-gray-100 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200 focus:outline-hidden"
                           title="Copy report to clipboard"
                           aria-label="Copy report to clipboard"
                         >
@@ -1286,8 +1308,9 @@ function ReportGenerator() {
                         {copyError && (
                           <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-max">
                             <div className="relative">
-                              <div className="absolute -inset-1 bg-red-500 rounded-lg opacity-20 blur-sm" />
-                              <div className="relative px-3 py-1.5 bg-red-50 text-red-800 text-xs font-medium rounded-lg shadow-sm border border-red-200/50 animate-fadeIn">
+                                <div className="absolute -inset-1 bg-red-500 rounded-lg opacity-20 blur-xs"/>
+                                <div
+                                    className="relative px-3 py-1.5 bg-red-50 text-red-800 text-xs font-medium rounded-lg shadow-xs border border-red-200/50 animate-fadeIn">
                                 {copyError}
                               </div>
                             </div>
@@ -1393,7 +1416,7 @@ function ReportGenerator() {
                             <button
                               onClick={handleCopyReport}
                               disabled={copyLoading}
-                              className="relative overflow-hidden flex items-center justify-center w-8 h-8 bg-gray-50 hover:bg-gray-100 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200 focus:outline-none"
+                              className="relative overflow-hidden flex items-center justify-center w-8 h-8 bg-gray-50 hover:bg-gray-100 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200 focus:outline-hidden"
                               title="Copy report to clipboard"
                               aria-label="Copy report to clipboard"
                             >

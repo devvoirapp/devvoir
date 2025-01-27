@@ -4,8 +4,8 @@ import {Icon} from "@iconify/react";
 import classNames from "classnames"; // Util for conditional classes
 
 // Button styles extracted as constants
-const BUTTON_BASE_CLASSES = "relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20";
-const BACKGROUND_EFFECT_CLASSES = "absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700";
+const BUTTON_BASE_CLASSES = "relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20";
+const BACKGROUND_EFFECT_CLASSES = "absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700";
 
 // Utility to determine rotation class
 const getIconRotationClass = (iconPosition: 'left' | 'right') =>

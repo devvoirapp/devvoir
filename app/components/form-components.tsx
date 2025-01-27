@@ -65,7 +65,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               bg-white
               border
               rounded-lg
-              outline-none
+              outline-hidden
               transition-colors
               duration-200
               ${startIcon ? 'pl-10' : ''}

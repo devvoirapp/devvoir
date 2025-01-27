@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import {useState} from 'react';
 
 interface AvatarProps {
   src?: string | null;
@@ -37,8 +37,8 @@ export function Avatar({
 
   if (!src || error) {
     return (
-      <div 
-        className={`${sizes[size]} bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-white font-medium ${className}`}
+      <div
+          className={`${sizes[size]} bg-linear-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-white font-medium ${className}`}
       >
         {getFallbackInitials(fallback)}
       </div>
