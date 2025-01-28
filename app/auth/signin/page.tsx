@@ -5,6 +5,7 @@ import {useEffect} from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import SignInButton from "./SignInButton";
 import {Icon} from "@iconify/react";
+import {LucideBot, LucideClock, LucideGitCommitHorizontal, LucideUsers} from "@/utils/icons";
 
 export default function AuthPage() {
   const { status } = useSession();
@@ -39,7 +40,7 @@ export default function AuthPage() {
           <div className="inline-flex items-center justify-center gap-3 mb-6">
             <div className="relative">
               <div className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
-              <Icon icon={"lucide:git-commit-horizontal"} className="w-10 h-10 relative text-purple-600"/>
+              <LucideGitCommitHorizontal className="w-10 h-10 relative text-purple-600"/>
             </div>
             <h1 className="text-5xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
               Devvoir
@@ -85,19 +86,19 @@ export default function AuthPage() {
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3 text-gray-600">
                   <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center">
-                    <Icon icon={"lucide:clock"} className="w-4 h-4 text-purple-600"/>
+                    <LucideClock className="w-4 h-4 text-purple-600"/>
                   </div>
                   <span>Save 30+ minutes daily on manual reporting</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
                   <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
-                    <Icon icon={"lucide:bot"} className="w-4 h-4 text-blue-600"/>
+                    <LucideBot className="w-4 h-4 text-blue-600"/>
                   </div>
                   <span>AI-powered commit & PR analysis</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
                   <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center">
-                    <Icon icon={"lucide:users"} className="w-4 h-4 text-indigo-600"/>
+                    <LucideUsers className="w-4 h-4 text-indigo-600"/>
                   </div>
                   <span>Used by 2,000+ developers</span>
                 </div>

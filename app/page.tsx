@@ -1,8 +1,22 @@
 "use client";
 import {useRouter} from 'next/navigation';
 import {Button} from "@/app/components/Button";
-import {Icon} from "@iconify/react";
-import {LucideGitPullRequest, LucideMessageSquare, LucideX} from "@/utils/icons";
+import {
+    LucideArrowRight,
+    LucideBot,
+    LucideCheck,
+    LucideCheckCircle2,
+    LucideClock,
+    LucideFileText,
+    LucideGitCommitHorizontal,
+    LucideGitPullRequest,
+    LucideMessageSquare,
+    LucideSparkles,
+    LucideX,
+    SimpleIconsGithub,
+    SimpleIconsLinkedin,
+    SimpleIconsTwitter
+} from "@/utils/icons";
 
 // const PricingSection = () => {
 //     const plans = [
@@ -668,7 +682,7 @@ const LandingPage = () => {
 
     const features: Feature[] = [
         {
-            icon: <Icon icon={"simple-icons:github"} className="w-8 h-8 text-white"/>,
+            icon: <SimpleIconsGithub className="w-8 h-8 text-white"/>,
             title: "Connect Repository",
             description: "Link your GitHub repository to start tracking your development activity automatically.",
             bgGradient: "from-purple-500 to-purple-600",
@@ -736,7 +750,7 @@ const LandingPage = () => {
         <div className="flex items-start gap-3 mb-4">
             <div className="mt-1">
                 <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-                    <Icon icon={"lucide:check"} className={"w-3 h-3 text-green-500"}/>
+                    <LucideCheck className={"w-3 h-3 text-green-500"}/>
                 </div>
             </div>
             <p className="text-gray-600">{text}</p>
@@ -885,7 +899,7 @@ const LandingPage = () => {
                             {/* Pain Points */}
                             <div className="bg-white/80 backdrop-blur-xs rounded-xl border border-gray-200 p-6">
                                 <h3 className="text-lg font-semibold text-red-600 mb-6 flex items-center gap-2">
-                                    <Icon icon={"lucide:clock"} className="w-5 h-5"/>
+                                    <LucideClock className="w-5 h-5"/>
                                     Time-Consuming Manual Updates
                                 </h3>
                                 {painPoints.map((point, idx) => (
@@ -896,7 +910,7 @@ const LandingPage = () => {
                             {/* Solutions */}
                             <div className="bg-white/80 backdrop-blur-xs rounded-xl border border-gray-200 p-6">
                                 <h3 className="text-lg font-semibold text-green-600 mb-6 flex items-center gap-2">
-                                    <Icon icon={"lucide:bot"} className={"w-5 h-5"}/>
+                                    <LucideBot className={"w-5 h-5"}/>
                                     Automated AI Solutions
                                 </h3>
                                 {solutions.map((solution, idx) => (
@@ -941,7 +955,7 @@ const LandingPage = () => {
                                         <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
                                             <div className="flex items-center gap-2 text-blue-400 mb-2">
                                                 {/*<Bot className="w-4 h-4" />*/}
-                                                <Icon icon={"lucide:bot"} className={"w-5 h-5"}/>
+                                                <LucideBot className={"w-5 h-5"}/>
                                                 <span
                                                     className="text-sm">Devvoir Generated:</span>
                                             </div>
@@ -977,7 +991,7 @@ const LandingPage = () => {
 
                             {/* CTA */}
                             <div className="flex flex-col items-center justify-center mt-8 text-center">
-                                <Button icon={"lucide:arrow-right"} text={"Try It Now - It's Free"}
+                                <Button Icon={LucideArrowRight} text={"Try It Now - It's Free"}
                                         onClick={() => router.push("/auth/signin")} iconPosition={"right"}/>
                                 <p className="mt-3 text-sm text-gray-600">
                                     No credit card required • Free during beta
@@ -1006,7 +1020,7 @@ const LandingPage = () => {
             <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b">
                 <div className="container mx-auto px-4 max-w-7xl py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                        <Icon icon={"lucide:git-commit-horizontal"} className="w-8 h-8 text-purple-600"/>
+                        <LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>
                         <div className="relative">
                             <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Devvoir
@@ -1061,7 +1075,7 @@ const LandingPage = () => {
                             </button>
                         ))}
                     </div> */}
-                    <Button icon={"lucide:sparkles"} text={"Get Started"} onClick={() => router.push("/auth/signin")}
+                    <Button Icon={LucideSparkles} text={"Get Started"} onClick={() => router.push("/auth/signin")}
                             iconPosition={"left"}/>
                 </div>
             </nav>
@@ -1087,7 +1101,7 @@ const LandingPage = () => {
                                 reports.
                                 No more manual standups or forgetting what you worked on.
                             </p>
-                            <Button icon={"lucide:arrow-right"} text={"Get Started"} iconPosition={"right"}
+                            <Button Icon={LucideArrowRight} text={"Get Started"} iconPosition={"right"}
                                     onClick={() => router.push("/auth/signin")}/>
                         </div>
 
@@ -1114,7 +1128,7 @@ const LandingPage = () => {
                                     <div className="space-y-4">
                                         <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
                                             <div className="flex items-center gap-2 text-blue-400 mb-2">
-                                                <Icon icon={"lucide:git-commit-horizontal"} className="w-4 h-4"/>
+                                                <LucideGitCommitHorizontal className="w-4 h-4"/>
                                                 <span
                                                     className="text-sm">feat: Implement real-time data synchronization</span>
                                             </div>
@@ -1126,7 +1140,7 @@ const LandingPage = () => {
 
                                         <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
                                             <div className="flex items-center gap-2 text-purple-400 mb-2">
-                                                <Icon icon={"lucide:git-pull-request"} className="w-4 h-4"/>
+                                                <LucideGitPullRequest className="w-4 h-4"/>
                                                 <span className="text-sm">PR: Enhance caching mechanism</span>
                                             </div>
                                             <p className="text-gray-300 text-sm">
@@ -1137,7 +1151,7 @@ const LandingPage = () => {
 
                                         <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
                                             <div className="flex items-center gap-2 text-green-400 mb-2">
-                                                <Icon icon={"lucide:bot"} className={"w-5 h-5"}/>
+                                                <LucideBot className={"w-5 h-5"}/>
                                                 <span className="text-sm">Daily Summary</span>
                                             </div>
                                             <p className="text-gray-300 text-sm">
@@ -1229,10 +1243,10 @@ const LandingPage = () => {
                                             {feature.features.map((item, i) => (
                                                 <li key={i} className="flex items-center gap-3 text-gray-700">
                                                     <div className="relative">
-                                                        <Icon icon={"lucide:check-circle-2"}
+                                                        <LucideCheckCircle2
                                                               className={"w-5 h-5 text-green-500 shrink-0"}/>
                                                         <div className="absolute inset-0 animate-ping opacity-20">
-                                                            <Icon icon={"lucide:check-circle-2"}
+                                                            <LucideCheckCircle2
                                                                   className="w-5 h-5 text-green-500 shrink-0"/>
                                                         </div>
                                                     </div>
@@ -1271,7 +1285,7 @@ const LandingPage = () => {
                                         End of Day Report - John&apos;s Activity
                                     </h4>
                                     <div className="flex items-center mt-2 text-gray-600">
-                                        <Icon icon={"lucide:clock"} className="w-4 h-4 mr-2"/>
+                                        <LucideClock className="w-4 h-4 mr-2"/>
                                         <span>Thursday, November 2, 2024</span>
                                     </div>
                                 </div>
@@ -1281,7 +1295,7 @@ const LandingPage = () => {
                                 {/* Pull Requests Section */}
                                 <div>
                                     <div className="flex items-center mb-4">
-                                        <Icon icon={"lucide:git-pull-request"}
+                                        <LucideGitPullRequest
                                               className="w-5 h-5 text-violet-600 mr-2"/>
                                         <h5 className="text-lg font-semibold text-gray-900">Pull Requests</h5>
                                     </div>
@@ -1309,7 +1323,7 @@ const LandingPage = () => {
                                 {/* Commits Section */}
                                 <div>
                                     <div className="flex items-center mb-4">
-                                        <Icon icon={"lucide:git-commit-horizontal"}
+                                        <LucideGitCommitHorizontal
                                               className="w-5 h-5 text-indigo-600 mr-2"/>
                                         <h5 className="text-lg font-semibold text-gray-900">Commits</h5>
                                     </div>
@@ -1336,7 +1350,7 @@ const LandingPage = () => {
                                 {/* Summary Section */}
                                 <div>
                                     <div className="flex items-center mb-4">
-                                        <Icon icon={"lucide:file-text"} className="w-5 h-5 text-gray-900 mr-2"/>
+                                        <LucideFileText className="w-5 h-5 text-gray-900 mr-2"/>
                                         <h5 className="text-lg font-semibold text-gray-900">Summary</h5>
                                     </div>
                                     <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
@@ -1389,7 +1403,7 @@ const LandingPage = () => {
                                 <div
                                     className="inline-flex p-3 rounded-xl bg-violet-500/10 backdrop-blur-xs border border-violet-500/20">
                                     {/*<Bot className="w-6 h-6 text-violet-400" />*/}
-                                    <Icon icon={"lucide:bot"} className={"w-6 h-6 text-violet-400"}/>
+                                    <LucideBot className={"w-6 h-6 text-violet-400"}/>
                                 </div>
                             </div>
 
@@ -1398,7 +1412,7 @@ const LandingPage = () => {
                                 <div className="flex justify-center">
                                     <div
                                         className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20">
-                                        <Icon icon={"lucide:sparkles"} className="w-4 h-4 text-violet-400"/>
+                                        <LucideSparkles className="w-4 h-4 text-violet-400"/>
                                         <span className="text-sm text-violet-200">AI-Powered Reports</span>
                                     </div>
                                 </div>
@@ -1419,7 +1433,7 @@ const LandingPage = () => {
 
                                 {/* CTA Button */}
                                 <div className="flex flex-col items-center gap-4">
-                                    <Button icon={"lucide:arrow-right"} text={"Start Automating Your Reports"}
+                                    <Button Icon={LucideArrowRight} text={"Start Automating Your Reports"}
                                             onClick={() => router.push("/auth/signin")} iconPosition={"right"}/>
                                     <span
                                         className="text-sm text-gray-500">Get started in minutes • No setup needed</span>
@@ -1451,7 +1465,7 @@ const LandingPage = () => {
             <footer className="bg-white border-t">
                 <div className="container mx-auto px-4 max-w-7xl py-12">
                     <div className="flex items-center justify-center gap-2 mb-8">
-                        <Icon icon={"lucide:git-commit-horizontal"} className="w-8 h-8 text-purple-600"/>
+                        <LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>
                         <div className="relative">
                             <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Devvoir
@@ -1472,11 +1486,11 @@ const LandingPage = () => {
                     </div>
                     <div className="flex items-center justify-center gap-6 mb-4">
                         <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <Icon icon={"lucide:twitter"}
+                            <SimpleIconsTwitter
                                   className="w-6 h-6 text-blue-500 hover:text-blue-400 transition-colors"/>
                         </a>
                         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                            <Icon icon={"lucide:linkedin"}
+                            <SimpleIconsLinkedin
                                   className="w-6 h-6 text-blue-700 hover:text-blue-600 transition-colors"/>
                         </a>
                     </div>

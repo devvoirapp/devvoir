@@ -1,10 +1,10 @@
 'use client'
 
-import { signIn } from "next-auth/react"
+import {signIn} from "next-auth/react"
 
 export default function SignInButton() {
-  const handleSignIn = () => {
-    signIn("github", {
+    const handleSignIn = async () => {
+        await signIn("github", {
       callbackUrl: '/report-generator'
     })
   }
@@ -12,7 +12,7 @@ export default function SignInButton() {
   return (
     <button
       onClick={handleSignIn}
-      className="flex items-center justify-center space-x-2 rounded-lg bg-gray-900 px-6 py-3 text-white hover:bg-gray-800 w-full"
+      className="flex items-center justify-center space-x-2 rounded-lg bg-gray-900 px-6 py-2.5 text-white hover:bg-gray-800 w-full"
     >
       <svg
         className="h-6 w-6"
