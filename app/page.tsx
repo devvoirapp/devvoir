@@ -1450,10 +1450,6 @@ const LandingPage = () => {
             {/* Footer */}
             <footer className="bg-white border-t">
                 <div className="container mx-auto px-4 max-w-7xl py-12">
-                    {/*<div className="flex items-center justify-center gap-2 mb-8">*/}
-                    {/*    <GitCommit className="w-6 h-6 text-purple-600"/>*/}
-                    {/*    <span className="font-bold text-xl text-black">Devvoir</span>*/}
-                    {/*</div>*/}
                     <div className="flex items-center justify-center gap-2 mb-8">
                         <Icon icon={"lucide:git-commit-horizontal"} className="w-8 h-8 text-purple-600"/>
                         <div className="relative">
@@ -1461,18 +1457,28 @@ const LandingPage = () => {
                                 Devvoir
                                 <div className="absolute -right-16 -top-1 transform rotate-12 group">
                                     <div className="relative">
-                                        <span
-                                            className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
+                            <span
+                                className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
                                         <span
                                             className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
-                                            BETA
-                                        </span>
+                                BETA
+                            </span>
                                         <span
                                             className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>
                                     </div>
                                 </div>
                             </h1>
                         </div>
+                    </div>
+                    <div className="flex items-center justify-center gap-6 mb-4">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                            <Icon icon={"lucide:twitter"}
+                                  className="w-6 h-6 text-blue-500 hover:text-blue-400 transition-colors"/>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                            <Icon icon={"lucide:linkedin"}
+                                  className="w-6 h-6 text-blue-700 hover:text-blue-600 transition-colors"/>
+                        </a>
                     </div>
                     <div className="text-center text-gray-800">
                         <p>&copy; {new Date().getFullYear()} Devvoir. All rights reserved.</p>
