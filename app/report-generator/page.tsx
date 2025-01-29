@@ -11,10 +11,14 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import QuotaWarning from "@/app/components/QuotaWarning";
 import {Icon} from "@iconify/react";
 import {
+    LucideArrowRight,
+    LucideCheck,
     LucideGitBranch,
     LucideGitCommitHorizontal,
     LucideGitPullRequest,
     LucideLogOut,
+    LucideRefreshCcw,
+    LucideSparkles,
     LucideUsers
 } from "@/utils/icons";
 import {Button} from "@/app/components/Button";
@@ -727,41 +731,39 @@ function ReportGenerator() {
                           </div>
                         </div>
                         <div className="shrink-0 text-gray-300">
-                            <Icon icon={"lucide:git-branch"} className="h-6 w-6"/>
+                            <LucideGitBranch className="h-6 w-6"/>
                         </div>
                       </div>
                     </div>
 
                     {/* Pull Requests Dropdown */}
-                    <Dropdown
-                        Icon={LucideGitPullRequest}
-                      label="Pull Requests"
-                      options={pullRequests}
-                      value={selectedPR}
-                      onChange={(value) => {
-                        console.log({ value });
-                        if (typeof value === "string") {
-                          setSelectedPR(value);
-                        }
-                      }}
-                      placeholder={
-                        isLoadingPRs
-                          ? "Loading pull requests..."
-                          : "Select pull requests"
-                      }
-                      searchable
-                      loading={isLoadingPRs}
-                      disabled={!repository}
-                      position="top"
-                    />
-                      <div
-                          className="flex items-center bg-linear-to-r from-purple-50 to-blue-50 rounded-md px-3 py-2 mt-2 mb-4 border border-purple-100">
-                          <Icon icon={"lucide:info"} className="h-4 w-4 text-purple-600 mr-2 shrink-0"/>
-                      <span className="text-sm text-gray-700">
-                        Reports can be generated for pull requests with up to 10
-                        file changes.
-                      </span>
-                    </div>
+                      <div>
+                          <Dropdown
+                              Icon={LucideGitPullRequest}
+                              label="Pull Requests"
+                              options={pullRequests}
+                              value={selectedPR}
+                              onChange={(value) => {
+                                  console.log({value});
+                                  if (typeof value === "string") {
+                                      setSelectedPR(value);
+                                  }
+                              }}
+                              placeholder={
+                                  isLoadingPRs
+                                      ? "Loading pull requests..."
+                                      : "Select pull requests"
+                              }
+                              searchable
+                              loading={isLoadingPRs}
+                              disabled={!repository}
+                              position="top"
+                          />
+                          <div className="flex items-center rounded-md py-2 mb-4 text-gray-700 text-xs">
+                              Reports can be generated for pull requests with up to 10 file changes. For larger PRs,
+                              only the first 10 files
+                          </div>
+                      </div>
 
                     {/* Generate Report Button */}
                     <button
@@ -785,17 +787,17 @@ function ReportGenerator() {
                     >
                       {loading ? (
                         <>
-                            <Icon icon={"lucide:refresh-ccw"} className="w-4 h-4 animate-spin"/>
+                            <LucideRefreshCcw className="w-4 h-4 animate-spin"/>
                           Generating...
                         </>
                       ) : aiSummary ? (
                         <>
-                            <Icon icon={"lucide:check"} className="w-4 h-4"/>
+                            <LucideCheck className="w-4 h-4"/>
                           Report Generated
                         </>
                       ) : (
                         <>
-                            <Icon icon={"lucide:sparkles"} className="w-4 h-4"/>
+                            <LucideSparkles className="w-4 h-4"/>
                           Generate Report
                         </>
                       )}
@@ -803,6 +805,9 @@ function ReportGenerator() {
                   </div>
                 }
               </form>
+                  <div className={'text-gray-600 text-sm text-center mt-3'}>Devvoir may make mistakes. Please verify
+                      important details.
+                  </div>
             </div>
 
             {/* PR Changes Cards */}
@@ -1133,14 +1138,14 @@ function ReportGenerator() {
                             <div className="relative flex items-center gap-2">
                               {regenerateLoading ? (
                                 <>
-                                    <Icon icon={"lucide:refresh-ccw"} className="w-4 h-4 text-white animate-spin"/>
+                                    <LucideRefreshCcw className="w-4 h-4 text-white animate-spin"/>
                                   <span className="text-sm font-medium">
                                     Regenerating...
                                   </span>
                                 </>
                               ) : (
                                 <>
-                                    <Icon icon={"lucide:refresh-ccw"}
+                                    <LucideRefreshCcw
                                           className="w-4 h-4 text-white transform group-hover:rotate-180 transition-transform duration-500"/>
                                   <span className="text-sm font-medium">
                                     Regenerate
@@ -1188,7 +1193,7 @@ function ReportGenerator() {
                                               className="absolute inset-0 bg-linear-to-r from-purple-500 to-blue-500 rounded-xl opacity-10 group-hover:opacity-20 blur-xs transition-opacity duration-300"/>
                                           <div
                                               className="relative h-10 w-10 flex items-center justify-center bg-linear-to-r from-purple-50 to-blue-50 rounded-xl shadow-xs">
-                                          <Icon icon={"lucide:refresh-ccw"}
+                                              <LucideRefreshCcw
                                                 className="w-5 h-5 text-purple-600 group-hover:rotate-180 transition-transform duration-500"/>
                                       </div>
                                     </div>
@@ -1223,7 +1228,7 @@ function ReportGenerator() {
                                               className="absolute inset-0 bg-linear-to-r from-purple-500 to-blue-500 rounded-xl opacity-10 group-hover:opacity-20 blur-xs transition-opacity duration-300"/>
                                           <div
                                               className="relative h-10 w-10 flex items-center justify-center bg-linear-to-r from-purple-50 to-blue-50 rounded-xl shadow-xs">
-                                          <Icon icon={"lucide:git-pull-request"}
+                                              <LucideGitPullRequest
                                                 className="w-5 h-5 text-purple-600 transform group-hover:scale-110 transition-transform duration-300"/>
                                       </div>
                                     </div>
@@ -1274,7 +1279,7 @@ function ReportGenerator() {
                           {copyLoading ? (
                             <LoadingSpinner />
                           ) : copySuccess ? (
-                              <Icon icon={"lucide:check"} className="w-4 h-4 text-purple-500"/>
+                              <LucideCheck className="w-4 h-4 text-purple-500"/>
                           ) : (
                               <Icon icon={"lucide:copy"} className="w-4 h-4 text-gray-600"/>
                           )}
@@ -1385,7 +1390,7 @@ function ReportGenerator() {
                               disabled={currentGeneration >= totalGenerations}
                               className="p-2 rounded-lg bg-purple-50 text-purple-600 hover:bg-purple-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                             >
-                                <Icon icon={"lucide:arrow-right"} className="w-4 h-4"/>
+                                <LucideArrowRight className="w-4 h-4"/>
                             </button>
                             <button
                               onClick={handleCopyReport}
@@ -1397,7 +1402,7 @@ function ReportGenerator() {
                               {copyLoading ? (
                                 <LoadingSpinner />
                               ) : copySuccess ? (
-                                  <Icon icon={"lucide:check"} className="w-4 h-4 text-purple-500"/>
+                                  <LucideCheck className="w-4 h-4 text-purple-500"/>
                               ) : (
                                   <Icon icon={"lucide:copy"} className="w-4 h-4 text-gray-600"/>
                               )}
