@@ -10,6 +10,14 @@ import Dropdown from '../components/Dropdown';
 import LoadingSpinner from '../components/LoadingSpinner';
 import QuotaWarning from "@/app/components/QuotaWarning";
 import {Icon} from "@iconify/react";
+import {
+    LucideGitBranch,
+    LucideGitCommitHorizontal,
+    LucideGitPullRequest,
+    LucideLogOut,
+    LucideUsers
+} from "@/utils/icons";
+import {Button} from "@/app/components/Button";
 
 type Repository = {
     name: string;
@@ -591,7 +599,7 @@ function ReportGenerator() {
                         </div>
                     )} */}
             <div className="flex items-center gap-2">
-                <Icon icon={"lucide:git-commit-horizontal"} className="w-8 h-8 text-purple-600"/>
+                <LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>
               <div className="relative">
                   <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   Devvoir
@@ -610,42 +618,8 @@ function ReportGenerator() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <button
-                onClick={() => router.push("/account")}
-                className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
-              >
-                {/* Background shine effect */}
-                  <div
-                      className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700"/>
-
-                {/* Content wrapper */}
-                <div className="relative flex items-center gap-2">
-                  {/* Icon */}
-                    <Icon icon={"lucide:users"}
-                          className="w-5 h-5 transition-transform duration-300 ease-out group-hover:rotate-12"/>
-
-                  {/* Text */}
-                  <span className="font-semibold text-sm">Account</span>
-                </div>
-              </button>
-              <button
-                  className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
-                onClick={() => signOut({ callbackUrl: "/" })}
-              >
-                {/* Background shine effect */}
-                  <div
-                      className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform ease-out duration-700"/>
-
-                {/* Content wrapper */}
-                <div className="relative flex items-center gap-2">
-                  {/* Icon */}
-                    <Icon icon={"lucide:log-out"}
-                          className="w-5 h-5 transition-transform duration-300 ease-out group-hover:rotate-12"/>
-
-                  {/* Text */}
-                  <span className="font-semibold text-sm">Sign Out</span>
-                </div>
-              </button>
+                <Button Icon={LucideUsers} text={"Account"} onClick={() => router.push("/account")}/>
+                <Button Icon={LucideLogOut} text={"Sign Out"} onClick={() => signOut({callbackUrl: "/"})}/>
             </div>
           </div>
         </header>
@@ -662,7 +636,7 @@ function ReportGenerator() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Account Selection Dropdown */}
                 <Dropdown
-                    icon={"lucide:users"}
+                    Icon={LucideUsers}
                   label="Select Account"
                   options={organizations}
                   value={selectedOrg}
@@ -680,7 +654,7 @@ function ReportGenerator() {
                 {
                   <div className="mt-6 animate-fadeIn">
                     <Dropdown
-                        icon={"lucide:git-branch"}
+                        Icon={LucideGitBranch}
                       label="Repository"
                       options={repositories}
                       value={repository}
@@ -760,7 +734,7 @@ function ReportGenerator() {
 
                     {/* Pull Requests Dropdown */}
                     <Dropdown
-                        icon={"lucide:git-pull-request"}
+                        Icon={LucideGitPullRequest}
                       label="Pull Requests"
                       options={pullRequests}
                       value={selectedPR}

@@ -116,3 +116,38 @@ export const LucideUsers = (props: SVGProps<SVGSVGElement>) => (
         </g>
     </svg>
 );
+
+export const LucideLogOut = (props: SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
+        <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+              d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5l-5-5m5 5H9"></path>
+    </svg>
+);
+
+export const LucideGitBranch = (props: SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
+        <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}>
+            <path d="M6 3v12"></path>
+            <circle cx={18} cy={6} r={3}></circle>
+            <circle cx={6} cy={18} r={3}></circle>
+            <path d="M18 9a9 9 0 0 1-9 9"></path>
+        </g>
+    </svg>
+);
+
+export const LucideRefreshCcw = (props: SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
+        <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}>
+            <path d="M21 12a9 9 0 0 0-9-9a9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5m-5 4a9 9 0 0 0 9 9a9.75 9.75 0 0 0-6.74-2.74L21 16"></path>
+            <path d="M16 16h5v5"></path>
+        </g>
+    </svg>
+);
+
+export const LucideChevronDown = (props: SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
+        <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+              d="m6 9l6 6l6-6"></path>
+    </svg>
+);

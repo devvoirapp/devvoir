@@ -1,6 +1,6 @@
 "use client";
-import React, {useEffect, useMemo, useRef, useState} from "react";
-import {Icon} from "@iconify/react";
+import React, {ElementType, useEffect, useMemo, useRef, useState} from "react";
+import {LucideChevronDown} from "@/utils/icons";
 
 export interface DropdownOption {
   value: string;
@@ -11,7 +11,7 @@ export interface DropdownOption {
 }
 
 interface DropdownProps {
-  icon: string;
+  Icon: ElementType;
   label: string;
   options: DropdownOption[];
   value: string | string[];
@@ -25,7 +25,7 @@ interface DropdownProps {
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
-                                             icon,
+                                             Icon,
   label,
   options,
   value,
@@ -111,9 +111,8 @@ const Dropdown: React.FC<DropdownProps> = ({
           `}
         >
           <div className="flex items-center gap-3 min-w-0 h-full">
-            {icon && (
+            {Icon && (
               <Icon
-                  icon={icon}
                   className={`w-5 h-5 shrink-0 ${
                   selectedValues.length ? "text-purple-500" : "text-gray-400"
                 }`}
@@ -155,7 +154,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           {loading ? (
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-purple-600"></div>
           ) : (
-              <Icon icon={"lucide:chevron-down"}
+              <LucideChevronDown
               className={`w-5 h-5 text-gray-400 transition-transform ${
                 position === 'top'
                   ? isOpen ? 'rotate-0' : 'rotate-180'
