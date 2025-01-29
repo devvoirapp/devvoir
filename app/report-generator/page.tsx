@@ -772,6 +772,7 @@ function ReportGenerator() {
                       </div>
 
                     {/* Generate Report Button */}
+                      {/*  <Button Icon={() => loading ? <LucideRefreshCcw className="w-4 h-4 animate-spin"/> : <LucideCheck className="w-4 h-4"/>} text={loading ? "Generating..." : "Report Generated"} onClick={handleGenerateReport} className={'w-full'} />*/}
                     <button
                       onClick={handleGenerateReport}
                       disabled={
