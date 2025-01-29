@@ -2,12 +2,20 @@
 
 import {Avatar} from '@/app/components/Avatar';
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from '@/app/components/ui/Card';
-import {Icon} from "@iconify/react";
 import {signOut, useSession} from 'next-auth/react';
 import {redirect, useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import {Product} from '../types/product';
+import {
+    LucideCrown,
+    LucideFileText,
+    LucideGitCommitHorizontal,
+    LucideRefreshCcw,
+    LucideSparkles,
+    LucideUser,
+    SimpleIconsGithub
+} from "@/utils/icons";
 
 interface UsageMetrics {
     monthlyReportCount: number;
@@ -199,7 +207,7 @@ export default function AccountPage() {
                                     onClick={() => router.push('/report-generator')}
                                     className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
                                 >
-                                    <Icon icon={"lucide:git-commit-horizontal"} className="w-4 h-4" />
+                                    <LucideGitCommitHorizontal className="w-4 h-4"/>
                                     Back
                                 </button>
                             </div>
@@ -210,7 +218,7 @@ export default function AccountPage() {
                                     <div className="relative">
                                         <div
                                             className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
-                                        <Icon icon={"lucide:git-commit-horizontal"}
+                                        <LucideGitCommitHorizontal
                                             className="w-8 h-8 relative text-purple-600" />
                                     </div>
                                     <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
@@ -315,7 +323,7 @@ export default function AccountPage() {
                                                         {session?.user?.login && (
                                                             <div
                                                                 className="flex items-center gap-1.5 text-sm text-gray-500">
-                                                                <Icon icon={"simple-icons:github"} className="h-4 w-4" />
+                                                                <SimpleIconsGithub className="h-4 w-4"/>
                                                                 <a
                                                                     href={`https://github.com/${session.user.login}`}
                                                                     target="_blank"
@@ -365,7 +373,7 @@ export default function AccountPage() {
                                                             <div className="shrink-0">
                                                                 <div
                                                                     className="p-3 bg-purple-50 group-hover:bg-purple-100 rounded-xl shadow-xs transition-colors duration-300">
-                                                                    <Icon icon="lucide:github"
+                                                                    <SimpleIconsGithub
                                                                         className="w-6 h-6 text-purple-600" />
                                                                 </div>
                                                             </div>
@@ -381,7 +389,7 @@ export default function AccountPage() {
                                                                 </div>
                                                                 <div
                                                                     className="flex items-center gap-2 text-sm text-gray-500">
-                                                                    <Icon icon="lucide:user" className="w-4 h-4" />
+                                                                    <LucideUser className="w-4 h-4"/>
                                                                     <span
                                                                         className="truncate">{session?.user?.login}</span>
                                                                 </div>
@@ -468,7 +476,7 @@ export default function AccountPage() {
                                                         <div className="flex items-center gap-4 flex-1 min-w-0">
                                                             <div
                                                                 className="p-3 bg-purple-50 group-hover:bg-purple-100 rounded-xl shadow-xs transition-colors duration-300">
-                                                                <Icon icon="lucide:file-text"
+                                                                <LucideFileText
                                                                     className="w-5 h-5 text-purple-600" />
                                                             </div>
                                                             <div className="min-w-0">
@@ -633,7 +641,7 @@ export default function AccountPage() {
                                                 {/* Refined header badge */}
                                                 <div
                                                     className="inline-flex items-center gap-2 px-5 py-2 bg-white/80 rounded-full mb-6 shadow-xs border border-purple-100">
-                                                    <Icon icon="lucide:refresh-cw" className="w-5 h-5 text-purple-600" />
+                                                    <LucideRefreshCcw className="w-5 h-5 text-purple-600"/>
                                                     <span
                                                         className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                                         Extend Your Limits
@@ -688,7 +696,7 @@ export default function AccountPage() {
                                                                                             className="absolute inset-0 rounded-full blur-xs bg-blue-500/20"></div>
                                                                                         <div
                                                                                             className="relative px-4 py-1.5 rounded-full bg-linear-to-r from-blue-600 to-purple-600 text-white text-sm font-medium flex items-center gap-2">
-                                                                                            <Icon icon="lucide:crown"
+                                                                                            <LucideCrown
                                                                                                 className="w-4 h-4" />
                                                                                             Most Popular
                                                                                         </div>
@@ -721,8 +729,7 @@ export default function AccountPage() {
                                                                                         <div
                                                                                             className={`w-6 h-6 rounded-full flex items-center justify-center ${is25Reports ? 'bg-blue-100' : 'bg-gray-100'
                                                                                                 }`}>
-                                                                                            <Icon
-                                                                                                icon="lucide:file-text"
+                                                                                            <LucideFileText
                                                                                                 className={`w-3.5 h-3.5 ${is25Reports ? 'text-blue-600' : 'text-gray-600'}`} />
                                                                                         </div>
                                                                                         <span className="text-gray-700">
@@ -734,8 +741,7 @@ export default function AccountPage() {
                                                                                         <div
                                                                                             className={`w-6 h-6 rounded-full flex items-center justify-center ${is25Reports ? 'bg-blue-100' : 'bg-gray-100'
                                                                                                 }`}>
-                                                                                            <Icon
-                                                                                                icon="lucide:refresh-cw"
+                                                                                            <LucideRefreshCcw
                                                                                                 className={`w-3.5 h-3.5 ${is25Reports ? 'text-blue-600' : 'text-gray-600'}`} />
                                                                                         </div>
                                                                                         <span className="text-gray-700">
@@ -759,8 +765,7 @@ export default function AccountPage() {
                                                                                         : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                                                                                         }`}
                                                                                 >
-                                                                                    <Icon
-                                                                                        icon="lucide:sparkles"
+                                                                                    <LucideSparkles
                                                                                         className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${is25Reports ? 'text-white' : 'text-gray-600'
                                                                                             }`}
                                                                                     />

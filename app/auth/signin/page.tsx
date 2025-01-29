@@ -4,7 +4,6 @@ import {useRouter} from 'next/navigation';
 import {useEffect} from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import SignInButton from "./SignInButton";
-import {Icon} from "@iconify/react";
 import {LucideBot, LucideClock, LucideGitCommitHorizontal, LucideUsers} from "@/utils/icons";
 
 export default function AuthPage() {
@@ -69,7 +68,7 @@ export default function AuthPage() {
             <div className="bg-linear-to-r from-purple-600 to-blue-600 text-white px-8 py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Icon icon={"lucide:bot"} className="w-5 h-5"/>
+                  <LucideBot className="w-5 h-5"/>
                   <span className="font-medium">Beta Access Available</span>
                 </div>
                 <span className="text-sm bg-white/20 px-3 py-1 rounded-full">Limited Time</span>

@@ -29,7 +29,6 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
-    "@iconify/react": "^5.2.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^20",
     "@types/react": "^18",

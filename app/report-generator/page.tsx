@@ -9,15 +9,21 @@ import CodeDiff from '../components/CodeDiff';
 import Dropdown from '../components/Dropdown';
 import LoadingSpinner from '../components/LoadingSpinner';
 import QuotaWarning from "@/app/components/QuotaWarning";
-import {Icon} from "@iconify/react";
 import {
+    LucideArrowLeft,
     LucideArrowRight,
+    LucideBrain,
     LucideCheck,
+    LucideCircleCheck,
+    LucideCircleX,
+    LucideCopy,
     LucideGitBranch,
     LucideGitCommitHorizontal,
     LucideGitPullRequest,
+    LucideInfo,
     LucideLogOut,
     LucideRefreshCcw,
+    LucideSearch,
     LucideSparkles,
     LucideUsers
 } from "@/utils/icons";
@@ -879,7 +885,7 @@ function ReportGenerator() {
                   </div>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Icon icon={"lucide:search"} className="h-5 w-5 text-gray-400"/>
+                        <LucideSearch className="h-5 w-5 text-gray-400"/>
                     </div>
                     <input
                       type="text"
@@ -924,7 +930,7 @@ function ReportGenerator() {
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
                               <div className="p-2 bg-purple-50 rounded-lg">
-                                  <Icon icon={"lucide:git-pull-request"} className="w-5 h-5 text-purple-600"/>
+                                  <LucideGitPullRequest className="w-5 h-5 text-purple-600"/>
                               </div>
                               <div>
                                 <h3 className="text-lg font-semibold text-gray-900">
@@ -1042,14 +1048,14 @@ function ReportGenerator() {
                             <div className="flex items-center gap-2">
                               {approvedPRs.has(prNumber) ? (
                                 <>
-                                    <Icon icon={"lucide:circle-check"} className="w-5 h-5 text-green-600"/>
+                                    <LucideCircleCheck className="w-5 h-5 text-green-600"/>
                                   <span className="text-sm font-medium text-green-800">
                                     PR Approved
                                   </span>
                                 </>
                               ) : (
                                 <>
-                                    <Icon icon={"lucide:circle-x"} className="w-5 h-5 text-red-600"/>
+                                    <LucideCircleX className="w-5 h-5 text-red-600"/>
                                   <span className="text-sm font-medium text-red-800">
                                     PR Rejected
                                   </span>
@@ -1061,7 +1067,7 @@ function ReportGenerator() {
                         {note && (
                           <div className="p-4 border-t border-gray-100">
                             <div className="flex items-center gap-2">
-                                <Icon icon={"lucide:info"} className="w-5 h-5 text-purple-600"/>
+                                <LucideInfo className="w-5 h-5 text-purple-600"/>
                               <span className="text-sm font-medium text-purple-800">
                                 {note}
                               </span>
@@ -1095,7 +1101,7 @@ function ReportGenerator() {
                                 className="absolute -inset-0.5 bg-linear-to-r from-purple-600 to-indigo-600 rounded-full opacity-75 blur-sm group-hover/icon:opacity-100 transition-all duration-300"/>
                             <div
                                 className="relative z-0 flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-purple-600 to-indigo-600 ring-2 ring-purple-400/50">
-                              <Icon icon={"lucide:brain"}
+                                <LucideBrain
                                     className="w-5 h-5 text-white transform group-hover/icon:scale-110 transition-transform duration-300"/>
                           </div>
                         </div>
@@ -1252,7 +1258,7 @@ function ReportGenerator() {
                                           <div
                                               className="absolute inset-0 bg-linear-to-r from-purple-500 to-blue-500 rounded-full opacity-10 blur-[2px]"/>
                                       <div className="relative">
-                                          <Icon icon={"lucide:info"} className="w-4 h-4 text-purple-600"/>
+                                          <LucideInfo className="w-4 h-4 text-purple-600"/>
                                       </div>
                                     </div>
                                     <div className="flex-1">
@@ -1281,7 +1287,7 @@ function ReportGenerator() {
                           ) : copySuccess ? (
                               <LucideCheck className="w-4 h-4 text-purple-500"/>
                           ) : (
-                              <Icon icon={"lucide:copy"} className="w-4 h-4 text-gray-600"/>
+                              <LucideCopy className="w-4 h-4 text-gray-600"/>
                           )}
                         </button>
                         {copyError && (
@@ -1317,7 +1323,7 @@ function ReportGenerator() {
                     ) : error ? (
                       <div className="px-8 py-6">
                         <div className="flex items-start gap-3 text-red-600">
-                            <Icon icon={"lucide:circle-x"} className="w-5 h-5 mt-0.5"/>
+                            <LucideCircleX className="w-5 h-5 mt-0.5"/>
                           <div>
                             <p className="font-medium">
                               Error Generating Report
@@ -1366,7 +1372,7 @@ function ReportGenerator() {
                               disabled={currentGeneration <= 1}
                               className="p-2 rounded-lg bg-purple-50 text-purple-600 hover:bg-purple-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                             >
-                                <Icon icon={"lucide:arrow-left"} className="w-4 h-4"/>
+                                <LucideArrowLeft className="w-4 h-4"/>
                             </button>
                             <span className="text-black">
                               {currentGeneration} / {totalGenerations}
@@ -1404,7 +1410,7 @@ function ReportGenerator() {
                               ) : copySuccess ? (
                                   <LucideCheck className="w-4 h-4 text-purple-500"/>
                               ) : (
-                                  <Icon icon={"lucide:copy"} className="w-4 h-4 text-gray-600"/>
+                                  <LucideCopy className="w-4 h-4 text-gray-600"/>
                               )}
                             </button>
                           </div>

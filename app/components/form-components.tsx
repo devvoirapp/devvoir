@@ -2,7 +2,7 @@
 'use client';  // Add this at the top
 
 import React, {forwardRef, InputHTMLAttributes} from 'react';
-import {Icon} from "@iconify/react";
+import {LucideCheck} from "@/utils/icons";
 
 // TextField Component
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
@@ -180,7 +180,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           `}
         >
           {checked && !indeterminate && (
-              <Icon icon={"lucide:check"} className="w-3.5 h-3.5 text-white" strokeWidth={3}/>
+              <LucideCheck className="w-3.5 h-3.5 text-white" strokeWidth={3}/>
           )}
           {indeterminate && (
             <div className="w-2.5 h-0.5 bg-white rounded-full" />
