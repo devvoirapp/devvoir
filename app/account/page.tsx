@@ -1,13 +1,21 @@
 'use client';
 
-import { Avatar } from '@/app/components/Avatar';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/Card';
-import { Icon } from "@iconify/react";
-import { signOut, useSession } from 'next-auth/react';
-import { redirect, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import {Avatar} from '@/app/components/Avatar';
+import {Card, CardContent, CardFooter, CardHeader, CardTitle} from '@/app/components/ui/Card';
+import {signOut, useSession} from 'next-auth/react';
+import {redirect, useRouter} from 'next/navigation';
+import {useEffect, useState} from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Product } from '../types/product';
+import {Product} from '../types/product';
+import {
+    LucideCrown,
+    LucideFileText,
+    LucideGitCommitHorizontal,
+    LucideRefreshCcw,
+    LucideSparkles,
+    LucideUser,
+    SimpleIconsGithub
+} from "@/utils/icons";
 
 interface UsageMetrics {
     monthlyReportCount: number;
@@ -197,9 +205,9 @@ export default function AccountPage() {
                             <div className="justify-self-start">
                                 <button
                                     onClick={() => router.push('/report-generator')}
-                                    className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                                    className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
                                 >
-                                    <Icon icon={"lucide:git-commit-horizontal"} className="w-4 h-4" />
+                                    <LucideGitCommitHorizontal className="w-4 h-4"/>
                                     Back
                                 </button>
                             </div>
@@ -209,18 +217,18 @@ export default function AccountPage() {
                                 <div className="inline-flex items-center justify-center gap-3">
                                     <div className="relative">
                                         <div
-                                            className="absolute inset-0 bg-gradient-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
-                                        <Icon icon={"lucide:git-commit-horizontal"}
+                                            className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
+                                        <LucideGitCommitHorizontal
                                             className="w-8 h-8 relative text-purple-600" />
                                     </div>
-                                    <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
+                                    <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
                                         Devvoir
                                         <div className="absolute -right-16 -top-1 transform rotate-12 group">
                                             <div className="relative">
                                                 <span
-                                                    className="absolute inset-0 bg-purple-600 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></span>
+                                                    className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
                                                 <span
-                                                    className="relative block px-2 py-1 text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                                                    className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
                                                     BETA
                                                 </span>
                                                 <span
@@ -235,7 +243,7 @@ export default function AccountPage() {
                             {/* <div className="justify-self-end">
                 <button
                   onClick={handleSignOut}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
                 >
                   <LogOut className="w-4 h-4" />
                   Sign Out
@@ -248,14 +256,14 @@ export default function AccountPage() {
                     <div className="relative">
                         {/* Card glow effect */}
                         <div
-                            className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-20 transition duration-1000"></div>
+                            className="absolute -inset-1 bg-linear-to-r from-purple-600 to-blue-600 rounded-2xl blur-sm opacity-20 transition duration-1000"></div>
 
-                        <Card className="relative bg-white/80 backdrop-blur-sm">
+                        <Card className="relative bg-white/80 backdrop-blur-xs">
                             <CardHeader>
                                 <div className="flex items-center gap-4">
                                     <div>
                                         <CardTitle
-                                            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                                            className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                             Account Settings
                                         </CardTitle>
                                     </div>
@@ -264,18 +272,18 @@ export default function AccountPage() {
                             <CardContent>
                                 <div className="space-y-6">
                                     {/* Profile Information */}
-                                    <div className="bg-white rounded-xl p-6 shadow-sm space-y-5">
+                                    <div className="bg-white rounded-xl p-6 shadow-xs space-y-5">
                                         <div
                                             className="flex items-center justify-between border-b border-gray-200 pb-4">
                                             <div className="flex items-center gap-3">
                                                 <div
-                                                    className="h-8 w-1 bg-gradient-to-b from-purple-600 to-blue-600 rounded-full"></div>
+                                                    className="h-8 w-1 bg-linear-to-b from-purple-600 to-blue-600 rounded-full"></div>
                                                 <h3 className="text-lg font-semibold text-gray-900">Profile
                                                     Information</h3>
                                             </div>
                                             {/* <button
                         onClick={() => router.push('/report-generator')}
-                        className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                        className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
                       >
                         <GitCommit className="w-5 h-5" />
                         Report Generator
@@ -315,7 +323,7 @@ export default function AccountPage() {
                                                         {session?.user?.login && (
                                                             <div
                                                                 className="flex items-center gap-1.5 text-sm text-gray-500">
-                                                                <Icon icon={"simple-icons:github"} className="h-4 w-4" />
+                                                                <SimpleIconsGithub className="h-4 w-4"/>
                                                                 <a
                                                                     href={`https://github.com/${session.user.login}`}
                                                                     target="_blank"
@@ -333,13 +341,13 @@ export default function AccountPage() {
                                     </div>
 
                                     {/* Connected Accounts */}
-                                    <div className="bg-white rounded-xl p-8 shadow-sm space-y-6">
+                                    <div className="bg-white rounded-xl p-8 shadow-xs space-y-6">
                                         {/* Header Section */}
                                         <div
                                             className="flex items-center justify-between border-b border-gray-100 pb-6">
                                             <div className="flex items-center gap-4">
                                                 <div
-                                                    className="h-8 w-1 bg-gradient-to-b from-purple-600 to-blue-600 rounded-full shadow-lg shadow-purple-200"></div>
+                                                    className="h-8 w-1 bg-linear-to-b from-purple-600 to-blue-600 rounded-full shadow-lg shadow-purple-200"></div>
                                                 <div>
                                                     <h3 className="text-xl font-semibold text-gray-900">
                                                         Connected Accounts
@@ -354,7 +362,7 @@ export default function AccountPage() {
                                             {/* GitHub Integration */}
                                             <div className="group relative">
                                                 <div
-                                                    className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-white to-blue-50/50 rounded-xl transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
+                                                    className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-white to-blue-50/50 rounded-xl transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
 
                                                 <div
                                                     className="relative bg-gray-50 group-hover:bg-white rounded-xl p-6 border border-gray-100 group-hover:border-purple-100 transition-all duration-300 group-hover:shadow-md">
@@ -364,8 +372,8 @@ export default function AccountPage() {
                                                         <div className="flex items-start gap-4">
                                                             <div className="shrink-0">
                                                                 <div
-                                                                    className="p-3 bg-purple-50 group-hover:bg-purple-100 rounded-xl shadow-sm transition-colors duration-300">
-                                                                    <Icon icon="lucide:github"
+                                                                    className="p-3 bg-purple-50 group-hover:bg-purple-100 rounded-xl shadow-xs transition-colors duration-300">
+                                                                    <SimpleIconsGithub
                                                                         className="w-6 h-6 text-purple-600" />
                                                                 </div>
                                                             </div>
@@ -381,7 +389,7 @@ export default function AccountPage() {
                                                                 </div>
                                                                 <div
                                                                     className="flex items-center gap-2 text-sm text-gray-500">
-                                                                    <Icon icon="lucide:user" className="w-4 h-4" />
+                                                                    <LucideUser className="w-4 h-4"/>
                                                                     <span
                                                                         className="truncate">{session?.user?.login}</span>
                                                                 </div>
@@ -437,13 +445,13 @@ export default function AccountPage() {
                                     </div>
 
                                     {/* Usage & Limits */}
-                                    <div className="bg-white rounded-xl p-8 shadow-sm space-y-6">
+                                    <div className="bg-white rounded-xl p-8 shadow-xs space-y-6">
                                         {/* Header Section */}
                                         <div
                                             className="flex items-center justify-between border-b border-gray-100 pb-6">
                                             <div className="flex items-center gap-4">
                                                 <div
-                                                    className="h-8 w-1 bg-gradient-to-b from-purple-600 to-blue-600 rounded-full shadow-lg shadow-purple-200"></div>
+                                                    className="h-8 w-1 bg-linear-to-b from-purple-600 to-blue-600 rounded-full shadow-lg shadow-purple-200"></div>
                                                 <div>
                                                     <h3 className="text-xl font-semibold text-gray-900">
                                                         Usage & Limits
@@ -459,7 +467,7 @@ export default function AccountPage() {
                                             <div className="group relative">
                                                 {/* Subtle gradient background effect */}
                                                 <div
-                                                    className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-white to-blue-50/50 rounded-xl transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
+                                                    className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-white to-blue-50/50 rounded-xl transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
 
                                                 <div
                                                     className="relative bg-gray-50 group-hover:bg-white rounded-xl p-6 border border-gray-100 group-hover:border-purple-100 transition-all duration-300 group-hover:shadow-md">
@@ -467,8 +475,8 @@ export default function AccountPage() {
                                                     <div className="flex items-center justify-between mb-6">
                                                         <div className="flex items-center gap-4 flex-1 min-w-0">
                                                             <div
-                                                                className="p-3 bg-purple-50 group-hover:bg-purple-100 rounded-xl shadow-sm transition-colors duration-300">
-                                                                <Icon icon="lucide:file-text"
+                                                                className="p-3 bg-purple-50 group-hover:bg-purple-100 rounded-xl shadow-xs transition-colors duration-300">
+                                                                <LucideFileText
                                                                     className="w-5 h-5 text-purple-600" />
                                                             </div>
                                                             <div className="min-w-0">
@@ -484,7 +492,7 @@ export default function AccountPage() {
                                                             </div>
                                                         </div>
                                                         <span
-                                                            className="px-3 py-1.5 text-xs font-medium text-purple-700 bg-purple-100 rounded-full whitespace-nowrap ml-3 shadow-sm">
+                                                            className="px-3 py-1.5 text-xs font-medium text-purple-700 bg-purple-100 rounded-full whitespace-nowrap ml-3 shadow-xs">
                                                             Monthly Plan
                                                         </span>
                                                     </div>
@@ -519,13 +527,13 @@ export default function AccountPage() {
                                                             <div
                                                                 className="relative w-full h-2.5 bg-purple-100 rounded-full overflow-hidden">
                                                                 <div
-                                                                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full transition-all duration-500"
+                                                                    className="absolute top-0 left-0 h-full bg-linear-to-r from-purple-500 to-purple-600 rounded-full transition-all duration-500"
                                                                     style={{
                                                                         width: `${Math.min((Math.min(currentUsage.monthlyReportCount, currentUsage.monthlyReportLimit) / currentUsage.monthlyReportLimit) * 100, 100)}%`
                                                                     }}
                                                                 >
                                                                     <div
-                                                                        className="absolute inset-0 bg-gradient-to-t from-black/[0.1] to-transparent"></div>
+                                                                        className="absolute inset-0 bg-linear-to-t from-black/[0.1] to-transparent"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -560,14 +568,14 @@ export default function AccountPage() {
                                                                 <div
                                                                     className="relative w-full h-2.5 bg-blue-100 rounded-full overflow-hidden">
                                                                     <div
-                                                                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500"
+                                                                        className="absolute top-0 left-0 h-full bg-linear-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500"
                                                                         style={{
                                                                             width: `${(currentUsage.usedPurchasedReports / currentUsage.additionalReportsPurchased) * 100
                                                                                 }%`
                                                                         }}
                                                                     >
                                                                         <div
-                                                                            className="absolute inset-0 bg-gradient-to-t from-black/[0.1] to-transparent"></div>
+                                                                            className="absolute inset-0 bg-linear-to-t from-black/[0.1] to-transparent"></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -588,10 +596,10 @@ export default function AccountPage() {
                                     </div>
 
                                     {/* Display Settings */}
-                                    {/* <div className="bg-white rounded-xl p-6 shadow-sm space-y-5">
+                                    {/* <div className="bg-white rounded-xl p-6 shadow-xs space-y-5">
                     <div className="flex items-center justify-between border-b border-gray-200 pb-4">
                       <div className="flex items-center gap-3">
-                        <div className="h-8 w-1 bg-gradient-to-b from-purple-600 to-blue-600 rounded-full"></div>
+                        <div className="h-8 w-1 bg-linear-to-b from-purple-600 to-blue-600 rounded-full"></div>
                         <h3 className="text-lg font-semibold text-gray-900">Display Settings</h3>
                       </div>
                     </div>
@@ -601,7 +609,7 @@ export default function AccountPage() {
                         <div className="flex-1">
                           <div className="flex items-center gap-2">
                             <label htmlFor="pr-changes" className="text-base font-medium text-gray-900">Show PR Changes</label>
-                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gradient-to-r from-purple-500 to-blue-500 text-white">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-medium bg-linear-to-r from-purple-500 to-blue-500 text-white">
                               Coming Soon
                             </span>
                           </div>
@@ -621,7 +629,7 @@ export default function AccountPage() {
                                     <div className="mt-8">
                                         <Card className="relative overflow-hidden border border-gray-200">
                                             {/* Matching background with account page cards */}
-                                            <div className="absolute inset-0 bg-white/80 backdrop-blur-sm"></div>
+                                            <div className="absolute inset-0 bg-white/80 backdrop-blur-xs"></div>
 
                                             {/* Subtle decorative elements */}
                                             <div
@@ -632,16 +640,16 @@ export default function AccountPage() {
                                             <CardHeader className="relative z-10 text-center pb-12">
                                                 {/* Refined header badge */}
                                                 <div
-                                                    className="inline-flex items-center gap-2 px-5 py-2 bg-white/80 rounded-full mb-6 shadow-sm border border-purple-100">
-                                                    <Icon icon="lucide:refresh-cw" className="w-5 h-5 text-purple-600" />
+                                                    className="inline-flex items-center gap-2 px-5 py-2 bg-white/80 rounded-full mb-6 shadow-xs border border-purple-100">
+                                                    <LucideRefreshCcw className="w-5 h-5 text-purple-600"/>
                                                     <span
-                                                        className="text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                                                        className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                                         Extend Your Limits
                                                     </span>
                                                 </div>
 
                                                 <CardTitle
-                                                    className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+                                                    className="text-4xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
                                                     Purchase Report Credits
                                                 </CardTitle>
                                                 <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -673,22 +681,22 @@ export default function AccountPage() {
                                                                         {/* Reduced glow on hover */}
                                                                         <div
                                                                             className={`absolute -inset-0.5 rounded-3xl blur-md opacity-0 transition duration-300 group-hover:opacity-50 ${is25Reports
-                                                                                ? 'bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-blue-500/40'
-                                                                                : 'bg-gradient-to-r from-gray-300/40 via-gray-400/40 to-gray-300/40'
+                                                                                ? 'bg-linear-to-r from-blue-500/40 via-purple-500/40 to-blue-500/40'
+                                                                                : 'bg-linear-to-r from-gray-300/40 via-gray-400/40 to-gray-300/40'
                                                                                 }`} />
 
                                                                         <div
-                                                                            className="relative h-full p-8 bg-white rounded-2xl border border-gray-200 shadow-sm flex flex-col">
+                                                                            className="relative h-full p-8 bg-white rounded-2xl border border-gray-200 shadow-xs flex flex-col">
                                                                             {/* Premium badge for 30 reports */}
                                                                             {is25Reports && (
                                                                                 <div
                                                                                     className="absolute -top-4 right-8">
                                                                                     <div className="relative">
                                                                                         <div
-                                                                                            className="absolute inset-0 rounded-full blur-sm bg-blue-500/20"></div>
+                                                                                            className="absolute inset-0 rounded-full blur-xs bg-blue-500/20"></div>
                                                                                         <div
-                                                                                            className="relative px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium flex items-center gap-2">
-                                                                                            <Icon icon="lucide:crown"
+                                                                                            className="relative px-4 py-1.5 rounded-full bg-linear-to-r from-blue-600 to-purple-600 text-white text-sm font-medium flex items-center gap-2">
+                                                                                            <LucideCrown
                                                                                                 className="w-4 h-4" />
                                                                                             Most Popular
                                                                                         </div>
@@ -705,7 +713,7 @@ export default function AccountPage() {
                                                                                     <div
                                                                                         className="flex items-center justify-center gap-2">
                                                                                         <span
-                                                                                            className="text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                                                                                            className="text-4xl font-bold bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                                                                                             {product.attributes.price_formatted}
                                                                                         </span>
                                                                                         <span
@@ -715,14 +723,13 @@ export default function AccountPage() {
 
                                                                                 {/* Features list */}
                                                                                 <div
-                                                                                    className="space-y-4 flex-grow mb-8">
+                                                                                    className="space-y-4 grow mb-8">
                                                                                     <div
                                                                                         className="flex items-center gap-3">
                                                                                         <div
                                                                                             className={`w-6 h-6 rounded-full flex items-center justify-center ${is25Reports ? 'bg-blue-100' : 'bg-gray-100'
                                                                                                 }`}>
-                                                                                            <Icon
-                                                                                                icon="lucide:file-text"
+                                                                                            <LucideFileText
                                                                                                 className={`w-3.5 h-3.5 ${is25Reports ? 'text-blue-600' : 'text-gray-600'}`} />
                                                                                         </div>
                                                                                         <span className="text-gray-700">
@@ -734,8 +741,7 @@ export default function AccountPage() {
                                                                                         <div
                                                                                             className={`w-6 h-6 rounded-full flex items-center justify-center ${is25Reports ? 'bg-blue-100' : 'bg-gray-100'
                                                                                                 }`}>
-                                                                                            <Icon
-                                                                                                icon="lucide:refresh-cw"
+                                                                                            <LucideRefreshCcw
                                                                                                 className={`w-3.5 h-3.5 ${is25Reports ? 'text-blue-600' : 'text-gray-600'}`} />
                                                                                         </div>
                                                                                         <span className="text-gray-700">
@@ -755,12 +761,11 @@ export default function AccountPage() {
                                                                                 <button
                                                                                     onClick={() => handlePurchase(product)}
                                                                                     className={`w-full py-3.5 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group ${is25Reports
-                                                                                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-sm hover:shadow-md'
+                                                                                        ? 'bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-xs hover:shadow-md'
                                                                                         : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                                                                                         }`}
                                                                                 >
-                                                                                    <Icon
-                                                                                        icon="lucide:sparkles"
+                                                                                    <LucideSparkles
                                                                                         className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${is25Reports ? 'text-white' : 'text-gray-600'
                                                                                             }`}
                                                                                     />
@@ -788,12 +793,12 @@ export default function AccountPage() {
                                     </div>
 
                                     {/* Account Actions */}
-                                    <div className="bg-white rounded-xl p-6 shadow-sm space-y-5">
+                                    <div className="bg-white rounded-xl p-6 shadow-xs space-y-5">
                                         <div
                                             className="flex items-center justify-between border-b border-gray-200 pb-4">
                                             <div className="flex items-center gap-3">
                                                 <div
-                                                    className="h-8 w-1 bg-gradient-to-b from-purple-600 to-blue-600 rounded-full"></div>
+                                                    className="h-8 w-1 bg-linear-to-b from-purple-600 to-blue-600 rounded-full"></div>
                                                 <h3 className="text-lg font-semibold text-gray-900">Account Actions</h3>
                                             </div>
                                         </div>
@@ -808,7 +813,7 @@ export default function AccountPage() {
                                                 </div>
                                                 <button
                                                     onClick={handleSignOut}
-                                                    className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                                                    className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
                                                 >
                                                     Sign Out
                                                 </button>

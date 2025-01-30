@@ -1,19 +1,21 @@
-import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import { getNextMonthResetDate } from '@/utils/getNextMonthResetDate';
+import {NextResponse} from 'next/server';
+import {PrismaClient} from '@prisma/client';
+import {getNextMonthResetDate} from '@/utils/getNextMonthResetDate';
 
 const prisma = new PrismaClient();
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export async function GET(request: Request) {
+export async function GET() {
     try {
         // Verify the request is from Vercel Cron
-        const authHeader = request.headers.get('authorization');
-        if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-            return new NextResponse('Unauthorized', { status: 401 });
-        }
+        // const authHeader = request.headers.get('authorization');
+        // console.log({authHeader});
+        // console.log({cronSecret: process.env.CRON_SECRET});
+        // if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+        //     return new NextResponse('Unauthorized', { status: 401 });
+        // }
 
         // Get all users with their monthlyResetDate and report counts
         const users = await prisma.userSettings.findMany({

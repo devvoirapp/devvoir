@@ -1,6 +1,6 @@
 "use client";
-import React, {useEffect, useMemo, useRef, useState} from "react";
-import {Icon} from "@iconify/react";
+import React, {ElementType, useEffect, useMemo, useRef, useState} from "react";
+import {LucideChevronDown} from "@/utils/icons";
 
 export interface DropdownOption {
   value: string;
@@ -11,7 +11,7 @@ export interface DropdownOption {
 }
 
 interface DropdownProps {
-  icon: string;
+  Icon: ElementType;
   label: string;
   options: DropdownOption[];
   value: string | string[];
@@ -25,7 +25,7 @@ interface DropdownProps {
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
-                                             icon,
+                                             Icon,
   label,
   options,
   value,
@@ -111,10 +111,9 @@ const Dropdown: React.FC<DropdownProps> = ({
           `}
         >
           <div className="flex items-center gap-3 min-w-0 h-full">
-            {icon && (
+            {Icon && (
               <Icon
-                  icon={icon}
-                className={`w-5 h-5 flex-shrink-0 ${
+                  className={`w-5 h-5 shrink-0 ${
                   selectedValues.length ? "text-purple-500" : "text-gray-400"
                 }`}
               />
@@ -126,7 +125,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                     {selectedOptions.map((option) => (
                       <div
                         key={option.value}
-                        className={`flex-shrink-0 h-[26px] px-2 rounded-md inline-flex items-center ${
+                        className={`shrink-0 h-[26px] px-2 rounded-md inline-flex items-center ${
                           option.className ? `bg-opacity-10 bg-${option.className.split('-')[1]}-100` : 'bg-purple-50'
                         }`}
                       >
@@ -155,7 +154,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           {loading ? (
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-purple-600"></div>
           ) : (
-              <Icon icon={"lucide:chevron-down"}
+              <LucideChevronDown
               className={`w-5 h-5 text-gray-400 transition-transform ${
                 position === 'top'
                   ? isOpen ? 'rotate-0' : 'rotate-180'
@@ -183,7 +182,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search..."
-                    className="w-full pl-9 pr-4 py-2.5 text-sm bg-white text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-400 transition-all duration-200 hover:border-gray-300"
+                    className="w-full pl-9 pr-4 py-2.5 text-sm bg-white text-gray-900 border border-gray-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-gray-400 transition-all duration-200 hover:border-gray-300"
                     autoComplete="off"
                   />
                 </div>
@@ -207,11 +206,11 @@ const Dropdown: React.FC<DropdownProps> = ({
                       ${index !== filteredOptions.length - 1 ? 'border-b border-gray-50' : ''}
                     `}
                   >
-                    <div className="flex items-center gap-3 flex-grow min-w-0">
+                    <div className="flex items-center gap-3 grow min-w-0">
                       {option.icon && (
                           <Icon
                               icon={option.icon}
-                          className={`w-5 h-5 flex-shrink-0 ${
+                              className={`w-5 h-5 shrink-0 ${
                             selectedValues.includes(option.value)
                               ? option.className || 'text-purple-500'
                               : option.className || 'text-gray-400'
@@ -234,7 +233,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                       </div>
                     </div>
                     {multiSelect && (
-                      <div className={`flex-shrink-0 w-5 h-5 ${
+                        <div className={`shrink-0 w-5 h-5 ${
                         selectedValues.includes(option.value)
                           ? option.className || 'text-purple-500'
                           : 'text-gray-400 opacity-0'

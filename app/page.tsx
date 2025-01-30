@@ -1,8 +1,22 @@
 "use client";
 import {useRouter} from 'next/navigation';
 import {Button} from "@/app/components/Button";
-import {Icon} from "@iconify/react";
-import {LucideGitPullRequest, LucideMessageSquare, LucideX} from "@/utils/icons";
+import {
+    LucideArrowRight,
+    LucideBot,
+    LucideCheck,
+    LucideCheckCircle2,
+    LucideClock,
+    LucideFileText,
+    LucideGitCommitHorizontal,
+    LucideGitPullRequest,
+    LucideMessageSquare,
+    LucideSparkles,
+    LucideX,
+    SimpleIconsGithub,
+    SimpleIconsLinkedin,
+    SimpleIconsTwitter
+} from "@/utils/icons";
 
 // const PricingSection = () => {
 //     const plans = [
@@ -28,14 +42,14 @@ import {LucideGitPullRequest, LucideMessageSquare, LucideX} from "@/utils/icons"
 //     return (
 //         <section className="py-24 relative overflow-hidden">
 //             {/* Background decorative elements */}
-//             <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50" />
+//             <div className="absolute inset-0 bg-linear-to-br from-purple-50 via-white to-blue-50" />
 //             <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse" />
 //             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse delay-1000" />
 
 //             <div className="container mx-auto px-4 relative">
 //                 <div className="text-center max-w-3xl mx-auto mb-16">
 //                     <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 bg-purple-100 rounded-full">
-//                         <span className="text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+//                         <span className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
 //                             Beta Access
 //                         </span>
 //                     </div>
@@ -50,16 +64,16 @@ import {LucideGitPullRequest, LucideMessageSquare, LucideX} from "@/utils/icons"
 //                 <div className="max-w-lg mx-auto">
 //                     {plans.map((plan, idx) => (
 //                         <div key={idx} className="relative group">
-//                             <Card className="relative overflow-hidden transition-all duration-300 hover:shadow-xl border border-purple-100 group-hover:-translate-y-1 backdrop-blur-sm bg-white/80">
+//                             <Card className="relative overflow-hidden transition-all duration-300 hover:shadow-xl border border-purple-100 group-hover:-translate-y-1 backdrop-blur-xs bg-white/80">
 //                                 {/* Beta badge */}
 //                                 <div className="absolute top-0 right-0">
-//                                     <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-medium px-4 py-1 rounded-bl-lg">
+//                                     <div className="bg-linear-to-r from-purple-600 to-blue-600 text-white text-sm font-medium px-4 py-1 rounded-bl-lg">
 //                                         Beta
 //                                     </div>
 //                                 </div>
 
 //                                 {/* Hover gradient effect */}
-//                                 <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+//                                 <div className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
 //                                 <div className="p-8 relative">
 //                                     {/* Plan header */}
@@ -67,7 +81,7 @@ import {LucideGitPullRequest, LucideMessageSquare, LucideX} from "@/utils/icons"
 //                                         <h4 className="text-2xl font-bold text-gray-900 mb-3">{plan.name}</h4>
 //                                         <p className="text-gray-600 mb-4">{plan.description}</p>
 //                                         <div className="flex items-baseline gap-2">
-//                                             <span className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+//                                             <span className="text-5xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
 //                                                 {plan.price}
 //                                             </span>
 //                                             {plan.period && (
@@ -81,9 +95,9 @@ import {LucideGitPullRequest, LucideMessageSquare, LucideX} from "@/utils/icons"
 //                                         {plan.features.map((feature, idx) => (
 //                                             <li key={idx} className="flex items-center gap-3">
 //                                                 <div className="relative">
-//                                                     <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+//                                                     <Check className="w-5 h-5 text-green-500 shrink-0" />
 //                                                     <div className="absolute inset-0 animate-ping opacity-20">
-//                                                         <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+//                                                         <Check className="w-5 h-5 text-green-500 shrink-0" />
 //                                                     </div>
 //                                                 </div>
 //                                                 <span className="text-gray-700 group-hover:text-gray-900 transition-colors">
@@ -101,14 +115,14 @@ import {LucideGitPullRequest, LucideMessageSquare, LucideX} from "@/utils/icons"
 //                                     </div>
 
 //                                     {/* CTA Button */}
-//                                     <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:brightness-110 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden group">
-//                                         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700" />
+//                                     <button className="w-full bg-linear-to-r from-purple-600 to-blue-600 hover:brightness-110 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden group">
+//                                         <div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700" />
 //                                         <span className="relative z-10">{plan.buttonText}</span>
 //                                     </button>
 //                                 </div>
 
 //                                 {/* Decorative bottom border */}
-//                                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-600 to-blue-600" />
+//                                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-purple-600 to-blue-600" />
 //                             </Card>
 //                         </div>
 //                     ))}
@@ -166,7 +180,7 @@ interface Feature {
 //                                     <ul className="space-y-2">
 //                                         {faq.additionalInfo.map((info, idx) => (
 //                                             <li key={idx} className="flex items-center text-sm text-gray-600">
-//                                                 <ArrowRight className="w-4 h-4 text-violet-400 mr-2 flex-shrink-0" />
+//                                                 <ArrowRight className="w-4 h-4 text-violet-400 mr-2 shrink-0" />
 //                                                 {info}
 //                                             </li>
 //                                         ))}
@@ -232,7 +246,7 @@ interface Feature {
 //     ];
 
 //     return (
-//         <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+//         <section className="py-24 bg-linear-to-b from-white to-gray-50">
 //             <div className="container mx-auto px-4">
 //                 <div className="text-center max-w-3xl mx-auto mb-16">
 //                     <div className="flex items-center justify-center mb-4">
@@ -241,7 +255,7 @@ interface Feature {
 //                             FAQ
 //                         </span>
 //                     </div>
-//                     <h3 className="text-4xl font-bold mb-6 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+//                     <h3 className="text-4xl font-bold mb-6 bg-linear-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
 //                         Frequently Asked Questions
 //                     </h3>
 //                     <p className="text-xl text-gray-600">
@@ -286,7 +300,7 @@ interface Feature {
 // };
 
 // const MetricCard = () => (
-//     <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 flex items-center gap-3 border border-gray-100">
+//     <div className="bg-white/50 backdrop-blur-xs rounded-lg p-4 flex items-center gap-3 border border-gray-100">
 //         <div className="w-10 h-10 rounded-full bg-violet-50 flex items-center justify-center">
 //             <Icon className="w-5 h-5 text-violet-500" />
 //         </div>
@@ -304,17 +318,17 @@ interface Feature {
 //         onClick={onClick}
 //     >
 //         {/* Animated background decoration */}
-//         <div className={`absolute inset-0 bg-gradient-to-r rounded-2xl blur opacity-20 
+//         <div className={`absolute inset-0 bg-linear-to-r rounded-2xl blur opacity-20 
 //       ${isActive
 //                 ? 'from-violet-200 to-indigo-200 scale-105'
 //                 : 'from-gray-100 to-gray-50 group-hover:scale-95'
 //             }`}
 //         />
 
-//         <div className={`relative bg-white/90 backdrop-blur-sm p-8 rounded-2xl transition-all duration-500
+//         <div className={`relative bg-white/90 backdrop-blur-xs p-8 rounded-2xl transition-all duration-500
 //       ${isActive
 //                 ? 'shadow-xl border-violet-200'
-//                 : 'shadow-sm border-gray-100 group-hover:shadow-lg'
+//                 : 'shadow-xs border-gray-100 group-hover:shadow-lg'
 //             } border`}
 //         >
 //             {/* Verified Badge */}
@@ -359,8 +373,8 @@ interface Feature {
 //             {/* Author Info */}
 //             <div className="flex items-start gap-4 pt-6 border-t border-gray-100">
 //                 <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-lg transition-all duration-500 ${isActive
-//                     ? 'bg-gradient-to-r from-violet-500 to-indigo-500'
-//                     : 'bg-gradient-to-r from-gray-700 to-gray-600'
+//                     ? 'bg-linear-to-r from-violet-500 to-indigo-500'
+//                     : 'bg-linear-to-r from-gray-700 to-gray-600'
 //                     }`}>
 //                     {testimonial.author[0]}
 //                 </div>
@@ -424,7 +438,7 @@ interface Feature {
 //     ];
 
 //     return (
-//         <section className="py-24 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
+//         <section className="py-24 bg-linear-to-b from-white via-gray-50 to-white overflow-hidden">
 //             {/* Metrics Section */}
 //             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
 //                 {metrics.map((metric, idx) => (
@@ -440,7 +454,7 @@ interface Feature {
 //                         User Stories
 //                     </span>
 //                 </div>
-//                 <h3 className="text-4xl font-bold mb-6 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+//                 <h3 className="text-4xl font-bold mb-6 bg-linear-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
 //                     Loved by Developers
 //                 </h3>
 //                 <p className="text-xl text-gray-600">
@@ -451,7 +465,7 @@ interface Feature {
 //             {/* Testimonials Grid */}
 //             <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto relative">
 //                 {/* Background Decoration */}
-//                 <div className="absolute inset-0 bg-gradient-to-r from-violet-100/20 via-transparent to-indigo-100/20 blur-3xl" />
+//                 <div className="absolute inset-0 bg-linear-to-r from-violet-100/20 via-transparent to-indigo-100/20 blur-3xl" />
 
 //                 {testimonials.map((testimonial, idx) => (
 //                     <TestimonialCard
@@ -551,7 +565,7 @@ const Card = ({children, className = '', ...props}: { children: React.ReactNode,
 
 //     return (
 //         <section className="py-24 relative overflow-hidden">
-//             <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50" />
+//             <div className="absolute inset-0 bg-linear-to-br from-purple-50 via-white to-blue-50" />
 //             <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse" />
 //             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse delay-1000" />
 
@@ -560,13 +574,13 @@ const Card = ({children, className = '', ...props}: { children: React.ReactNode,
 //             <div className="container mx-auto px-4 relative">
 //                 <div className="text-center max-w-3xl mx-auto mb-16">
 //                     <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 bg-purple-100 rounded-full">
-//                         <span className="text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+//                         <span className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
 //                             About Devvoir
 //                         </span>
 //                     </div>
 //                     <h2 className="text-4xl font-bold mb-6 text-gray-900">
 //                         Revolutionizing Developer
-//                         <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+//                         <span className="block text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-blue-600">
 //                             Productivity
 //                         </span>
 //                     </h2>
@@ -575,17 +589,17 @@ const Card = ({children, className = '', ...props}: { children: React.ReactNode,
 //                     </p>
 
 //                     <div className="relative max-w-2xl mx-auto mb-20 group">
-//                         <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200" />
+//                         <div className="absolute -inset-1 bg-linear-to-r from-purple-600 to-blue-600 rounded-xl blur-sm opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200" />
 
-//                         <div className="relative p-8 bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200/50 shadow-xl">
+//                         <div className="relative p-8 bg-white/90 backdrop-blur-xs rounded-xl border border-gray-200/50 shadow-xl">
 //                             <div className="flex flex-col items-center text-center space-y-6">
 //                                 <div className="space-y-4">
-//                                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 p-0.5 shadow-lg">
+//                                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-purple-600 to-blue-600 p-0.5 shadow-lg">
 //                                         <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
-//                                             <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">D</span>
+//                                             <span className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">D</span>
 //                                         </div>
 //                                     </div>
-//                                     <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+//                                     <h3 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
 //                                         Why &quot;Devvoir&quot;?
 //                                     </h3>
 //                                 </div>
@@ -593,7 +607,7 @@ const Card = ({children, className = '', ...props}: { children: React.ReactNode,
 //                                 <div className="flex flex-col items-center space-y-2">
 //                                     <span className="text-lg font-medium text-gray-700">How to pronounce it</span>
 //                                     <div className="flex items-center gap-3">
-//                                         <span className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-100 text-purple-700 font-mono text-lg tracking-wide shadow-sm">
+//                                         <span className="px-4 py-2 rounded-lg bg-linear-to-r from-purple-50 to-blue-50 border border-purple-100 text-purple-700 font-mono text-lg tracking-wide shadow-xs">
 //                                             /dev-vwär/
 //                                         </span>
 //                                         <button className="p-2 rounded-full hover:bg-purple-50 transition-colors group">
@@ -621,11 +635,11 @@ const Card = ({children, className = '', ...props}: { children: React.ReactNode,
 //                 <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
 //                     {values.map((value, idx) => (
 //                         <div key={idx} 
-//                              className="group relative p-6 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-//                             <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
+//                              className="group relative p-6 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+//                             <div className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
 
 //                             <div className="relative">
-//                                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+//                                 <div className="w-12 h-12 rounded-lg bg-linear-to-br from-purple-100 to-blue-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
 //                                     {value.icon}
 //                                 </div>
 //                                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{value.title}</h3>
@@ -668,7 +682,7 @@ const LandingPage = () => {
 
     const features: Feature[] = [
         {
-            icon: <Icon icon={"simple-icons:github"} className="w-8 h-8 text-white"/>,
+            icon: <SimpleIconsGithub className="w-8 h-8 text-white"/>,
             title: "Connect Repository",
             description: "Link your GitHub repository to start tracking your development activity automatically.",
             bgGradient: "from-purple-500 to-purple-600",
@@ -704,13 +718,13 @@ const LandingPage = () => {
     ];
 
     // const FeatureCard = ({ icon: Icon, title, description }) => (
-    //     <div className="group relative p-6 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+    //     <div className="group relative p-6 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-xs hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
     //         {/* Gradient background effect */}
-    //         <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
+    //         <div className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
 
     //         <div className="relative">
     //             {/* Icon wrapper */}
-    //             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center mb-4 transform transition-transform group-hover:scale-110 group-hover:rotate-3">
+    //             <div className="w-12 h-12 rounded-lg bg-linear-to-br from-purple-500 to-blue-500 flex items-center justify-center mb-4 transform transition-transform group-hover:scale-110 group-hover:rotate-3">
     //                 <Icon className="w-6 h-6 text-white" />
     //             </div>
 
@@ -736,7 +750,7 @@ const LandingPage = () => {
         <div className="flex items-start gap-3 mb-4">
             <div className="mt-1">
                 <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-                    <Icon icon={"lucide:check"} className={"w-3 h-3 text-green-500"}/>
+                    <LucideCheck className={"w-3 h-3 text-green-500"}/>
                 </div>
             </div>
             <p className="text-gray-600">{text}</p>
@@ -770,7 +784,7 @@ const LandingPage = () => {
     //     ];
 
     //     return (
-    //         <section className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+    //         <section className="py-24 bg-linear-to-b from-white to-gray-50 relative overflow-hidden">
     //             {/* Background decorative elements */}
     //             <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse" />
     //             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse delay-1000" />
@@ -779,13 +793,13 @@ const LandingPage = () => {
     //                 {/* Section Header */}
     //                 <div className="text-center max-w-3xl mx-auto mb-16">
     //                     <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 bg-purple-100 rounded-full">
-    //                         <span className="text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+    //                         <span className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
     //                             Why Choose Devvoir
     //                         </span>
     //                     </div>
     //                     <h2 className="text-4xl font-bold mb-6 text-gray-900">
     //                         The Smart Way to Track Your
-    //                         <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+    //                         <span className="block text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-blue-600">
     //                             Development Journey
     //                         </span>
     //                     </h2>
@@ -803,7 +817,7 @@ const LandingPage = () => {
 
     //                 {/* Benefits List */}
     //                 <div className="max-w-2xl mx-auto">
-    //                     <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 p-8">
+    //                     <div className="bg-white/80 backdrop-blur-xs rounded-xl border border-gray-200 p-8">
     //                         <h3 className="text-2xl font-bold text-gray-900 mb-6">
     //                             What You Get
     //                         </h3>
@@ -811,9 +825,9 @@ const LandingPage = () => {
     //                             {benefits.map((benefit, idx) => (
     //                                 <div key={idx} className="flex items-center gap-3">
     //                                     <div className="relative">
-    //                                         <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+    //                                         <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
     //                                         <div className="absolute inset-0 animate-ping opacity-20">
-    //                                             <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+    //                                             <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
     //                                         </div>
     //                                     </div>
     //                                     <span className="text-gray-700">{benefit}</span>
@@ -825,7 +839,7 @@ const LandingPage = () => {
 
     //                 {/* CTA */}
     //                 <div className="text-center mt-16">
-    //                     <button className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 group">
+    //                     <button className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 group">
     //                         <Sparkles className="w-5 h-5" />
     //                         <span>Try It Free</span>
     //                     </button>
@@ -854,7 +868,7 @@ const LandingPage = () => {
         ];
 
         return (
-            <section className="py-24 relative overflow-hidden bg-gradient-to-br from-gray-50 to-purple-50">
+            <section className="py-24 relative overflow-hidden bg-linear-to-br from-gray-50 to-purple-50">
                 {/* Background Elements */}
                 <div className="absolute inset-0">
                     <div
@@ -868,13 +882,13 @@ const LandingPage = () => {
                         <div
                             className="inline-flex items-center justify-center px-4 py-1.5 mb-6 bg-purple-100 rounded-full">
                             <span
-                                className="text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                                className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Why Devvoir?
                             </span>
                         </div>
                         <h2 className="text-4xl font-bold mb-6 text-black">
                             Focus on <span
-                            className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">Writing Code</span>,
+                            className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-blue-600">Writing Code</span>,
                             <br/>Not Status Updates
                         </h2>
                     </div>
@@ -883,9 +897,9 @@ const LandingPage = () => {
                         {/* Left Side: Pain Points and Solutions */}
                         <div className="space-y-8">
                             {/* Pain Points */}
-                            <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 p-6">
+                            <div className="bg-white/80 backdrop-blur-xs rounded-xl border border-gray-200 p-6">
                                 <h3 className="text-lg font-semibold text-red-600 mb-6 flex items-center gap-2">
-                                    <Icon icon={"lucide:clock"} className="w-5 h-5"/>
+                                    <LucideClock className="w-5 h-5"/>
                                     Time-Consuming Manual Updates
                                 </h3>
                                 {painPoints.map((point, idx) => (
@@ -894,9 +908,9 @@ const LandingPage = () => {
                             </div>
 
                             {/* Solutions */}
-                            <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 p-6">
+                            <div className="bg-white/80 backdrop-blur-xs rounded-xl border border-gray-200 p-6">
                                 <h3 className="text-lg font-semibold text-green-600 mb-6 flex items-center gap-2">
-                                    <Icon icon={"lucide:bot"} className={"w-5 h-5"}/>
+                                    <LucideBot className={"w-5 h-5"}/>
                                     Automated AI Solutions
                                 </h3>
                                 {solutions.map((solution, idx) => (
@@ -923,7 +937,7 @@ const LandingPage = () => {
                                     <div className="space-y-4">
                                         {/* Manual Update (Crossed Out) */}
                                         <div className="relative">
-                                            <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-sm opacity-50">
+                                            <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs opacity-50">
                                                 <div className="text-gray-400 mb-2 text-sm">Manual Update:</div>
                                                 <p className="text-gray-500 font-mono text-sm">
                                                     Today I worked on... [typing indicator]
@@ -931,17 +945,17 @@ const LandingPage = () => {
                                             </div>
                                             <div className="absolute inset-0 flex items-center justify-center">
                                                 <div
-                                                    className="bg-red-500/10 backdrop-blur-sm rounded-lg px-3 py-1 border border-red-500/20">
+                                                    className="bg-red-500/10 backdrop-blur-xs rounded-lg px-3 py-1 border border-red-500/20">
                                                     <span className="text-red-400 text-sm">Time Consuming</span>
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* Devvoir Generated (Active) */}
-                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-sm">
+                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
                                             <div className="flex items-center gap-2 text-blue-400 mb-2">
                                                 {/*<Bot className="w-4 h-4" />*/}
-                                                <Icon icon={"lucide:bot"} className={"w-5 h-5"}/>
+                                                <LucideBot className={"w-5 h-5"}/>
                                                 <span
                                                     className="text-sm">Devvoir Generated:</span>
                                             </div>
@@ -977,7 +991,7 @@ const LandingPage = () => {
 
                             {/* CTA */}
                             <div className="flex flex-col items-center justify-center mt-8 text-center">
-                                <Button icon={"lucide:arrow-right"} text={"Try It Now - It's Free"}
+                                <Button Icon={LucideArrowRight} text={"Try It Now - It's Free"}
                                         onClick={() => router.push("/auth/signin")} iconPosition={"right"}/>
                                 <p className="mt-3 text-sm text-gray-600">
                                     No credit card required • Free during beta
@@ -1006,16 +1020,16 @@ const LandingPage = () => {
             <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b">
                 <div className="container mx-auto px-4 max-w-7xl py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                        <Icon icon={"lucide:git-commit-horizontal"} className="w-8 h-8 text-purple-600"/>
+                        <LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>
                         <div className="relative">
-                            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                            <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Devvoir
                                 <div className="absolute -right-16 -top-1 transform rotate-12 group">
                                     <div className="relative">
                                         <span
-                                            className="absolute inset-0 bg-purple-600 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></span>
+                                            className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
                                         <span
-                                            className="relative block px-2 py-1 text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                                            className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
                                             BETA
                                         </span>
                                         <span
@@ -1054,20 +1068,20 @@ const LandingPage = () => {
                                 </div>
 
                                 {activeLink === id && (
-                                    <div className="absolute -bottom-4 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600">
+                                    <div className="absolute -bottom-4 left-0 right-0 h-0.5 bg-linear-to-r from-purple-600 to-blue-600">
                                         <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-purple-600" />
                                     </div>
                                 )}
                             </button>
                         ))}
                     </div> */}
-                    <Button icon={"lucide:sparkles"} text={"Get Started"} onClick={() => router.push("/auth/signin")}
+                    <Button Icon={LucideSparkles} text={"Get Started"} onClick={() => router.push("/auth/signin")}
                             iconPosition={"left"}/>
                 </div>
             </nav>
 
             {/* Hero Section */}
-            <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-br from-purple-50 via-white to-blue-50">
+            <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-linear-to-br from-purple-50 via-white to-blue-50">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div className="text-left">
@@ -1078,7 +1092,7 @@ const LandingPage = () => {
                             <h2 className="text-4xl md:text-6xl font-bold text-black mb-6 leading-tight">
                                 Your Daily Report
                                 <span
-                                    className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+                                    className="block text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-blue-600">
                                     Writes Itself
                                 </span>
                             </h2>
@@ -1087,7 +1101,7 @@ const LandingPage = () => {
                                 reports.
                                 No more manual standups or forgetting what you worked on.
                             </p>
-                            <Button icon={"lucide:arrow-right"} text={"Get Started"} iconPosition={"right"}
+                            <Button Icon={LucideArrowRight} text={"Get Started"} iconPosition={"right"}
                                     onClick={() => router.push("/auth/signin")}/>
                         </div>
 
@@ -1112,9 +1126,9 @@ const LandingPage = () => {
                                 {/* Code content */}
                                 <div className="p-6 font-mono text-sm">
                                     <div className="space-y-4">
-                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-sm">
+                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
                                             <div className="flex items-center gap-2 text-blue-400 mb-2">
-                                                <Icon icon={"lucide:git-commit-horizontal"} className="w-4 h-4"/>
+                                                <LucideGitCommitHorizontal className="w-4 h-4"/>
                                                 <span
                                                     className="text-sm">feat: Implement real-time data synchronization</span>
                                             </div>
@@ -1124,9 +1138,9 @@ const LandingPage = () => {
                                             </p>
                                         </div>
 
-                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-sm">
+                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
                                             <div className="flex items-center gap-2 text-purple-400 mb-2">
-                                                <Icon icon={"lucide:git-pull-request"} className="w-4 h-4"/>
+                                                <LucideGitPullRequest className="w-4 h-4"/>
                                                 <span className="text-sm">PR: Enhance caching mechanism</span>
                                             </div>
                                             <p className="text-gray-300 text-sm">
@@ -1135,9 +1149,9 @@ const LandingPage = () => {
                                             </p>
                                         </div>
 
-                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-sm">
+                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
                                             <div className="flex items-center gap-2 text-green-400 mb-2">
-                                                <Icon icon={"lucide:bot"} className={"w-5 h-5"}/>
+                                                <LucideBot className={"w-5 h-5"}/>
                                                 <span className="text-sm">Daily Summary</span>
                                             </div>
                                             <p className="text-gray-300 text-sm">
@@ -1164,7 +1178,7 @@ const LandingPage = () => {
             {/* How It Works */}
             <section className="py-24 relative overflow-hidden">
                 {/* Background decorative elements */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50"/>
+                <div className="absolute inset-0 bg-linear-to-br from-purple-50 via-white to-blue-50"/>
                 <div
                     className="absolute top-0 left-1/4 w-96 h-96 bg-purple-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse"/>
                 <div
@@ -1175,14 +1189,14 @@ const LandingPage = () => {
                         <div
                             className="inline-flex items-center justify-center px-4 py-1.5 mb-6 bg-purple-100 rounded-full">
                             <span
-                                className="text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                                className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 How It Works
                             </span>
                         </div>
                         <h3 className="text-4xl font-bold mb-6 text-gray-900">
                             Three Simple Steps to
                             <span
-                                className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+                                className="block text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-blue-600">
                                 Automate Your Updates
                             </span>
                         </h3>
@@ -1198,7 +1212,7 @@ const LandingPage = () => {
                                 {/* Updated connector line between cards */}
                                 {/*{idx < features.length - 1 && (*/}
                                 {/*    <div className="hidden md:block absolute top-1/4 -right-4 w-8">*/}
-                                {/*        <div className="relative h-0.5 bg-gradient-to-r from-purple-300 to-blue-300">*/}
+                                {/*        <div className="relative h-0.5 bg-linear-to-r from-purple-300 to-blue-300">*/}
                                 {/*            <ArrowRight*/}
                                 {/*                className="absolute -right-1 -top-2 w-5 h-5 text-blue-500 animate-pulse"/>*/}
                                 {/*        </div>*/}
@@ -1206,18 +1220,18 @@ const LandingPage = () => {
                                 {/*)}*/}
 
                                 <Card
-                                    className="relative h-full overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 group-hover:-translate-y-1 backdrop-blur-sm bg-white/80">
+                                    className="relative h-full overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 group-hover:-translate-y-1 backdrop-blur-xs bg-white/80">
                                     <div
-                                        className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                                        className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
 
                                     <div className="p-8 relative">
                                         {/* Icon with gradient background */}
                                         <div
-                                            className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-lg`}>
+                                            className={`w-16 h-16 rounded-2xl bg-linear-to-br ${feature.bgGradient} flex items-center justify-center mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-lg`}>
                                             {feature.icon}
                                             {/* Decorative shine effect */}
                                             <div
-                                                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700"/>
+                                                className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700"/>
                                         </div>
 
                                         {/* Content */}
@@ -1229,11 +1243,11 @@ const LandingPage = () => {
                                             {feature.features.map((item, i) => (
                                                 <li key={i} className="flex items-center gap-3 text-gray-700">
                                                     <div className="relative">
-                                                        <Icon icon={"lucide:check-circle-2"}
-                                                              className={"w-5 h-5 text-green-500 flex-shrink-0"}/>
+                                                        <LucideCheckCircle2
+                                                              className={"w-5 h-5 text-green-500 shrink-0"}/>
                                                         <div className="absolute inset-0 animate-ping opacity-20">
-                                                            <Icon icon={"lucide:check-circle-2"}
-                                                                className="w-5 h-5 text-green-500 flex-shrink-0"/>
+                                                            <LucideCheckCircle2
+                                                                  className="w-5 h-5 text-green-500 shrink-0"/>
                                                         </div>
                                                     </div>
                                                     <span
@@ -1245,7 +1259,7 @@ const LandingPage = () => {
 
                                     {/* Decorative gradient line */}
                                     <div
-                                        className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.bgGradient}`}/>
+                                        className={`absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r ${feature.bgGradient}`}/>
                                 </Card>
                             </div>
                         ))}
@@ -1256,14 +1270,14 @@ const LandingPage = () => {
             {/* <PricingSection /> */}
 
             {/* Example Report Section */}
-            <section className="py-16 bg-gradient-to-b from-violet-50 to-white overflow-hidden">
+            <section className="py-16 bg-linear-to-b from-violet-50 to-white overflow-hidden">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <div className="max-w-4xl mx-auto">
-                        <h3 className="text-4xl font-bold text-center bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent mb-8">
+                        <h3 className="text-4xl font-bold text-center bg-linear-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent mb-8">
                             Example Daily Report
                         </h3>
 
-                        <Card className="p-8 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+                        <Card className="p-8 shadow-lg border-0 bg-white/80 backdrop-blur-xs">
                             {/* Header */}
                             <div className="mb-8 flex items-center justify-between border-b border-gray-100 pb-6">
                                 <div>
@@ -1271,7 +1285,7 @@ const LandingPage = () => {
                                         End of Day Report - John&apos;s Activity
                                     </h4>
                                     <div className="flex items-center mt-2 text-gray-600">
-                                        <Icon icon={"lucide:clock"} className="w-4 h-4 mr-2"/>
+                                        <LucideClock className="w-4 h-4 mr-2"/>
                                         <span>Thursday, November 2, 2024</span>
                                     </div>
                                 </div>
@@ -1281,7 +1295,7 @@ const LandingPage = () => {
                                 {/* Pull Requests Section */}
                                 <div>
                                     <div className="flex items-center mb-4">
-                                        <Icon icon={"lucide:git-pull-request"}
+                                        <LucideGitPullRequest
                                               className="w-5 h-5 text-violet-600 mr-2"/>
                                         <h5 className="text-lg font-semibold text-gray-900">Pull Requests</h5>
                                     </div>
@@ -1309,7 +1323,7 @@ const LandingPage = () => {
                                 {/* Commits Section */}
                                 <div>
                                     <div className="flex items-center mb-4">
-                                        <Icon icon={"lucide:git-commit-horizontal"}
+                                        <LucideGitCommitHorizontal
                                               className="w-5 h-5 text-indigo-600 mr-2"/>
                                         <h5 className="text-lg font-semibold text-gray-900">Commits</h5>
                                     </div>
@@ -1336,7 +1350,7 @@ const LandingPage = () => {
                                 {/* Summary Section */}
                                 <div>
                                     <div className="flex items-center mb-4">
-                                        <Icon icon={"lucide:file-text"} className="w-5 h-5 text-gray-900 mr-2"/>
+                                        <LucideFileText className="w-5 h-5 text-gray-900 mr-2"/>
                                         <h5 className="text-lg font-semibold text-gray-900">Summary</h5>
                                     </div>
                                     <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
@@ -1365,9 +1379,9 @@ const LandingPage = () => {
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                     {/* Gradient overlays */}
                     <div
-                        className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-violet-500/10 to-transparent blur-2xl"/>
+                        className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-linear-to-br from-violet-500/10 to-transparent blur-2xl"/>
                     <div
-                        className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-indigo-500/10 to-transparent blur-2xl"/>
+                        className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-linear-to-tl from-indigo-500/10 to-transparent blur-2xl"/>
 
                     {/* Animated shapes */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
@@ -1383,13 +1397,13 @@ const LandingPage = () => {
                 <div className="relative container mx-auto px-4 max-w-7xl">
                     <div className="max-w-4xl mx-auto">
                         <div
-                            className="relative backdrop-blur-sm bg-gray-800/20 rounded-2xl p-8 md:p-12 border border-gray-700">
+                            className="relative backdrop-blur-xs bg-gray-800/20 rounded-2xl p-8 md:p-12 border border-gray-700">
                             {/* Decorative icon */}
                             <div className="absolute -top-6 left-1/2 -translate-x-1/2">
                                 <div
-                                    className="inline-flex p-3 rounded-xl bg-violet-500/10 backdrop-blur-sm border border-violet-500/20">
+                                    className="inline-flex p-3 rounded-xl bg-violet-500/10 backdrop-blur-xs border border-violet-500/20">
                                     {/*<Bot className="w-6 h-6 text-violet-400" />*/}
-                                    <Icon icon={"lucide:bot"} className={"w-6 h-6 text-violet-400"}/>
+                                    <LucideBot className={"w-6 h-6 text-violet-400"}/>
                                 </div>
                             </div>
 
@@ -1398,7 +1412,7 @@ const LandingPage = () => {
                                 <div className="flex justify-center">
                                     <div
                                         className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20">
-                                        <Icon icon={"lucide:sparkles"} className="w-4 h-4 text-violet-400"/>
+                                        <LucideSparkles className="w-4 h-4 text-violet-400"/>
                                         <span className="text-sm text-violet-200">AI-Powered Reports</span>
                                     </div>
                                 </div>
@@ -1407,7 +1421,7 @@ const LandingPage = () => {
                                 <div>
                                     <h3 className="text-3xl md:text-4xl font-bold mb-4">
                                         <span
-                                            className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                                            className="bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
                                             Never Write Manual Standups Again
                                         </span>
                                     </h3>
@@ -1419,7 +1433,7 @@ const LandingPage = () => {
 
                                 {/* CTA Button */}
                                 <div className="flex flex-col items-center gap-4">
-                                    <Button icon={"lucide:arrow-right"} text={"Start Automating Your Reports"}
+                                    <Button Icon={LucideArrowRight} text={"Start Automating Your Reports"}
                                             onClick={() => router.push("/auth/signin")} iconPosition={"right"}/>
                                     <span
                                         className="text-sm text-gray-500">Get started in minutes • No setup needed</span>
@@ -1435,7 +1449,7 @@ const LandingPage = () => {
                                 ].map((stat, idx) => (
                                     <div key={idx} className="text-center">
                                         <div
-                                            className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                                            className="text-2xl font-bold bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
                                             {stat.value}
                                         </div>
                                         <div className="text-sm text-gray-400">{stat.label}</div>
@@ -1450,29 +1464,35 @@ const LandingPage = () => {
             {/* Footer */}
             <footer className="bg-white border-t">
                 <div className="container mx-auto px-4 max-w-7xl py-12">
-                    {/*<div className="flex items-center justify-center gap-2 mb-8">*/}
-                    {/*    <GitCommit className="w-6 h-6 text-purple-600"/>*/}
-                    {/*    <span className="font-bold text-xl text-black">Devvoir</span>*/}
-                    {/*</div>*/}
                     <div className="flex items-center justify-center gap-2 mb-8">
-                        <Icon icon={"lucide:git-commit-horizontal"} className="w-8 h-8 text-purple-600"/>
+                        <LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>
                         <div className="relative">
-                            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                            <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Devvoir
                                 <div className="absolute -right-16 -top-1 transform rotate-12 group">
                                     <div className="relative">
+                            <span
+                                className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
                                         <span
-                                            className="absolute inset-0 bg-purple-600 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></span>
-                                        <span
-                                            className="relative block px-2 py-1 text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
-                                            BETA
-                                        </span>
+                                            className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                                BETA
+                            </span>
                                         <span
                                             className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>
                                     </div>
                                 </div>
                             </h1>
                         </div>
+                    </div>
+                    <div className="flex items-center justify-center gap-6 mb-4">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                            <SimpleIconsTwitter
+                                  className="w-6 h-6 text-blue-500 hover:text-blue-400 transition-colors"/>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                            <SimpleIconsLinkedin
+                                  className="w-6 h-6 text-blue-700 hover:text-blue-600 transition-colors"/>
+                        </a>
                     </div>
                     <div className="text-center text-gray-800">
                         <p>&copy; {new Date().getFullYear()} Devvoir. All rights reserved.</p>

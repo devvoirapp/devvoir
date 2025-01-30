@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import localFont from "next/font/local";
+import {Inter} from 'next/font/google'
 import "./globals.css";
 import {Providers} from "@/app/providers";
 import {SpeedInsights} from '@vercel/speed-insights/next';
@@ -7,16 +7,11 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'auto',
+  weight: "400",
+})
 
 export const metadata: Metadata = {
   title: "Devvoir",
@@ -33,9 +28,7 @@ export default function RootLayout({
     <Head>
       <Link rel="icon" href="favicon.ico"/>
     </Head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <body className={inter.className}>
         <Providers>{children}<SpeedInsights /></Providers>
       </body>
     </html>

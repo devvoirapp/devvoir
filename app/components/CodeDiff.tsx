@@ -7,7 +7,7 @@ import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-json';
-import {Icon} from "@iconify/react";
+import {LucideChevronRight, LucideFileCode, LucideMinus, LucidePlus} from "@/utils/icons";
 
 interface CodeDiffProps {
     patch: string;
@@ -146,9 +146,9 @@ const CodeDiff: React.FC<CodeDiffProps> = ({ patch, filename }) => {
                 {/* Change indicator */}
                 <div className="absolute left-12 top-0 bottom-0 w-8 flex items-center justify-center text-gray-500/70 select-none border-r border-gray-700/50">
                     {isAddition ? (
-                        <Icon icon={"lucide:plus"} className="w-3.5 h-3.5 text-green-500/70"/>
+                        <LucidePlus className="w-3.5 h-3.5 text-green-500/70"/>
                     ) : isDeletion ? (
-                        <Icon icon={"lucide:minus"} className="w-3.5 h-3.5 text-red-500/70"/>
+                        <LucideMinus className="w-3.5 h-3.5 text-red-500/70"/>
                     ) : null}
                 </div>
                 {/* Code content */}
@@ -180,7 +180,7 @@ const CodeDiff: React.FC<CodeDiffProps> = ({ patch, filename }) => {
                 {/* File header */}
                 <div className="sticky top-0 px-4 py-3 bg-gray-900/50 border-b border-gray-800 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <Icon icon={"lucide:file-code"} className="w-4 h-4 text-gray-400"/>
+                        <LucideFileCode className="w-4 h-4 text-gray-400"/>
                         <span className="text-gray-300 font-medium">
                             {filename.split('/').pop()}
                         </span>
@@ -194,11 +194,11 @@ const CodeDiff: React.FC<CodeDiffProps> = ({ patch, filename }) => {
                         </button>
                         <div className="flex items-center gap-3 text-xs">
                             <span className="flex items-center gap-1.5">
-                                <Icon icon={"lucide:plus"} className="w-3.5 h-3.5 text-green-500"/>
+                                <LucidePlus className="w-3.5 h-3.5 text-green-500"/>
                                 <span className="text-green-400">{totalAdditions}</span>
                             </span>
                             <span className="flex items-center gap-1.5">
-                                <Icon icon={"lucide:minus"} className="w-3.5 h-3.5 text-red-500"/>
+                                <LucideMinus className="w-3.5 h-3.5 text-red-500"/>
                                 <span className="text-red-400">{totalDeletions}</span>
                             </span>
                         </div>
@@ -214,7 +214,7 @@ const CodeDiff: React.FC<CodeDiffProps> = ({ patch, filename }) => {
                                     onClick={() => toggleChunk(chunkIndex)}
                                     className="w-full px-4 py-2.5 flex items-center gap-3 bg-gray-900/30 hover:bg-gray-800/30 transition-colors group"
                                 >
-                                    <Icon icon={"lucide:chevron-right"}
+                                    <LucideChevronRight
                                         className={`w-4 h-4 text-gray-400 transform transition-transform duration-200 ${
                                             expandedChunks.has(chunkIndex) ? 'rotate-90' : ''
                                         } group-hover:text-gray-300`}
@@ -224,13 +224,13 @@ const CodeDiff: React.FC<CodeDiffProps> = ({ patch, filename }) => {
                                     </span>
                                     <div className="flex items-center gap-3 ml-auto text-xs">
                                         <span className="flex items-center gap-1.5">
-                                            <Icon icon={"lucide:plus"} className="w-3.5 h-3.5 text-green-500/70"/>
+                                            <LucidePlus className="w-3.5 h-3.5 text-green-500/70"/>
                                             <span className="text-green-400/70">
                                                 {chunk.lines.filter(l => l.type === 'addition').length}
                                             </span>
                                         </span>
                                         <span className="flex items-center gap-1.5">
-                                            <Icon icon={"lucide:minus"} className="w-3.5 h-3.5 text-red-500/70"/>
+                                            <LucideMinus className="w-3.5 h-3.5 text-red-500/70"/>
                                             <span className="text-red-400/70">
                                                 {chunk.lines.filter(l => l.type === 'deletion').length}
                                             </span>
