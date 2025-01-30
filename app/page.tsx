@@ -1487,11 +1487,11 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-center gap-6 mb-4">
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://x.com/DevvoirAI" target="_blank" rel="noopener noreferrer">
                             <SimpleIconsTwitter
                                   className="w-6 h-6 text-blue-500 hover:text-blue-400 transition-colors"/>
                         </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.linkedin.com/company/devvoir" target="_blank" rel="noopener noreferrer">
                             <SimpleIconsLinkedin
                                   className="w-6 h-6 text-blue-700 hover:text-blue-600 transition-colors"/>
                         </a>
