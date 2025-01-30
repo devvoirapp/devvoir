@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import { getNextMonthResetDate } from '@/utils/getNextMonthResetDate';
+import {NextResponse} from 'next/server';
+import {PrismaClient} from '@prisma/client';
+import {getNextMonthResetDate} from '@/utils/getNextMonthResetDate';
 
 const prisma = new PrismaClient();
 
@@ -11,6 +11,8 @@ export async function GET(request: Request) {
     try {
         // Verify the request is from Vercel Cron
         const authHeader = request.headers.get('authorization');
+        console.log({authHeader});
+        console.log({cronSecret: process.env.CRON_SECRET});
         if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
             return new NextResponse('Unauthorized', { status: 401 });
         }

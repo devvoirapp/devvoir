@@ -22,7 +22,7 @@ import {
     LucideGitPullRequest,
     LucideInfo,
     LucideLogOut,
-    LucideRefreshCcw,
+    LucideRefreshCw,
     LucideSearch,
     LucideSparkles,
     LucideUsers
@@ -792,10 +792,10 @@ function ReportGenerator() {
                                             }
                                         `}
                     >
-                      {loading ? (
+                        {loading || regenerateLoading ? (
                         <>
-                            <LucideRefreshCcw className="w-4 h-4 animate-spin"/>
-                          Generating...
+                            <LucideRefreshCw className="w-4 h-4 animate-spin"/>
+                            {regenerateLoading ? "Regenerating..." : "Generating..."}
                         </>
                       ) : aiSummary ? (
                         <>
@@ -1145,14 +1145,14 @@ function ReportGenerator() {
                             <div className="relative flex items-center gap-2">
                               {regenerateLoading ? (
                                 <>
-                                    <LucideRefreshCcw className="w-4 h-4 text-white animate-spin"/>
+                                    <LucideRefreshCw className="w-4 h-4 text-white animate-spin"/>
                                   <span className="text-sm font-medium">
                                     Regenerating...
                                   </span>
                                 </>
                               ) : (
                                 <>
-                                    <LucideRefreshCcw
+                                    <LucideRefreshCw
                                           className="w-4 h-4 text-white transform group-hover:rotate-180 transition-transform duration-500"/>
                                   <span className="text-sm font-medium">
                                     Regenerate
@@ -1200,7 +1200,7 @@ function ReportGenerator() {
                                               className="absolute inset-0 bg-linear-to-r from-purple-500 to-blue-500 rounded-xl opacity-10 group-hover:opacity-20 blur-xs transition-opacity duration-300"/>
                                           <div
                                               className="relative h-10 w-10 flex items-center justify-center bg-linear-to-r from-purple-50 to-blue-50 rounded-xl shadow-xs">
-                                              <LucideRefreshCcw
+                                              <LucideRefreshCw
                                                 className="w-5 h-5 text-purple-600 group-hover:rotate-180 transition-transform duration-500"/>
                                       </div>
                                     </div>

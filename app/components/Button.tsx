@@ -14,13 +14,17 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     Icon: ElementType;
     text: string;
     iconPosition?: 'left' | 'right';
+    disabled?: boolean;
+    iconClasses?: string;
 }
 
 export const Button = ({
                            Icon,
                            text,
                            onClick,
-                           iconPosition = 'left', // Default prop value
+                           iconPosition = 'left',
+                           disabled = false,
+                           iconClasses = ''
                        }: ButtonProps) => {
     // Content wrapper classes
     const contentWrapperClasses = classNames(
@@ -29,11 +33,11 @@ export const Button = ({
     );
 
     return (
-        <button onClick={onClick} className={BUTTON_BASE_CLASSES}>
+        <button onClick={onClick} className={BUTTON_BASE_CLASSES} disabled={disabled}>
             <div className={BACKGROUND_EFFECT_CLASSES}/>
             <div className={contentWrapperClasses}>
                 <Icon
-                    className={`w-5 h-5 transition-transform duration-300 ease-out ${getIconRotationClass(iconPosition)}`}
+                    className={`w-5 h-5 transition-transform duration-300 ease-out ${getIconRotationClass(iconPosition)} ${iconClasses}`}
                 />
                 <span className="font-semibold text-sm">{text}</span>
             </div>
