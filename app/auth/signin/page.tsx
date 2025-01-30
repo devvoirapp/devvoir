@@ -4,7 +4,8 @@ import {useRouter} from 'next/navigation';
 import {useEffect} from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import SignInButton from "./SignInButton";
-import {LucideBot, LucideClock, LucideGitCommitHorizontal, LucideUsers} from "@/utils/icons";
+import {LucideBot, LucideClock, LucideUsers} from "@/utils/icons";
+import Image from "next/image";
 
 export default function AuthPage() {
   const { status } = useSession();
@@ -39,7 +40,8 @@ export default function AuthPage() {
           <div className="inline-flex items-center justify-center gap-3 mb-6">
             <div className="relative">
               <div className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
-              <LucideGitCommitHorizontal className="w-10 h-10 relative text-purple-600"/>
+              <Image src={"/devvoir.png"} alt={"Devvoir Logo"} width={40} height={40}/>
+              {/*<LucideGitCommitHorizontal className="w-10 h-10 relative text-purple-600"/>*/}
             </div>
             <h1 className="text-5xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
               Devvoir

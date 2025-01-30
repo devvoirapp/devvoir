@@ -8,14 +8,15 @@ import {useEffect, useState} from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import {Product} from '../types/product';
 import {
+    LucideArrowLeft,
     LucideCrown,
     LucideFileText,
-    LucideGitCommitHorizontal,
     LucideRefreshCcw,
     LucideSparkles,
     LucideUser,
     SimpleIconsGithub
 } from "@/utils/icons";
+import Image from "next/image";
 
 interface UsageMetrics {
     monthlyReportCount: number;
@@ -207,7 +208,7 @@ export default function AccountPage() {
                                     onClick={() => router.push('/report-generator')}
                                     className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
                                 >
-                                    <LucideGitCommitHorizontal className="w-4 h-4"/>
+                                    <LucideArrowLeft className="w-4 h-4"/>
                                     Back
                                 </button>
                             </div>
@@ -218,8 +219,9 @@ export default function AccountPage() {
                                     <div className="relative">
                                         <div
                                             className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
-                                        <LucideGitCommitHorizontal
-                                            className="w-8 h-8 relative text-purple-600" />
+                                        {/*<LucideGitCommitHorizontal*/}
+                                        {/*    className="w-8 h-8 relative text-purple-600" />*/}
+                                        <Image src={"/devvoir.png"} alt={"Devvoir Logo"} width={32} height={32}/>
                                     </div>
                                     <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
                                         Devvoir

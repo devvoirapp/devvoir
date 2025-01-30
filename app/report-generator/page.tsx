@@ -18,7 +18,6 @@ import {
     LucideCircleX,
     LucideCopy,
     LucideGitBranch,
-    LucideGitCommitHorizontal,
     LucideGitPullRequest,
     LucideInfo,
     LucideLogOut,
@@ -28,6 +27,7 @@ import {
     LucideUsers
 } from "@/utils/icons";
 import {Button} from "@/app/components/Button";
+import Image from "next/image";
 
 type Repository = {
     name: string;
@@ -609,7 +609,8 @@ function ReportGenerator() {
                         </div>
                     )} */}
             <div className="flex items-center gap-2">
-                <LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>
+                {/*<LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>*/}
+                <Image src={"/devvoir.png"} alt={"Devvoir Logo"} width={32} height={32}/>
               <div className="relative">
                   <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   Devvoir

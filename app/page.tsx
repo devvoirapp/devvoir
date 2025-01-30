@@ -17,6 +17,7 @@ import {
     SimpleIconsLinkedin,
     SimpleIconsTwitter
 } from "@/utils/icons";
+import Image from "next/image";
 
 // const PricingSection = () => {
 //     const plans = [
@@ -1020,7 +1021,8 @@ const LandingPage = () => {
             <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b">
                 <div className="container mx-auto px-4 max-w-7xl py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                        <LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>
+                        {/*<LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>*/}
+                        <Image src={"/devvoir.png"} alt={"Devvoir Logo"} width={32} height={32}/>
                         <div className="relative">
                             <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Devvoir
