@@ -12,11 +12,11 @@ import {
     LucideCrown,
     LucideFileText,
     LucideRefreshCcw,
+    LucideRefreshCw,
     LucideSparkles,
     LucideUser,
     SimpleIconsGithub
 } from "@/utils/icons";
-import Image from "next/image";
 
 interface UsageMetrics {
     monthlyReportCount: number;
@@ -214,40 +214,40 @@ export default function AccountPage() {
                             </div>
 
                             {/* Logo */}
-                            <div className="justify-self-center">
-                                <div className="inline-flex items-center justify-center gap-3">
-                                    <div className="relative">
-                                        <div
-                                            className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
-                                        {/*<LucideGitCommitHorizontal*/}
-                                        {/*    className="w-8 h-8 relative text-purple-600" />*/}
-                                        <Image
-                                            src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}
-                                            alt={"Devvoir Logo"}
-                                            width={32}
-                                            height={32}
-                                            priority
-                                            loading="eager"
-                                            quality={90}
-                                        />
-                                    </div>
-                                    <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
-                                        Devvoir
-                                        <div className="absolute -right-16 -top-1 transform rotate-12 group">
-                                            <div className="relative">
-                                                <span
-                                                    className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
-                                                <span
-                                                    className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
-                                                    BETA
-                                                </span>
-                                                <span
-                                                    className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>
-                                            </div>
-                                        </div>
-                                    </h1>
-                                </div>
-                            </div>
+                            {/*<div className="justify-self-center">*/}
+                            {/*    <div className="inline-flex items-center justify-center gap-3">*/}
+                            {/*        <div className="relative">*/}
+                            {/*            <div*/}
+                            {/*                className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>*/}
+                            {/*            /!*<LucideGitCommitHorizontal*!/*/}
+                            {/*            /!*    className="w-8 h-8 relative text-purple-600" />*!/*/}
+                            {/*            <Image*/}
+                            {/*                src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}*/}
+                            {/*                alt={"Devvoir Logo"}*/}
+                            {/*                width={32}*/}
+                            {/*                height={32}*/}
+                            {/*                priority*/}
+                            {/*                loading="eager"*/}
+                            {/*                quality={90}*/}
+                            {/*            />*/}
+                            {/*        </div>*/}
+                            {/*        <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">*/}
+                            {/*            Devvoir*/}
+                            {/*            <div className="absolute -right-16 -top-1 transform rotate-12 group">*/}
+                            {/*                <div className="relative">*/}
+                            {/*                    <span*/}
+                            {/*                        className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>*/}
+                            {/*                    <span*/}
+                            {/*                        className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">*/}
+                            {/*                        BETA*/}
+                            {/*                    </span>*/}
+                            {/*                    <span*/}
+                            {/*                        className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
+                            {/*        </h1>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
 
                             {/* Sign Out Button */}
                             {/* <div className="justify-self-end">
@@ -651,7 +651,7 @@ export default function AccountPage() {
                                                 {/* Refined header badge */}
                                                 <div
                                                     className="inline-flex items-center gap-2 px-5 py-2 bg-white/80 rounded-full mb-6 shadow-xs border border-purple-100">
-                                                    <LucideRefreshCcw className="w-5 h-5 text-purple-600"/>
+                                                    <LucideRefreshCw className="w-5 h-5 text-purple-600"/>
                                                     <span
                                                         className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                                         Extend Your Limits

@@ -608,7 +608,7 @@ function ReportGenerator() {
                             </button>
                         </div>
                     )} */}
-            <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 {/*<LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>*/}
                 <Image
                     src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}
@@ -620,7 +620,7 @@ function ReportGenerator() {
                     quality={90}
                 />
               <div className="relative">
-                  <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   Devvoir
                   <div className="absolute -right-16 -top-1 transform rotate-12 group">
                     <div className="relative">
