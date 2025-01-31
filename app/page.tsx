@@ -1088,19 +1088,18 @@ const LandingPage = () => {
                         <div className="text-left">
                             <div
                                 className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full text-purple-800 font-medium text-sm mb-6">
-                                🚀 Automated Daily Dev Updates
+                                ✨ Smart Dev Reports in Seconds
                             </div>
-                            <h2 className="text-4xl md:text-6xl font-bold text-black mb-6 leading-tight">
-                                Your Daily Report
+                            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6 leading-tight">
+                                Code to Reports,
                                 <span
                                     className="block text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-blue-600">
-                                    Writes Itself
+                                   Instantly Writes Itself
                                 </span>
                             </h2>
                             <p className="text-xl text-gray-800 mb-8">
-                                Let AI analyze your commits and PRs to automatically generate comprehensive end-of-day
-                                reports.
-                                No more manual standups or forgetting what you worked on.
+                                Stop spending time writing standup reports. Devvoir transforms your GitHub activity into
+                                polished, professional updates in just a few clicks.
                             </p>
                             <Button Icon={LucideArrowRight} text={"Get Started"} iconPosition={"right"}
                                     onClick={() => router.push("/auth/signin")}/>
@@ -1430,7 +1429,7 @@ const LandingPage = () => {
                             {/* Stats */}
                             <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6">
                                 {[
-                                    {value: '2,000+', label: 'Active Users'},
+                                    {value: '100+', label: 'Active Users'},
                                     {value: '30 mins', label: 'Saved Daily'},
                                     {value: '95%', label: 'Satisfaction'}
                                 ].map((stat, idx) => (

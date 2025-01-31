@@ -101,7 +101,7 @@ export default function AuthPage() {
                   <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center">
                     <LucideUsers className="w-4 h-4 text-indigo-600"/>
                   </div>
-                  <span>Used by 2,000+ developers</span>
+                  <span>Used by 100+ developers</span>
                 </div>
               </div>
 
@@ -119,7 +119,7 @@ export default function AuthPage() {
                   <div className="text-center">
                     <div
                         className="text-2xl font-bold bg-linear-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
-                      2,000+
+                      100+
                     </div>
                     <div className="text-sm text-gray-600">Active Users</div>
                   </div>
