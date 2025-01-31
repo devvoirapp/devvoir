@@ -221,7 +221,15 @@ export default function AccountPage() {
                                             className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
                                         {/*<LucideGitCommitHorizontal*/}
                                         {/*    className="w-8 h-8 relative text-purple-600" />*/}
-                                        <Image src={"/devvoir.png"} alt={"Devvoir Logo"} width={32} height={32}/>
+                                        <Image
+                                            src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}
+                                            alt={"Devvoir Logo"}
+                                            width={32}
+                                            height={32}
+                                            priority
+                                            loading="eager"
+                                            quality={90}
+                                        />
                                     </div>
                                     <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
                                         Devvoir

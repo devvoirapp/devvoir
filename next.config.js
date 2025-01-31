@@ -8,10 +8,13 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
-  },
-  env: {
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   },
 }
 
