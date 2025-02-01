@@ -204,7 +204,7 @@ export default function AccountPage() {
                             <div className="justify-self-start">
                                 <button
                                     onClick={() => router.push('/report-generator')}
-                                    className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                                    className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20 cursor-pointer"
                                 >
                                     <LucideArrowLeft className="w-4 h-4"/>
                                     Back
@@ -492,10 +492,7 @@ export default function AccountPage() {
                                                                     Code Analysis Reports
                                                                 </h4>
                                                                 <p className="text-sm text-gray-500 mt-0.5 truncate">
-                                                                    {currentUsage.additionalReportsPurchased
-                                                                        ? `Monthly limit + ${currentUsage.additionalReportsPurchased} additional credits`
-                                                                        : 'Monthly limit usage'
-                                                                    }
+                                                                    Monthly limit
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -657,7 +654,7 @@ export default function AccountPage() {
                                                 </div>
 
                                                 <CardTitle
-                                                    className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+                                                    className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
                                                     Boost Your Report Generation
                                                 </CardTitle>
                                                 <p className="text-gray-600 text-base max-w-2xl mx-auto">
@@ -760,16 +757,16 @@ export default function AccountPage() {
                                                                                 </div>
 
                                                                                 {/* Description */}
-                                                                                <p className="text-gray-600 text-center text-sm mb-8">
-                                                                                    {is10Reports
-                                                                                        ? 'Perfect for occasional report generation needs'
-                                                                                        : 'Perfect for frequent report generation needs'}
-                                                                                </p>
+                                                                                {/*<p className="text-gray-600 text-center text-sm mb-8">*/}
+                                                                                {/*    {is10Reports*/}
+                                                                                {/*        ? 'Perfect for occasional report generation needs'*/}
+                                                                                {/*        : 'Perfect for frequent report generation needs'}*/}
+                                                                                {/*</p>*/}
 
                                                                                 {/* Button */}
                                                                                 <button
                                                                                     onClick={() => handlePurchase(product)}
-                                                                                    className={`w-full py-2 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group ${is25Reports
+                                                                                    className={`w-full py-2 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer ${is25Reports
                                                                                         ? 'bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-xs hover:shadow-md'
                                                                                         : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                                                                                         }`}
@@ -818,7 +815,7 @@ export default function AccountPage() {
                                                 </div>
                                                 <button
                                                     onClick={handleSignOut}
-                                                    className="relative overflow-hidden group flex items-center gap-2 px-6 py-2 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                                                    className="relative overflow-hidden group flex items-center gap-2 px-6 py-2 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20 cursor-pointer"
                                                 >
                                                     Sign Out
                                                 </button>

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import {NextResponse} from 'next/server';
 
 interface CheckoutData {
   variantId: string;
@@ -47,7 +47,10 @@ export async function POST(req: Request) {
               receipt_button_text: 'Return to Dashboard'
             },
             checkout_options: {
-              button_color: "#7047EB"
+              button_color: "#7047EB",
+              logo: true,
+              media: true,
+              discount: true,
             },
             checkout_data: {
               custom: {
