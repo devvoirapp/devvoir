@@ -23,7 +23,7 @@ export const Button = ({
                            text,
                            onClick,
                            iconPosition = 'left',
-                           disabled = false,
+                           disabled,
                            iconClasses = ''
                        }: ButtonProps) => {
     // Content wrapper classes

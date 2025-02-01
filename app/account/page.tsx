@@ -11,9 +11,7 @@ import {
     LucideArrowLeft,
     LucideCrown,
     LucideFileText,
-    LucideRefreshCcw,
     LucideRefreshCw,
-    LucideSparkles,
     LucideUser,
     SimpleIconsGithub
 } from "@/utils/icons";
@@ -659,11 +657,12 @@ export default function AccountPage() {
                                                 </div>
 
                                                 <CardTitle
-                                                    className="text-4xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
-                                                    Purchase Report Credits
+                                                    className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+                                                    Boost Your Report Generation
                                                 </CardTitle>
-                                                <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                                                    Supercharge your workflow with additional report generation credits
+                                                <p className="text-gray-600 text-base max-w-2xl mx-auto">
+                                                    Elevate your workflow with additional report generation power.
+                                                    Choose the perfect plan to match your reporting needs.
                                                 </p>
                                             </CardHeader>
 
@@ -700,12 +699,12 @@ export default function AccountPage() {
                                                                             {/* Premium badge for 30 reports */}
                                                                             {is25Reports && (
                                                                                 <div
-                                                                                    className="absolute -top-4 right-8">
+                                                                                    className="absolute -top-4 right-16.5">
                                                                                     <div className="relative">
                                                                                         <div
                                                                                             className="absolute inset-0 rounded-full blur-xs bg-blue-500/20"></div>
                                                                                         <div
-                                                                                            className="relative px-4 py-1.5 rounded-full bg-linear-to-r from-blue-600 to-purple-600 text-white text-sm font-medium flex items-center gap-2">
+                                                                                            className="relative px-3 py-1.5 rounded-full bg-linear-to-r from-blue-600 to-purple-600 text-white text-sm font-medium flex items-center gap-2">
                                                                                             <LucideCrown
                                                                                                 className="w-4 h-4" />
                                                                                             Most Popular
@@ -718,7 +717,7 @@ export default function AccountPage() {
                                                                                 {/* Title and Price */}
                                                                                 <div className="text-center mb-8">
                                                                                     <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                                                                                        {is10Reports ? '10 Report Credits' : '25 Report Credits'}
+                                                                                        {is10Reports ? 'Lite Pack' : 'Pro Pack'}
                                                                                     </h3>
                                                                                     <div
                                                                                         className="flex items-center justify-center gap-2">
@@ -727,7 +726,7 @@ export default function AccountPage() {
                                                                                             {product.attributes.price_formatted}
                                                                                         </span>
                                                                                         <span
-                                                                                            className="text-gray-500">/pack</span>
+                                                                                            className="text-gray-500 text-base mt-3">/pack</span>
                                                                                     </div>
                                                                                 </div>
 
@@ -751,7 +750,7 @@ export default function AccountPage() {
                                                                                         <div
                                                                                             className={`w-6 h-6 rounded-full flex items-center justify-center ${is25Reports ? 'bg-blue-100' : 'bg-gray-100'
                                                                                                 }`}>
-                                                                                            <LucideRefreshCcw
+                                                                                            <LucideRefreshCw
                                                                                                 className={`w-3.5 h-3.5 ${is25Reports ? 'text-blue-600' : 'text-gray-600'}`} />
                                                                                         </div>
                                                                                         <span className="text-gray-700">
@@ -770,15 +769,11 @@ export default function AccountPage() {
                                                                                 {/* Button */}
                                                                                 <button
                                                                                     onClick={() => handlePurchase(product)}
-                                                                                    className={`w-full py-3.5 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group ${is25Reports
+                                                                                    className={`w-full py-2 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group ${is25Reports
                                                                                         ? 'bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-xs hover:shadow-md'
                                                                                         : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                                                                                         }`}
                                                                                 >
-                                                                                    <LucideSparkles
-                                                                                        className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${is25Reports ? 'text-white' : 'text-gray-600'
-                                                                                            }`}
-                                                                                    />
                                                                                     <span>Get {is10Reports ? '10' : '25'} Credits</span>
                                                                                 </button>
                                                                             </div>
@@ -823,7 +818,7 @@ export default function AccountPage() {
                                                 </div>
                                                 <button
                                                     onClick={handleSignOut}
-                                                    className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                                                    className="relative overflow-hidden group flex items-center gap-2 px-6 py-2 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
                                                 >
                                                     Sign Out
                                                 </button>

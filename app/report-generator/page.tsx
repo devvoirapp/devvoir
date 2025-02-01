@@ -637,8 +637,9 @@ function ReportGenerator() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-                <Button Icon={LucideUsers} text={"Account"} onClick={() => router.push("/account")}/>
-                <Button Icon={LucideLogOut} text={"Sign Out"} onClick={() => signOut({callbackUrl: "/"})}/>
+                <Button Icon={LucideUsers} text={"Account"} onClick={() => router.push("/account")} disabled={false}/>
+                <Button Icon={LucideLogOut} text={"Sign Out"} onClick={() => signOut({callbackUrl: "/"})}
+                        disabled={false}/>
             </div>
           </div>
         </header>
@@ -781,43 +782,46 @@ function ReportGenerator() {
                       </div>
 
                     {/* Generate Report Button */}
-                      {/*  <Button Icon={() => loading ? <LucideRefreshCcw className="w-4 h-4 animate-spin"/> : <LucideCheck className="w-4 h-4"/>} text={loading ? "Generating..." : "Report Generated"} onClick={handleGenerateReport} className={'w-full'} />*/}
-                    <button
-                      onClick={handleGenerateReport}
-                      disabled={
-                        selectedPR.length === 0 ||
-                        loading ||
-                        aiSummary.length > 0
-                      }
-                      className={`
-                                            w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg 
+                      {/*    <Button Icon={loading ? LucideRefreshCw : aiSummary ? LucideCheck : LucideSparkles}*/}
+                      {/*            text={loading ? "Generating..." : aiSummary ? "Report Generated" : "Generate Report"}*/}
+                      {/*            onClick={handleGenerateReport}*/}
+                      {/*            disabled={selectedPR.length === 0}/>*/}
+                      <button
+                          onClick={handleGenerateReport}
+                          disabled={
+                              selectedPR.length === 0 ||
+                              loading ||
+                              aiSummary.length > 0
+                          }
+                          className={`
+                                            w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg 
                                             text-sm font-medium transition-all duration-300
                                             ${
-                                              !loading &&
-                                              selectedPR.length > 0 &&
-                                              !aiSummary
-                                                  ? "bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-xs hover:shadow-lg hover:shadow-purple-500/20"
-                                                : "bg-gray-100 text-gray-400 cursor-not-allowed"
-                                            }
+                              !loading &&
+                              selectedPR.length > 0 &&
+                              !aiSummary
+                                  ? "bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-xs hover:shadow-lg hover:shadow-purple-500/20"
+                                  : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                          }
                                         `}
-                    >
-                        {loading || regenerateLoading ? (
-                        <>
-                            <LucideRefreshCw className="w-4 h-4 animate-spin"/>
-                            {regenerateLoading ? "Regenerating..." : "Generating..."}
-                        </>
-                      ) : aiSummary ? (
-                        <>
-                            <LucideCheck className="w-4 h-4"/>
-                          Report Generated
-                        </>
-                      ) : (
-                        <>
-                            <LucideSparkles className="w-4 h-4"/>
-                          Generate Report
-                        </>
-                      )}
-                    </button>
+                      >
+                          {loading || regenerateLoading ? (
+                              <>
+                                  <LucideRefreshCw className="w-4 h-4 animate-spin"/>
+                                  {regenerateLoading ? "Regenerating..." : "Generating..."}
+                              </>
+                          ) : aiSummary ? (
+                              <>
+                                  <LucideCheck className="w-4 h-4"/>
+                                  Report Generated
+                              </>
+                          ) : (
+                              <>
+                                  <LucideSparkles className="w-4 h-4"/>
+                                  Generate Report
+                              </>
+                          )}
+                      </button>
                   </div>
                 }
               </form>
