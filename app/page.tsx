@@ -1015,63 +1015,494 @@ const LandingPage = () => {
     // ];
 
     return (
-        <main>
-            <h1 className="text-4xl font-bold">Devvoir AI Development Assistant</h1>
-            <section>
-                <h2 className="text-2xl mt-8">Key Features</h2>
-                <div className="grid grid-cols-3 gap-4">
-                    {features.map((feature, idx) => (
-                        <div key={idx} className="relative group">
-                            <Card
-                                className="relative h-full overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 group-hover:-translate-y-1 backdrop-blur-sm bg-white/90">
-                                <div
-                                    className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+        <div className="min-h-screen overflow-x-hidden">
+            {/* Header/Navigation */}
+            <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b">
+                <div className="container mx-auto px-4 max-w-7xl py-4 flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                        {/*<LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>*/}
+                        <Image
+                            src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}
+                            alt={"Devvoir Logo"}
+                            width={32}
+                            height={32}
+                            priority
+                            loading="eager"
+                            quality={90}
+                        />
+                        <div className="relative">
+                            <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                                Devvoir
+                                <div className="absolute -right-16 -top-1 transform rotate-12 group">
+                                    <div className="relative">
+                                        <span
+                                            className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
+                                        <span
+                                            className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                                            BETA
+                                        </span>
+                                        <span
+                                            className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>
+                                    </div>
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
 
-                                <div className="p-8 relative">
-                                    {/* Enhanced icon container */}
+                    {/* <div className="hidden lg:flex items-center gap-1">
+                        {navLinks.map(({ id, icon: Icon, label }) => (
+                            <button
+                                key={id}
+                                onClick={() => setActiveLink(id)}
+                                className={`
+                group relative px-4 py-2 rounded-lg transition-all duration-300
+                ${activeLink === id ? 'text-purple-600' : 'text-gray-600 hover:text-purple-600'}
+              `}
+                            >
+                                <div className={`
+                absolute inset-0 rounded-lg transition-all duration-300
+                ${activeLink === id
+                                        ? 'bg-purple-50'
+                                        : 'bg-transparent group-hover:bg-purple-50/50'}
+              `} />
+
+                                <div className="relative flex items-center gap-2">
+                                    <Icon className={`
+                  w-4 h-4 transition-all duration-300
+                  ${activeLink === id
+                                            ? 'transform rotate-6 scale-110'
+                                            : 'group-hover:transform group-hover:rotate-6 group-hover:scale-110'}
+                `} />
+                                    <span className="font-medium">{label}</span>
+                                </div>
+
+                                {activeLink === id && (
+                                    <div className="absolute -bottom-4 left-0 right-0 h-0.5 bg-linear-to-r from-purple-600 to-blue-600">
+                                        <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-purple-600" />
+                                    </div>
+                                )}
+                            </button>
+                        ))}
+                    </div> */}
+                    <Button Icon={LucideSparkles} text={"Get Started"} onClick={() => router.push("/auth/signin")}
+                            iconPosition={"left"}/>
+                </div>
+            </nav>
+
+            {/* Hero Section */}
+            <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-linear-to-br from-purple-50 via-white to-blue-50">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                        <div className="text-left">
+                            <div
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full text-purple-800 font-medium text-sm mb-6">
+                                ✨ Smart Dev Reports in Seconds
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6 leading-tight">
+                                Code to Reports,
+                                <span
+                                    className="block text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-blue-600">
+                                   Instantly Writes Itself
+                                </span>
+                            </h2>
+                            <p className="text-xl text-gray-800 mb-8">
+                                Stop spending time writing standup reports. Devvoir transforms your GitHub activity into
+                                polished, professional updates in just a few clicks.
+                            </p>
+                            <Button Icon={LucideArrowRight} text={"Get Started"} iconPosition={"right"}
+                                    onClick={() => router.push("/auth/signin")}/>
+                        </div>
+
+                        <div className="relative">
+                            {/* Decorative blobs */}
+                            <div
+                                className="absolute -top-8 -left-8 w-72 h-72 bg-purple-200 rounded-full filter blur-3xl opacity-30 animate-pulse max-w-full"></div>
+                            <div
+                                className="absolute -bottom-8 -right-8 w-96 h-96 bg-blue-200 rounded-full filter blur-3xl opacity-30 animate-pulse delay-1000 max-w-full"></div>
+
+                            {/* Code window */}
+                            <div className="relative bg-gray-900 rounded-xl shadow-2xl border border-gray-800">
+                                {/* Window controls */}
+                                <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-800">
+                                    <div className="flex gap-2">
+                                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    </div>
+                                </div>
+
+                                {/* Code content */}
+                                <div className="p-6 font-mono text-sm">
+                                    <div className="space-y-4">
+                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
+                                            <div className="flex items-center gap-2 text-blue-400 mb-2">
+                                                <LucideGitCommitHorizontal className="w-4 h-4"/>
+                                                <span
+                                                    className="text-sm">feat: Implement real-time data synchronization</span>
+                                            </div>
+                                            <p className="text-gray-300 text-sm">
+                                                &quot;Added WebSocket integration for live updates, optimized payload
+                                                structure for better performance&quot;
+                                            </p>
+                                        </div>
+
+                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
+                                            <div className="flex items-center gap-2 text-purple-400 mb-2">
+                                                <LucideGitPullRequest className="w-4 h-4"/>
+                                                <span className="text-sm">PR: Enhance caching mechanism</span>
+                                            </div>
+                                            <p className="text-gray-300 text-sm">
+                                                &quot;Implemented Redis caching layer, reduced API latency by 60%, added
+                                                cache invalidation strategy&quot;
+                                            </p>
+                                        </div>
+
+                                        <div className="bg-gray-800/50 p-4 rounded-lg backdrop-blur-xs">
+                                            <div className="flex items-center gap-2 text-green-400 mb-2">
+                                                <LucideBot className={"w-5 h-5"}/>
+                                                <span className="text-sm">Daily Summary</span>
+                                            </div>
+                                            <p className="text-gray-300 text-sm">
+                                                &quot;Focused on performance optimizations today. Implemented real-time
+                                                sync
+                                                and enhanced caching. All tests passing with 40% improvement in response
+                                                times.&quot;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Why Devvoir */}
+            <WhyDevvoirSection/>
+
+            {/* About */}
+            {/* <AboutSection /> */}
+
+            {/* How It Works */}
+            <section className="py-24 relative overflow-hidden">
+                {/* Enhanced background effects */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50"/>
+                <div
+                    className="absolute top-0 left-1/4 w-96 h-96 bg-purple-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse"/>
+                <div
+                    className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse delay-1000"/>
+
+                <div className="container mx-auto px-4 max-w-7xl relative">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <div
+                            className="inline-flex items-center justify-center px-4 py-2 bg-purple-100 rounded-full mb-6">
+            <span
+                className="text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              How It Works
+            </span>
+                        </div>
+                        <h3 className="text-4xl font-bold mb-6 text-gray-900">
+                            Simple Steps to
+                            <span
+                                className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+              Generate Your Reports
+            </span>
+                        </h3>
+                        <p className="text-xl text-gray-600">
+                            Generate comprehensive daily reports from your GitHub activity with just a few clicks.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        {features.map((feature, idx) => (
+                            <div key={idx} className="relative group">
+                                <Card
+                                    className="relative h-full overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 group-hover:-translate-y-1 backdrop-blur-sm bg-white/90">
                                     <div
-                                        className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-lg`}>
-                                        {feature.icon}
+                                        className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+
+                                    <div className="p-8 relative">
+                                        {/* Enhanced icon container */}
                                         <div
-                                            className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700"/>
+                                            className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-lg`}>
+                                            {feature.icon}
+                                            <div
+                                                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700"/>
+                                        </div>
+
+                                        {/* Content with enhanced typography */}
+                                        <h4 className="text-2xl font-bold text-gray-900 mb-3">{feature.title}</h4>
+                                        <p className="text-gray-600 mb-6 leading-relaxed">{feature.description}</p>
+
+                                        {/* Enhanced feature list */}
+                                        <ul className="space-y-4">
+                                            {feature.features.map((item, i) => (
+                                                <li key={i} className="flex items-center gap-3 text-gray-700">
+                                                    <div className="relative flex-shrink-0 w-5 h-5">
+                                                        <div
+                                                            className={`w-5 h-5 rounded-full bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center`}>
+                                                            <div className="w-2 h-2 bg-white rounded-full"/>
+                                                        </div>
+                                                    </div>
+                                                    <span
+                                                        className="group-hover:text-gray-900 transition-colors">{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
 
-                                    {/* Content with enhanced typography */}
-                                    <h4 className="text-2xl font-bold text-gray-900 mb-3">{feature.title}</h4>
-                                    <p className="text-gray-600 mb-6 leading-relaxed">{feature.description}</p>
+                                    {/* Enhanced gradient line */}
+                                    <div
+                                        className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.bgGradient}`}/>
+                                </Card>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-                                    {/* Enhanced feature list */}
-                                    <ul className="space-y-4">
-                                        {feature.features.map((item, i) => (
-                                            <li key={i} className="flex items-center gap-3 text-gray-700">
-                                                <div className="relative flex-shrink-0 w-5 h-5">
-                                                    <div
-                                                        className={`w-5 h-5 rounded-full bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center`}>
-                                                        <div className="w-2 h-2 bg-white rounded-full"/>
+            {/* <PricingSection /> */}
+
+            {/* Example Report Section */}
+            <section className="py-16 bg-linear-to-b from-violet-50 to-white overflow-hidden">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="max-w-4xl mx-auto">
+                        <h3 className="text-4xl font-bold text-center bg-linear-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent mb-8">
+                            Example Daily Report
+                        </h3>
+
+                        <Card className="p-8 shadow-lg border-0 bg-white/80 backdrop-blur-xs">
+                            {/* Header */}
+                            <div className="mb-8 flex items-center justify-between border-b border-gray-100 pb-6">
+                                <div>
+                                    <h4 className="text-2xl font-bold text-gray-900">
+                                        End of Day Report - John&apos;s Activity
+                                    </h4>
+                                    <div className="flex items-center mt-2 text-gray-600">
+                                        <LucideClock className="w-4 h-4 mr-2"/>
+                                        <span>Thursday, November 2, 2024</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-8">
+                                {/* Pull Requests Section */}
+                                <div>
+                                    <div className="flex items-center mb-4">
+                                        <LucideGitPullRequest
+                                            className="w-5 h-5 text-violet-600 mr-2"/>
+                                        <h5 className="text-lg font-semibold text-gray-900">Pull Requests</h5>
+                                    </div>
+                                    <div className="space-y-3">
+                                        <div className="bg-violet-50 rounded-lg p-4 border border-violet-100">
+                                            <div className="flex items-start">
+                                                <div className="flex-1">
+                                                    <div className="font-semibold text-gray-900">
+                                                        Feature: User Authentication (#123)
+                                                    </div>
+                                                    <div className="mt-1 text-gray-600">
+                                                        Implemented OAuth flow with GitHub, added secure session
+                                                        management
                                                     </div>
                                                 </div>
                                                 <span
-                                                    className="group-hover:text-gray-900 transition-colors">{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                                    className="px-3 py-1 text-xs font-medium text-violet-700 bg-violet-100 rounded-full">
+                                                    In Review
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                {/* Enhanced gradient line */}
+                                {/* Commits Section */}
+                                <div>
+                                    <div className="flex items-center mb-4">
+                                        <LucideGitCommitHorizontal
+                                            className="w-5 h-5 text-indigo-600 mr-2"/>
+                                        <h5 className="text-lg font-semibold text-gray-900">Commits</h5>
+                                    </div>
+                                    <div className="space-y-3">
+                                        <div className="bg-indigo-50 rounded-lg p-4 border border-indigo-100">
+                                            <div className="font-semibold text-gray-900">
+                                                feat: Add user authentication flow
+                                            </div>
+                                            <div className="mt-1 text-gray-600">
+                                                Set up OAuth routes and handlers
+                                            </div>
+                                        </div>
+                                        <div className="bg-indigo-50 rounded-lg p-4 border border-indigo-100">
+                                            <div className="font-semibold text-gray-900">
+                                                fix: Update session handling
+                                            </div>
+                                            <div className="mt-1 text-gray-600">
+                                                Fixed session timeout issues and added refresh token support
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Summary Section */}
+                                <div>
+                                    <div className="flex items-center mb-4">
+                                        <LucideFileText className="w-5 h-5 text-gray-900 mr-2"/>
+                                        <h5 className="text-lg font-semibold text-gray-900">Summary</h5>
+                                    </div>
+                                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                                        <p className="text-gray-700 leading-relaxed">
+                                            Today&apos;s focus was on implementing the user authentication system.
+                                            Completed
+                                            the GitHub OAuth integration
+                                            and improved session management. All tests are passing and the PR is ready
+                                            for review.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
+                </div>
+            </section>
+
+            {/* <FAQSection /> */}
+
+            {/* <TestimonialsSection /> */}
+
+            {/* CTA Section */}
+            <section className="relative py-24 bg-gray-900 overflow-hidden">
+                {/* Decorative elements */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    {/* Gradient overlays */}
+                    <div
+                        className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-linear-to-br from-violet-500/10 to-transparent blur-2xl"/>
+                    <div
+                        className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-linear-to-tl from-indigo-500/10 to-transparent blur-2xl"/>
+
+                    {/* Animated shapes */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
+                        <div
+                            className="absolute top-0 left-0 w-72 h-72 bg-violet-500/5 rounded-full mix-blend-overlay animate-pulse"
+                            style={{animationDelay: '0s', animationDuration: '3s'}}/>
+                        <div
+                            className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-500/5 rounded-full mix-blend-overlay animate-pulse"
+                            style={{animationDelay: '1s', animationDuration: '4s'}}/>
+                    </div>
+                </div>
+
+                <div className="relative container mx-auto px-4 max-w-7xl">
+                    <div className="max-w-4xl mx-auto">
+                        <div
+                            className="relative backdrop-blur-xs bg-gray-800/20 rounded-2xl p-8 md:p-12 border border-gray-700">
+                            {/* Decorative icon */}
+                            <div className="absolute -top-6 left-1/2 -translate-x-1/2">
                                 <div
-                                    className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.bgGradient}`}/>
-                            </Card>
+                                    className="inline-flex p-3 rounded-xl bg-violet-500/10 backdrop-blur-xs border border-violet-500/20">
+                                    {/*<Bot className="w-6 h-6 text-violet-400" />*/}
+                                    <LucideBot className={"w-6 h-6 text-violet-400"}/>
+                                </div>
+                            </div>
+
+                            <div className="text-center space-y-8">
+                                {/* Badge */}
+                                <div className="flex justify-center">
+                                    <div
+                                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20">
+                                        <LucideSparkles className="w-4 h-4 text-violet-400"/>
+                                        <span className="text-sm text-violet-200">AI-Powered Reports</span>
+                                    </div>
+                                </div>
+
+                                {/* Main content */}
+                                <div>
+                                    <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                                        <span
+                                            className="bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                                            Never Write Manual Standups Again
+                                        </span>
+                                    </h3>
+                                    <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                                        Let AI handle your daily development reports while you focus on what matters -
+                                        writing code.
+                                    </p>
+                                </div>
+
+                                {/* CTA Button */}
+                                <div className="flex flex-col items-center gap-4">
+                                    <Button Icon={LucideArrowRight} text={"Start Automating Your Reports"}
+                                            onClick={() => router.push("/auth/signin")} iconPosition={"right"}/>
+                                    <span
+                                        className="text-sm text-gray-500">Get started in minutes • No setup needed</span>
+                                </div>
+                            </div>
+
+                            {/* Stats */}
+                            <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6">
+                                {[
+                                    {value: '100+', label: 'Active Users'},
+                                    {value: '30 mins', label: 'Saved Daily'},
+                                    {value: '95%', label: 'Satisfaction'}
+                                ].map((stat, idx) => (
+                                    <div key={idx} className="text-center">
+                                        <div
+                                            className="text-2xl font-bold bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                                            {stat.value}
+                                        </div>
+                                        <div className="text-sm text-gray-400">{stat.label}</div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    ))}
+                    </div>
                 </div>
             </section>
-            <section>
-                <h2 className="text-2xl mt-8">How It Works</h2>
-                <div className="space-y-4">
-                    {/* Steps */}
+
+            {/* Footer */}
+            <footer className="bg-white border-t">
+                <div className="container mx-auto px-4 max-w-7xl py-12">
+                    <div className="flex items-center justify-center gap-2 mb-8">
+                        <Image
+                            src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}
+                            alt={"Devvoir Logo"}
+                            width={32}
+                            height={32}
+                            priority
+                            loading="eager"
+                            quality={90}
+                        />
+                        {/*<LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>*/}
+                        <div className="relative">
+                            <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                                Devvoir
+                                <div className="absolute -right-16 -top-1 transform rotate-12 group">
+                                    <div className="relative">
+                            <span
+                                className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
+                                        <span
+                                            className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
+                                BETA
+                            </span>
+                                        <span
+                                            className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>
+                                    </div>
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-center gap-6 mb-4">
+                        <a href="https://x.com/DevvoirAI" target="_blank" rel="noopener noreferrer">
+                            <SimpleIconsTwitter
+                                className="w-6 h-6 text-blue-500 hover:text-blue-400 transition-colors"/>
+                        </a>
+                        <a href="https://www.linkedin.com/company/devvoir" target="_blank" rel="noopener noreferrer">
+                            <SimpleIconsLinkedin
+                                className="w-6 h-6 text-blue-700 hover:text-blue-600 transition-colors"/>
+                        </a>
+                    </div>
+                    <div className="text-center text-gray-800">
+                        <p>&copy; {new Date().getFullYear()} Devvoir. All rights reserved.</p>
+                    </div>
                 </div>
-            </section>
-        </main>
+            </footer>
+        </div>
     );
 };
 
