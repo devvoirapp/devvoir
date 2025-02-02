@@ -763,7 +763,7 @@ function ReportGenerator() {
                           />
                           <div className="flex items-center rounded-md py-2 mb-4 text-gray-700 text-xs">
                               Reports can be generated for pull requests with up to 10 file changes. For larger PRs,
-                              only the first 10 files
+                              only the first 10 files.
                           </div>
                       </div>
 
