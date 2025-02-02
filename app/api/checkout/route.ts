@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
+import {NextResponse} from 'next/server';
 
 interface CheckoutData {
-  variantId: string;
+  productId: string;
   user: {
     id: string;
     email: string;
@@ -12,6 +12,7 @@ interface CheckoutData {
     attributes: {
       name: string;
       price: number;
+      description: string;
     };
   };
 }
@@ -19,11 +20,11 @@ interface CheckoutData {
 export async function POST(req: Request) {
   try {
     const data: CheckoutData = await req.json();
-    const { variantId, user, product } = data;
+    const {productId, user, product} = data;
 
     console.log("Checkout Data:", data)
 
-    console.log('Creating checkout with variant:', variantId);
+    console.log('Creating checkout with variant:', productId);
 
     // Lemon Squeezy API endpoint
     const url = 'https://api.lemonsqueezy.com/v1/checkouts';
@@ -42,12 +43,15 @@ export async function POST(req: Request) {
           attributes: {
             product_options: {
               name: product.attributes.name,
-              description: `Purchase of ${product.attributes.name}`,
+              description: product.attributes.description,
               redirect_url: `${process.env.NEXT_PUBLIC_APP_URL}/account?success=true`,
               receipt_button_text: 'Return to Dashboard'
             },
             checkout_options: {
-              button_color: "#7047EB"
+              button_color: "#7047EB",
+              logo: true,
+              discount: true,
+              media: false
             },
             checkout_data: {
               custom: {
@@ -67,7 +71,7 @@ export async function POST(req: Request) {
             variant: {
               data: {
                 type: "variants",
-                id: variantId
+                id: process.env.NEXT_PUBLIC_LEMON_SQUEEZY_PRO_PLAN_VARIANT_ID
               }
             }
           }

@@ -4,7 +4,7 @@ import {useRouter} from 'next/navigation';
 import {useEffect} from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import SignInButton from "./SignInButton";
-import {LucideBot, LucideClock, LucideGitCommitHorizontal, LucideUsers} from "@/utils/icons";
+import {LucideBot, LucideClock, LucideUsers} from "@/utils/icons";
 
 export default function AuthPage() {
   const { status } = useSession();
@@ -35,27 +35,35 @@ export default function AuthPage() {
 
       <div className="w-full max-w-lg mx-auto space-y-12">
         {/* Logo & Branding */}
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center gap-3 mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
-              <LucideGitCommitHorizontal className="w-10 h-10 relative text-purple-600"/>
-            </div>
-            <h1 className="text-5xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
-              Devvoir
-              <div className="absolute -right-16 -top-1 transform rotate-12">
-                <div className="relative group">
-                  <div
-                      className="absolute inset-0 bg-linear-to-r from-purple-600 to-blue-600 rounded-lg opacity-75 blur-sm group-hover:blur-md transition-all duration-300"></div>
-                  <span
-                      className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
-                    BETA
-                  </span>
-                </div>
-              </div>
-            </h1>
-          </div>
-        </div>
+        {/*<div className="text-center">*/}
+        {/*  <div className="inline-flex items-center justify-center gap-3 mb-6">*/}
+        {/*    <div className="relative">*/}
+        {/*      <div className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>*/}
+        {/*        <Image*/}
+        {/*            src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}*/}
+        {/*            alt={"Devvoir Logo"}*/}
+        {/*            width={40}*/}
+        {/*            height={40}*/}
+        {/*            priority*/}
+        {/*            loading="eager"*/}
+        {/*            quality={90}*/}
+        {/*        />*/}
+        {/*    </div>*/}
+        {/*    <h1 className="text-5xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">*/}
+        {/*      Devvoir*/}
+        {/*      <div className="absolute -right-16 -top-1 transform rotate-12">*/}
+        {/*        <div className="relative group">*/}
+        {/*          <div*/}
+        {/*              className="absolute inset-0 bg-linear-to-r from-purple-600 to-blue-600 rounded-lg opacity-75 blur-sm group-hover:blur-md transition-all duration-300"></div>*/}
+        {/*          <span*/}
+        {/*              className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">*/}
+        {/*            BETA*/}
+        {/*          </span>*/}
+        {/*        </div>*/}
+        {/*      </div>*/}
+        {/*    </h1>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
 
         {/* Main Card */}
         <div className="relative">
@@ -99,7 +107,7 @@ export default function AuthPage() {
                   <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center">
                     <LucideUsers className="w-4 h-4 text-indigo-600"/>
                   </div>
-                  <span>Used by 2,000+ developers</span>
+                  <span>Used by 100+ developers</span>
                 </div>
               </div>
 
@@ -117,7 +125,7 @@ export default function AuthPage() {
                   <div className="text-center">
                     <div
                         className="text-2xl font-bold bg-linear-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
-                      2,000+
+                      100+
                     </div>
                     <div className="text-sm text-gray-600">Active Users</div>
                   </div>

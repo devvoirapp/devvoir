@@ -7,15 +7,8 @@ import {redirect, useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import {Product} from '../types/product';
-import {
-    LucideCrown,
-    LucideFileText,
-    LucideGitCommitHorizontal,
-    LucideRefreshCcw,
-    LucideSparkles,
-    LucideUser,
-    SimpleIconsGithub
-} from "@/utils/icons";
+import {LucideArrowLeft, LucideFileText, LucideUser, SimpleIconsGithub} from "@/utils/icons";
+import {Button} from "@/app/components/Button";
 
 interface UsageMetrics {
     monthlyReportCount: number;
@@ -45,7 +38,6 @@ export default function AccountPage() {
 
     // State for products
     const [products, setProducts] = useState<Product[]>([]);
-    const [loadingProducts, setLoadingProducts] = useState(true);
 
     // Handle PR changes toggle
     // const handlePRChangesToggle = async (checked: boolean) => {
@@ -70,17 +62,18 @@ export default function AccountPage() {
     // };
 
     // Handle product purchase
-    const handlePurchase = async (product: Product) => {
+    const handlePurchase = async () => {
         console.log(session?.user)
+        console.log({products})
         if (!session?.user?.email || !session?.user?.name) {
             console.error('User session data missing');
             return;
         }
 
         // Get the correct variant ID based on the product
-        const variantId = product.attributes.description.includes('25')
-            ? process.env.NEXT_PUBLIC_LEMON_SQUEEZY_PRO_PLAN_VARIANT_ID
-            : process.env.NEXT_PUBLIC_LEMON_SQUEEZY_LITE_PLAN_VARIANT_ID;
+        // const variantId = product.attributes.description.includes('25')
+        //     ? process.env.NEXT_PUBLIC_LEMON_SQUEEZY_PRO_PLAN_VARIANT_ID
+        //     : process.env.NEXT_PUBLIC_LEMON_SQUEEZY_LITE_PLAN_VARIANT_ID;
 
         try {
             const response = await fetch('/api/checkout', {
@@ -89,13 +82,12 @@ export default function AccountPage() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    variantId,
                     user: {
                         id: session.user.email, // Use email as the identifier
                         email: session.user.email,
                         name: session.user.name
                     },
-                    product
+                    product: products?.at(0)
                 }),
             });
 
@@ -163,8 +155,6 @@ export default function AccountPage() {
             } catch (error) {
                 console.error('Error fetching products:', error);
                 setProducts([]);
-            } finally {
-                setLoadingProducts(false);
             }
         };
 
@@ -205,39 +195,48 @@ export default function AccountPage() {
                             <div className="justify-self-start">
                                 <button
                                     onClick={() => router.push('/report-generator')}
-                                    className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                                    className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20 cursor-pointer"
                                 >
-                                    <LucideGitCommitHorizontal className="w-4 h-4"/>
+                                    <LucideArrowLeft className="w-4 h-4"/>
                                     Back
                                 </button>
                             </div>
 
                             {/* Logo */}
-                            <div className="justify-self-center">
-                                <div className="inline-flex items-center justify-center gap-3">
-                                    <div className="relative">
-                                        <div
-                                            className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>
-                                        <LucideGitCommitHorizontal
-                                            className="w-8 h-8 relative text-purple-600" />
-                                    </div>
-                                    <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">
-                                        Devvoir
-                                        <div className="absolute -right-16 -top-1 transform rotate-12 group">
-                                            <div className="relative">
-                                                <span
-                                                    className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
-                                                <span
-                                                    className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
-                                                    BETA
-                                                </span>
-                                                <span
-                                                    className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>
-                                            </div>
-                                        </div>
-                                    </h1>
-                                </div>
-                            </div>
+                            {/*<div className="justify-self-center">*/}
+                            {/*    <div className="inline-flex items-center justify-center gap-3">*/}
+                            {/*        <div className="relative">*/}
+                            {/*            <div*/}
+                            {/*                className="absolute inset-0 bg-linear-to-br from-purple-600 to-blue-600 blur-lg opacity-20"></div>*/}
+                            {/*            /!*<LucideGitCommitHorizontal*!/*/}
+                            {/*            /!*    className="w-8 h-8 relative text-purple-600" />*!/*/}
+                            {/*            <Image*/}
+                            {/*                src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}*/}
+                            {/*                alt={"Devvoir Logo"}*/}
+                            {/*                width={32}*/}
+                            {/*                height={32}*/}
+                            {/*                priority*/}
+                            {/*                loading="eager"*/}
+                            {/*                quality={90}*/}
+                            {/*            />*/}
+                            {/*        </div>*/}
+                            {/*        <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent relative">*/}
+                            {/*            Devvoir*/}
+                            {/*            <div className="absolute -right-16 -top-1 transform rotate-12 group">*/}
+                            {/*                <div className="relative">*/}
+                            {/*                    <span*/}
+                            {/*                        className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>*/}
+                            {/*                    <span*/}
+                            {/*                        className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">*/}
+                            {/*                        BETA*/}
+                            {/*                    </span>*/}
+                            {/*                    <span*/}
+                            {/*                        className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
+                            {/*        </h1>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
 
                             {/* Sign Out Button */}
                             {/* <div className="justify-self-end">
@@ -449,7 +448,7 @@ export default function AccountPage() {
                                         {/* Header Section */}
                                         <div
                                             className="flex items-center justify-between border-b border-gray-100 pb-6">
-                                            <div className="flex items-center gap-4">
+                                            <div className="flex items-center gap-4 justify-between">
                                                 <div
                                                     className="h-8 w-1 bg-linear-to-b from-purple-600 to-blue-600 rounded-full shadow-lg shadow-purple-200"></div>
                                                 <div>
@@ -459,7 +458,9 @@ export default function AccountPage() {
                                                     <p className="text-sm text-gray-500 mt-0.5">Monitor your report
                                                         generations</p>
                                                 </div>
+
                                             </div>
+                                            <Button text={"Purchase credits"} onClick={handlePurchase}/>
                                         </div>
 
                                         <div className="grid grid-cols-1 gap-4">
@@ -484,10 +485,7 @@ export default function AccountPage() {
                                                                     Code Analysis Reports
                                                                 </h4>
                                                                 <p className="text-sm text-gray-500 mt-0.5 truncate">
-                                                                    {currentUsage.additionalReportsPurchased
-                                                                        ? `Monthly limit + ${currentUsage.additionalReportsPurchased} additional credits`
-                                                                        : 'Monthly limit usage'
-                                                                    }
+                                                                    Monthly limit
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -626,171 +624,162 @@ export default function AccountPage() {
                   </div> */}
 
                                     {/* Products Section */}
-                                    <div className="mt-8">
-                                        <Card className="relative overflow-hidden border border-gray-200">
-                                            {/* Matching background with account page cards */}
-                                            <div className="absolute inset-0 bg-white/80 backdrop-blur-xs"></div>
+                                    {/*            <div className="mt-8">*/}
+                                    {/*                <Card className="relative overflow-hidden border border-gray-200">*/}
+                                    {/*                    <div className="absolute inset-0 bg-white/80 backdrop-blur-xs"></div>*/}
 
-                                            {/* Subtle decorative elements */}
-                                            <div
-                                                className="absolute -top-20 -left-20 w-96 h-96 bg-purple-100/20 rounded-full filter blur-3xl animate-pulse"></div>
-                                            <div
-                                                className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-100/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+                                    {/*                    <div*/}
+                                    {/*                        className="absolute -top-20 -left-20 w-96 h-96 bg-purple-100/20 rounded-full filter blur-3xl animate-pulse"></div>*/}
+                                    {/*                    <div*/}
+                                    {/*                        className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-100/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>*/}
 
-                                            <CardHeader className="relative z-10 text-center pb-12">
-                                                {/* Refined header badge */}
-                                                <div
-                                                    className="inline-flex items-center gap-2 px-5 py-2 bg-white/80 rounded-full mb-6 shadow-xs border border-purple-100">
-                                                    <LucideRefreshCcw className="w-5 h-5 text-purple-600"/>
-                                                    <span
-                                                        className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                                                        Extend Your Limits
-                                                    </span>
-                                                </div>
+                                    {/*                    <CardHeader className="relative z-10 text-center pb-12">*/}
+                                    {/*                        <div*/}
+                                    {/*                            className="inline-flex items-center gap-2 px-5 py-2 bg-white/80 rounded-full mb-6 shadow-xs border border-purple-100">*/}
+                                    {/*                            <LucideRefreshCw className="w-5 h-5 text-purple-600"/>*/}
+                                    {/*                            <span*/}
+                                    {/*                                className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">*/}
+                                    {/*                                Extend Your Limits*/}
+                                    {/*                            </span>*/}
+                                    {/*                        </div>*/}
 
-                                                <CardTitle
-                                                    className="text-4xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
-                                                    Purchase Report Credits
-                                                </CardTitle>
-                                                <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                                                    Supercharge your workflow with additional report generation credits
-                                                </p>
-                                            </CardHeader>
+                                    {/*                        <CardTitle*/}
+                                    {/*                            className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">*/}
+                                    {/*                            Boost Your Report Generation*/}
+                                    {/*                        </CardTitle>*/}
+                                    {/*                        <p className="text-gray-600 text-base max-w-2xl mx-auto">*/}
+                                    {/*                            Elevate your workflow with additional report generation power.*/}
+                                    {/*                            Choose the perfect plan to match your reporting needs.*/}
+                                    {/*                        </p>*/}
+                                    {/*                    </CardHeader>*/}
 
-                                            <CardContent className="relative z-10 px-6 pb-12">
-                                                {loadingProducts ? (
-                                                    <div className="flex justify-center py-12">
-                                                        <LoadingSpinner />
-                                                    </div>
-                                                ) : (
-                                                    <div
-                                                        className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                                                        {products
-                                                            .filter(product =>
-                                                                product.attributes.description.includes('25') || product.attributes.description.includes('10')
-                                                            )
-                                                            .map((product) => {
-                                                                const is10Reports = product.attributes.description.includes('10');
-                                                                const is25Reports = product.attributes.description.includes('25');
+                                    {/*                    <CardContent className="relative z-10 px-6 pb-12">*/}
+                                    {/*                        {loadingProducts ? (*/}
+                                    {/*                            <div className="flex justify-center py-12">*/}
+                                    {/*                                <LoadingSpinner />*/}
+                                    {/*                            </div>*/}
+                                    {/*                        ) : (*/}
+                                    {/*                            <div*/}
+                                    {/*                                className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">*/}
+                                    {/*                                {products*/}
+                                    {/*                                    .filter(product =>*/}
+                                    {/*                                        product.attributes.description.includes('25') || product.attributes.description.includes('10')*/}
+                                    {/*                                    )*/}
+                                    {/*                                    .map((product) => {*/}
+                                    {/*                                        const is10Reports = product.attributes.description.includes('10');*/}
+                                    {/*                                        const is25Reports = product.attributes.description.includes('25');*/}
 
-                                                                return (
-                                                                    <div
-                                                                        key={product.id}
-                                                                        className="relative group h-full"
-                                                                    >
-                                                                        {/* Reduced glow on hover */}
-                                                                        <div
-                                                                            className={`absolute -inset-0.5 rounded-3xl blur-md opacity-0 transition duration-300 group-hover:opacity-50 ${is25Reports
-                                                                                ? 'bg-linear-to-r from-blue-500/40 via-purple-500/40 to-blue-500/40'
-                                                                                : 'bg-linear-to-r from-gray-300/40 via-gray-400/40 to-gray-300/40'
-                                                                                }`} />
+                                    {/*                                        return (*/}
+                                    {/*                                            <div*/}
+                                    {/*                                                key={product.id}*/}
+                                    {/*                                                className="relative group h-full"*/}
+                                    {/*                                            >*/}
+                                    {/*                                                <div*/}
+                                    {/*                                                    className={`absolute -inset-0.5 rounded-3xl blur-md opacity-0 transition duration-300 group-hover:opacity-50 ${is25Reports*/}
+                                    {/*                                                        ? 'bg-linear-to-r from-blue-500/40 via-purple-500/40 to-blue-500/40'*/}
+                                    {/*                                                        : 'bg-linear-to-r from-gray-300/40 via-gray-400/40 to-gray-300/40'*/}
+                                    {/*                                                        }`} />*/}
 
-                                                                        <div
-                                                                            className="relative h-full p-8 bg-white rounded-2xl border border-gray-200 shadow-xs flex flex-col">
-                                                                            {/* Premium badge for 30 reports */}
-                                                                            {is25Reports && (
-                                                                                <div
-                                                                                    className="absolute -top-4 right-8">
-                                                                                    <div className="relative">
-                                                                                        <div
-                                                                                            className="absolute inset-0 rounded-full blur-xs bg-blue-500/20"></div>
-                                                                                        <div
-                                                                                            className="relative px-4 py-1.5 rounded-full bg-linear-to-r from-blue-600 to-purple-600 text-white text-sm font-medium flex items-center gap-2">
-                                                                                            <LucideCrown
-                                                                                                className="w-4 h-4" />
-                                                                                            Most Popular
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            )}
+                                    {/*                                                <div*/}
+                                    {/*                                                    className="relative h-full p-8 bg-white rounded-2xl border border-gray-200 shadow-xs flex flex-col">*/}
+                                    {/*                                                    /!* Premium badge for 30 reports *!/*/}
+                                    {/*                                                    {is25Reports && (*/}
+                                    {/*                                                        <div*/}
+                                    {/*                                                            className="absolute -top-4 right-16.5">*/}
+                                    {/*                                                            <div className="relative">*/}
+                                    {/*                                                                <div*/}
+                                    {/*                                                                    className="absolute inset-0 rounded-full blur-xs bg-blue-500/20"></div>*/}
+                                    {/*                                                                <div*/}
+                                    {/*                                                                    className="relative px-3 py-1.5 rounded-full bg-linear-to-r from-blue-600 to-purple-600 text-white text-sm font-medium flex items-center gap-2">*/}
+                                    {/*                                                                    <LucideCrown*/}
+                                    {/*                                                                        className="w-4 h-4" />*/}
+                                    {/*                                                                    Most Popular*/}
+                                    {/*                                                                </div>*/}
+                                    {/*                                                            </div>*/}
+                                    {/*                                                        </div>*/}
+                                    {/*                                                    )}*/}
 
-                                                                            <div className="flex flex-col h-full">
-                                                                                {/* Title and Price */}
-                                                                                <div className="text-center mb-8">
-                                                                                    <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                                                                                        {is10Reports ? '10 Report Credits' : '25 Report Credits'}
-                                                                                    </h3>
-                                                                                    <div
-                                                                                        className="flex items-center justify-center gap-2">
-                                                                                        <span
-                                                                                            className="text-4xl font-bold bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-                                                                                            {product.attributes.price_formatted}
-                                                                                        </span>
-                                                                                        <span
-                                                                                            className="text-gray-500">/pack</span>
-                                                                                    </div>
-                                                                                </div>
+                                    {/*                                                    <div className="flex flex-col h-full">*/}
+                                    {/*                                                        <div className="text-center mb-8">*/}
+                                    {/*                                                            <h3 className="text-2xl font-semibold text-gray-900 mb-3">*/}
+                                    {/*                                                                {is10Reports ? 'Lite Pack' : 'Pro Pack'}*/}
+                                    {/*                                                            </h3>*/}
+                                    {/*                                                            <div*/}
+                                    {/*                                                                className="flex items-center justify-center gap-2">*/}
+                                    {/*                                                                <span*/}
+                                    {/*                                                                    className="text-4xl font-bold bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">*/}
+                                    {/*                                                                    {product.attributes.price_formatted}*/}
+                                    {/*                                                                </span>*/}
+                                    {/*                                                                <span*/}
+                                    {/*                                                                    className="text-gray-500 text-base mt-3">/pack</span>*/}
+                                    {/*                                                            </div>*/}
+                                    {/*                                                        </div>*/}
 
-                                                                                {/* Features list */}
-                                                                                <div
-                                                                                    className="space-y-4 grow mb-8">
-                                                                                    <div
-                                                                                        className="flex items-center gap-3">
-                                                                                        <div
-                                                                                            className={`w-6 h-6 rounded-full flex items-center justify-center ${is25Reports ? 'bg-blue-100' : 'bg-gray-100'
-                                                                                                }`}>
-                                                                                            <LucideFileText
-                                                                                                className={`w-3.5 h-3.5 ${is25Reports ? 'text-blue-600' : 'text-gray-600'}`} />
-                                                                                        </div>
-                                                                                        <span className="text-gray-700">
-                                                                                            {is10Reports ? '10 Generations' : '25 Generations'}
-                                                                                        </span>
-                                                                                    </div>
-                                                                                    <div
-                                                                                        className="flex items-center gap-3">
-                                                                                        <div
-                                                                                            className={`w-6 h-6 rounded-full flex items-center justify-center ${is25Reports ? 'bg-blue-100' : 'bg-gray-100'
-                                                                                                }`}>
-                                                                                            <LucideRefreshCcw
-                                                                                                className={`w-3.5 h-3.5 ${is25Reports ? 'text-blue-600' : 'text-gray-600'}`} />
-                                                                                        </div>
-                                                                                        <span className="text-gray-700">
-                                                                                            Extends Monthly Limit
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
+                                    {/*                                                        <div*/}
+                                    {/*                                                            className="space-y-4 grow mb-8">*/}
+                                    {/*                                                            <div*/}
+                                    {/*                                                                className="flex items-center gap-3">*/}
+                                    {/*                                                                <div*/}
+                                    {/*                                                                    className={`w-6 h-6 rounded-full flex items-center justify-center ${is25Reports ? 'bg-blue-100' : 'bg-gray-100'*/}
+                                    {/*                                                                        }`}>*/}
+                                    {/*                                                                    <LucideFileText*/}
+                                    {/*                                                                        className={`w-3.5 h-3.5 ${is25Reports ? 'text-blue-600' : 'text-gray-600'}`} />*/}
+                                    {/*                                                                </div>*/}
+                                    {/*                                                                <span className="text-gray-700">*/}
+                                    {/*                                                                    {is10Reports ? '10 Generations' : '25 Generations'}*/}
+                                    {/*                                                                </span>*/}
+                                    {/*                                                            </div>*/}
+                                    {/*                                                            <div*/}
+                                    {/*                                                                className="flex items-center gap-3">*/}
+                                    {/*                                                                <div*/}
+                                    {/*                                                                    className={`w-6 h-6 rounded-full flex items-center justify-center ${is25Reports ? 'bg-blue-100' : 'bg-gray-100'*/}
+                                    {/*                                                                        }`}>*/}
+                                    {/*                                                                    <LucideRefreshCw*/}
+                                    {/*                                                                        className={`w-3.5 h-3.5 ${is25Reports ? 'text-blue-600' : 'text-gray-600'}`} />*/}
+                                    {/*                                                                </div>*/}
+                                    {/*                                                                <span className="text-gray-700">*/}
+                                    {/*                                                                    Extends Monthly Limit*/}
+                                    {/*                                                                </span>*/}
+                                    {/*                                                            </div>*/}
+                                    {/*                                                        </div>*/}
 
-                                                                                {/* Description */}
-                                                                                <p className="text-gray-600 text-center text-sm mb-8">
-                                                                                    {is10Reports
-                                                                                        ? 'Perfect for occasional report generation needs'
-                                                                                        : 'Perfect for frequent report generation needs'}
-                                                                                </p>
+                                    {/*                                                        /!* Description *!/*/}
+                                    {/*                                                        /!*<p className="text-gray-600 text-center text-sm mb-8">*!/*/}
+                                    {/*                                                        /!*    {is10Reports*!/*/}
+                                    {/*                                                        /!*        ? 'Perfect for occasional report generation needs'*!/*/}
+                                    {/*                                                        /!*        : 'Perfect for frequent report generation needs'}*!/*/}
+                                    {/*                                                        /!*</p>*!/*/}
 
-                                                                                {/* Button */}
-                                                                                <button
-                                                                                    onClick={() => handlePurchase(product)}
-                                                                                    className={`w-full py-3.5 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group ${is25Reports
-                                                                                        ? 'bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-xs hover:shadow-md'
-                                                                                        : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-                                                                                        }`}
-                                                                                >
-                                                                                    <LucideSparkles
-                                                                                        className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${is25Reports ? 'text-white' : 'text-gray-600'
-                                                                                            }`}
-                                                                                    />
-                                                                                    <span>Get {is10Reports ? '10' : '25'} Credits</span>
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                );
-                                                            })}
-                                                    </div>
-                                                )}
+                                    {/*                                                        /!* Button *!/*/}
+                                    {/*                                                        <button*/}
+                                    {/*                                                            onClick={() => handlePurchase(product)}*/}
+                                    {/*                                                            className={`w-full py-2 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer ${is25Reports*/}
+                                    {/*                                                                ? 'bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-xs hover:shadow-md'*/}
+                                    {/*                                                                : 'bg-gray-100 hover:bg-gray-200 text-gray-800'*/}
+                                    {/*                                                                }`}*/}
+                                    {/*                                                        >*/}
+                                    {/*                                                            <span>Get {is10Reports ? '10' : '25'} Credits</span>*/}
+                                    {/*                                                        </button>*/}
+                                    {/*                                                    </div>*/}
+                                    {/*                                                </div>*/}
+                                    {/*                                            </div>*/}
+                                    {/*                                        );*/}
+                                    {/*                                    })}*/}
+                                    {/*                            </div>*/}
+                                    {/*                        )}*/}
 
-                                                {/* Footer section */}
-                                                {/* <div className="text-center mt-12">
-                          <p className="text-sm text-gray-600">
-                            Need a custom plan?
-                            <button className="ml-1 text-purple-600 hover:text-purple-700 font-medium">
-                              Contact our team
-                            </button>
-                          </p>
-                        </div> */}
-                                            </CardContent>
-                                        </Card>
-                                    </div>
+                                    {/*                        /!* Footer section *!/*/}
+                                    {/*                        /!* <div className="text-center mt-12">*/}
+                                    {/*  <p className="text-sm text-gray-600">*/}
+                                    {/*    Need a custom plan?*/}
+                                    {/*    <button className="ml-1 text-purple-600 hover:text-purple-700 font-medium">*/}
+                                    {/*      Contact our team*/}
+                                    {/*    </button>*/}
+                                    {/*  </p>*/}
+                                    {/*</div> *!/*/}
+                                    {/*                    </CardContent>*/}
+                                    {/*                </Card>*/}
+                                    {/*            </div>*/}
 
                                     {/* Account Actions */}
                                     <div className="bg-white rounded-xl p-6 shadow-xs space-y-5">
@@ -813,7 +802,7 @@ export default function AccountPage() {
                                                 </div>
                                                 <button
                                                     onClick={handleSignOut}
-                                                    className="relative overflow-hidden group flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20"
+                                                    className="relative overflow-hidden group flex items-center gap-2 px-6 py-2 bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all duration-300 ease-out hover:shadow-lg hover:shadow-purple-500/20 cursor-pointer"
                                                 >
                                                     Sign Out
                                                 </button>

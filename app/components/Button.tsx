@@ -11,7 +11,7 @@ const getIconRotationClass = (iconPosition: 'left' | 'right') =>
     iconPosition === 'left' ? 'group-hover:rotate-45' : 'group-hover:-rotate-45';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    Icon: ElementType;
+    Icon?: ElementType;
     text: string;
     iconPosition?: 'left' | 'right';
     disabled?: boolean;
@@ -23,7 +23,7 @@ export const Button = ({
                            text,
                            onClick,
                            iconPosition = 'left',
-                           disabled = false,
+                           disabled,
                            iconClasses = ''
                        }: ButtonProps) => {
     // Content wrapper classes
@@ -36,9 +36,9 @@ export const Button = ({
         <button onClick={onClick} className={BUTTON_BASE_CLASSES} disabled={disabled}>
             <div className={BACKGROUND_EFFECT_CLASSES}/>
             <div className={contentWrapperClasses}>
-                <Icon
+                {Icon && <Icon
                     className={`w-5 h-5 transition-transform duration-300 ease-out ${getIconRotationClass(iconPosition)} ${iconClasses}`}
-                />
+                />}
                 <span className="font-semibold text-sm">{text}</span>
             </div>
         </button>

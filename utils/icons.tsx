@@ -270,3 +270,25 @@ export const LucideRefreshCw = (props: SVGProps<SVGSVGElement>) => (
         </g>
     </svg>
 );
+
+export const LucideFileStack = (props: SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
+        <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}>
+            <path d="M21 7h-3a2 2 0 0 1-2-2V2"></path>
+            <path d="M21 6v6.5c0 .8-.7 1.5-1.5 1.5h-7c-.8 0-1.5-.7-1.5-1.5v-9c0-.8.7-1.5 1.5-1.5H17Z"></path>
+            <path d="M7 8v8.8c0 .3.2.6.4.8s.5.4.8.4H15"></path>
+            <path d="M3 12v8.8c0 .3.2.6.4.8s.5.4.8.4H11"></path>
+        </g>
+    </svg>
+);
+
+export const LucideShare2 = (props: SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
+        <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}>
+            <circle cx={18} cy={5} r={3}></circle>
+            <circle cx={6} cy={12} r={3}></circle>
+            <circle cx={18} cy={19} r={3}></circle>
+            <path d="m8.59 13.51l6.83 3.98m-.01-10.98l-6.82 3.98"></path>
+        </g>
+    </svg>
+);

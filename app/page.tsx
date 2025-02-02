@@ -5,18 +5,19 @@ import {
     LucideArrowRight,
     LucideBot,
     LucideCheck,
-    LucideCheckCircle2,
     LucideClock,
+    LucideFileStack,
     LucideFileText,
     LucideGitCommitHorizontal,
     LucideGitPullRequest,
-    LucideMessageSquare,
+    LucideShare2,
     LucideSparkles,
     LucideX,
     SimpleIconsGithub,
     SimpleIconsLinkedin,
     SimpleIconsTwitter
 } from "@/utils/icons";
+import Image from "next/image";
 
 // const PricingSection = () => {
 //     const plans = [
@@ -683,36 +684,35 @@ const LandingPage = () => {
     const features: Feature[] = [
         {
             icon: <SimpleIconsGithub className="w-8 h-8 text-white"/>,
-            title: "Connect Repository",
-            description: "Link your GitHub repository to start tracking your development activity automatically.",
+            title: "Connect GitHub",
+            description: "Seamlessly integrate your GitHub account to get started with Devvoir.",
             bgGradient: "from-purple-500 to-purple-600",
             features: [
-                "One-click GitHub integration",
-                "Automatic repository scanning",
-                "Real-time synchronization"
+                "Simple account integration",
+                "Organization account support",
+                "Secure OAuth authentication"
             ]
         },
         {
-            icon: <LucideGitPullRequest className="w-8 h-8 text-white"/>,
-
-            title: "Track Activity",
-            description: "We monitor your commits, pull requests, and code reviews throughout the day.",
+            icon: <LucideFileStack className="w-8 h-8 text-white"/>,
+            title: "Select & Generate",
+            description: "Choose your account, repositories, and PRs to generate detailed reports.",
             bgGradient: "from-blue-500 to-blue-600",
             features: [
-                "Commit tracking",
-                "PR monitoring",
-                "Code review analytics"
+                "Choose your account",
+                "Select specific repositories",
+                "Pick relevant pull requests"
             ]
         },
         {
-            icon: <LucideMessageSquare className="w-8 h-8 text-white"/>,
-            title: "Generate Reports",
-            description: "Receive automated standup reports with your daily development progress.",
+            icon: <LucideShare2 className="w-8 h-8 text-white"/>,
+            title: "Share & Iterate",
+            description: "Share your generated reports and regenerate them as needed.",
             bgGradient: "from-indigo-500 to-indigo-600",
             features: [
-                "Daily summaries",
-                "Custom report formats",
-                "Team overview"
+                "One-click copying",
+                "Easy report sharing",
+                "Flexible regeneration options"
             ]
         }
     ];
@@ -1020,9 +1020,18 @@ const LandingPage = () => {
             <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b">
                 <div className="container mx-auto px-4 max-w-7xl py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                        <LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>
+                        {/*<LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>*/}
+                        <Image
+                            src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}
+                            alt={"Devvoir Logo"}
+                            width={32}
+                            height={32}
+                            priority
+                            loading="eager"
+                            quality={90}
+                        />
                         <div className="relative">
-                            <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                            <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Devvoir
                                 <div className="absolute -right-16 -top-1 transform rotate-12 group">
                                     <div className="relative">
@@ -1087,19 +1096,18 @@ const LandingPage = () => {
                         <div className="text-left">
                             <div
                                 className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full text-purple-800 font-medium text-sm mb-6">
-                                🚀 Automated Daily Dev Updates
+                                ✨ Smart Dev Reports in Seconds
                             </div>
-                            <h2 className="text-4xl md:text-6xl font-bold text-black mb-6 leading-tight">
-                                Your Daily Report
+                            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6 leading-tight">
+                                Code to Reports,
                                 <span
                                     className="block text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-blue-600">
-                                    Writes Itself
+                                   Instantly Writes Itself
                                 </span>
                             </h2>
                             <p className="text-xl text-gray-800 mb-8">
-                                Let AI analyze your commits and PRs to automatically generate comprehensive end-of-day
-                                reports.
-                                No more manual standups or forgetting what you worked on.
+                                Stop spending time writing standup reports. Devvoir transforms your GitHub activity into
+                                polished, professional updates in just a few clicks.
                             </p>
                             <Button Icon={LucideArrowRight} text={"Get Started"} iconPosition={"right"}
                                     onClick={() => router.push("/auth/signin")}/>
@@ -1177,8 +1185,8 @@ const LandingPage = () => {
 
             {/* How It Works */}
             <section className="py-24 relative overflow-hidden">
-                {/* Background decorative elements */}
-                <div className="absolute inset-0 bg-linear-to-br from-purple-50 via-white to-blue-50"/>
+                {/* Enhanced background effects */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50"/>
                 <div
                     className="absolute top-0 left-1/4 w-96 h-96 bg-purple-200/30 rounded-full filter blur-3xl opacity-30 animate-pulse"/>
                 <div
@@ -1187,67 +1195,53 @@ const LandingPage = () => {
                 <div className="container mx-auto px-4 max-w-7xl relative">
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <div
-                            className="inline-flex items-center justify-center px-4 py-1.5 mb-6 bg-purple-100 rounded-full">
-                            <span
-                                className="text-sm font-medium bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                                How It Works
-                            </span>
+                            className="inline-flex items-center justify-center px-4 py-2 bg-purple-100 rounded-full mb-6">
+            <span
+                className="text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              How It Works
+            </span>
                         </div>
                         <h3 className="text-4xl font-bold mb-6 text-gray-900">
-                            Three Simple Steps to
+                            Simple Steps to
                             <span
-                                className="block text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-blue-600">
-                                Automate Your Updates
-                            </span>
+                                className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+              Generate Your Reports
+            </span>
                         </h3>
                         <p className="text-xl text-gray-600">
-                            Devvoir automatically analyzes your GitHub activity at the end of each day to create
-                            detailed standup reports.
+                            Generate comprehensive daily reports from your GitHub activity with just a few clicks.
                         </p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {features.map((feature, idx) => (
                             <div key={idx} className="relative group">
-                                {/* Updated connector line between cards */}
-                                {/*{idx < features.length - 1 && (*/}
-                                {/*    <div className="hidden md:block absolute top-1/4 -right-4 w-8">*/}
-                                {/*        <div className="relative h-0.5 bg-linear-to-r from-purple-300 to-blue-300">*/}
-                                {/*            <ArrowRight*/}
-                                {/*                className="absolute -right-1 -top-2 w-5 h-5 text-blue-500 animate-pulse"/>*/}
-                                {/*        </div>*/}
-                                {/*    </div>*/}
-                                {/*)}*/}
-
                                 <Card
-                                    className="relative h-full overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 group-hover:-translate-y-1 backdrop-blur-xs bg-white/80">
+                                    className="relative h-full overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 group-hover:-translate-y-1 backdrop-blur-sm bg-white/90">
                                     <div
-                                        className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                                        className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
 
                                     <div className="p-8 relative">
-                                        {/* Icon with gradient background */}
+                                        {/* Enhanced icon container */}
                                         <div
-                                            className={`w-16 h-16 rounded-2xl bg-linear-to-br ${feature.bgGradient} flex items-center justify-center mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-lg`}>
+                                            className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center mb-6 transform transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-lg`}>
                                             {feature.icon}
-                                            {/* Decorative shine effect */}
                                             <div
-                                                className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700"/>
+                                                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700"/>
                                         </div>
 
-                                        {/* Content */}
+                                        {/* Content with enhanced typography */}
                                         <h4 className="text-2xl font-bold text-gray-900 mb-3">{feature.title}</h4>
-                                        <p className="text-gray-600 mb-6">{feature.description}</p>
+                                        <p className="text-gray-600 mb-6 leading-relaxed">{feature.description}</p>
 
-                                        {/* Features list with gradient bullets */}
-                                        <ul className="space-y-3">
+                                        {/* Enhanced feature list */}
+                                        <ul className="space-y-4">
                                             {feature.features.map((item, i) => (
                                                 <li key={i} className="flex items-center gap-3 text-gray-700">
-                                                    <div className="relative">
-                                                        <LucideCheckCircle2
-                                                              className={"w-5 h-5 text-green-500 shrink-0"}/>
-                                                        <div className="absolute inset-0 animate-ping opacity-20">
-                                                            <LucideCheckCircle2
-                                                                  className="w-5 h-5 text-green-500 shrink-0"/>
+                                                    <div className="relative flex-shrink-0 w-5 h-5">
+                                                        <div
+                                                            className={`w-5 h-5 rounded-full bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center`}>
+                                                            <div className="w-2 h-2 bg-white rounded-full"/>
                                                         </div>
                                                     </div>
                                                     <span
@@ -1257,9 +1251,9 @@ const LandingPage = () => {
                                         </ul>
                                     </div>
 
-                                    {/* Decorative gradient line */}
+                                    {/* Enhanced gradient line */}
                                     <div
-                                        className={`absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r ${feature.bgGradient}`}/>
+                                        className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.bgGradient}`}/>
                                 </Card>
                             </div>
                         ))}
@@ -1296,7 +1290,7 @@ const LandingPage = () => {
                                 <div>
                                     <div className="flex items-center mb-4">
                                         <LucideGitPullRequest
-                                              className="w-5 h-5 text-violet-600 mr-2"/>
+                                            className="w-5 h-5 text-violet-600 mr-2"/>
                                         <h5 className="text-lg font-semibold text-gray-900">Pull Requests</h5>
                                     </div>
                                     <div className="space-y-3">
@@ -1324,7 +1318,7 @@ const LandingPage = () => {
                                 <div>
                                     <div className="flex items-center mb-4">
                                         <LucideGitCommitHorizontal
-                                              className="w-5 h-5 text-indigo-600 mr-2"/>
+                                            className="w-5 h-5 text-indigo-600 mr-2"/>
                                         <h5 className="text-lg font-semibold text-gray-900">Commits</h5>
                                     </div>
                                     <div className="space-y-3">
@@ -1443,7 +1437,7 @@ const LandingPage = () => {
                             {/* Stats */}
                             <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6">
                                 {[
-                                    {value: '2,000+', label: 'Active Users'},
+                                    {value: '100+', label: 'Active Users'},
                                     {value: '30 mins', label: 'Saved Daily'},
                                     {value: '95%', label: 'Satisfaction'}
                                 ].map((stat, idx) => (
@@ -1465,7 +1459,16 @@ const LandingPage = () => {
             <footer className="bg-white border-t">
                 <div className="container mx-auto px-4 max-w-7xl py-12">
                     <div className="flex items-center justify-center gap-2 mb-8">
-                        <LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>
+                        <Image
+                            src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}
+                            alt={"Devvoir Logo"}
+                            width={32}
+                            height={32}
+                            priority
+                            loading="eager"
+                            quality={90}
+                        />
+                        {/*<LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>*/}
                         <div className="relative">
                             <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Devvoir
@@ -1485,13 +1488,13 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-center gap-6 mb-4">
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://x.com/DevvoirAI" target="_blank" rel="noopener noreferrer">
                             <SimpleIconsTwitter
-                                  className="w-6 h-6 text-blue-500 hover:text-blue-400 transition-colors"/>
+                                className="w-6 h-6 text-blue-500 hover:text-blue-400 transition-colors"/>
                         </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.linkedin.com/company/devvoir" target="_blank" rel="noopener noreferrer">
                             <SimpleIconsLinkedin
-                                  className="w-6 h-6 text-blue-700 hover:text-blue-600 transition-colors"/>
+                                className="w-6 h-6 text-blue-700 hover:text-blue-600 transition-colors"/>
                         </a>
                     </div>
                     <div className="text-center text-gray-800">
