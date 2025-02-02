@@ -6,6 +6,8 @@ import {SpeedInsights} from '@vercel/speed-insights/next';
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { StructuredData } from './components/StructuredData'
+import { generateMetadata } from './components/Metadata'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -13,10 +15,7 @@ const inter = Inter({
   weight: "400",
 })
 
-export const metadata: Metadata = {
-  title: "Devvoir",
-  description: "Track your development activity with ease.",
-};
+export const metadata: Metadata = generateMetadata({});
 
 export default function RootLayout({
   children,
@@ -29,7 +28,11 @@ export default function RootLayout({
       <Link rel="icon" href="favicon.ico"/>
     </Head>
     <body className={inter.className}>
-        <Providers>{children}<SpeedInsights /></Providers>
+        <Providers>
+          <StructuredData />
+          {children}
+          <SpeedInsights />
+        </Providers>
       </body>
     </html>
   );
