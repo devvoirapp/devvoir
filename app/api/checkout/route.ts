@@ -70,7 +70,7 @@ export async function POST(req: Request) {
             variant: {
               data: {
                 type: "variants",
-                id: "679839"
+                id: process.env.NEXT_PUBLIC_LEMON_SQUEEZY_PRO_PLAN_VARIANT_ID
               }
             }
           }
