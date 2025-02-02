@@ -38,7 +38,6 @@ export default function AccountPage() {
 
     // State for products
     const [products, setProducts] = useState<Product[]>([]);
-    const [loadingProducts, setLoadingProducts] = useState(true);
 
     // Handle PR changes toggle
     // const handlePRChangesToggle = async (checked: boolean) => {
@@ -156,8 +155,6 @@ export default function AccountPage() {
             } catch (error) {
                 console.error('Error fetching products:', error);
                 setProducts([]);
-            } finally {
-                setLoadingProducts(false);
             }
         };
 

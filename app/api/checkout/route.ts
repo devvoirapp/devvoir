@@ -50,7 +50,6 @@ export async function POST(req: Request) {
             checkout_options: {
               button_color: "#7047EB",
               logo: true,
-              media: true,
               discount: true,
             },
             checkout_data: {
