@@ -547,28 +547,14 @@ function ReportGenerator() {
         setCopyError('');
         
         try {
-            const formattedText = aiSummary
-                // Convert markdown headings
-                .replace(/^### (.*$)/gm, '*$1*')
-                .replace(/^## (.*$)/gm, '*$1*')
-                .replace(/^# (.*$)/gm, '*$1*')
-                // Convert markdown bold
-                .replace(/\*\*(.*?)\*\*/g, '*$1*')
-                // Convert markdown italic
-                .replace(/_(.*?)_/g, '_$1_')
-                // Convert markdown code blocks
-                .replace(/```([\s\S]*?)```/g, '```$1```')
-                .replace(/`([^`]+)`/g, '`$1`')
-                // Convert markdown lists
-                .replace(/^\s*[-*+]\s+/gm, '• ')
-                .replace(/^\s*\d+\.\s+/gm, '$& ')
-                // Clean up extra spaces and add proper spacing
-                .split('\n')
-                .map(line => line.trim())
-                .filter(line => line.length > 0)
-                .join('\n\n');
+            // Remove all markdown formatting and fix bullet points
+            const plainText = aiSummary
+                .replace(/[#*_`]/g, '') // Remove markdown symbols except dash/bullet
+                .replace(/^\s*[-•]\s+/gm, '• ') // Standardize bullet points
+                .replace(/\n\s*\n/g, '\n') // Replace multiple newlines with single
+                .trim();
 
-            await navigator.clipboard.writeText(formattedText);
+            await navigator.clipboard.writeText(plainText);
             setCopySuccess(true);
             
             // Reset success state after 2 seconds
@@ -795,7 +781,7 @@ function ReportGenerator() {
                           }
                           className={`
                                             w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg 
-                                            text-sm font-medium transition-all duration-300
+                                            text-sm font-medium transition-all duration-300 cursor-pointer
                                             ${
                               !loading &&
                               selectedPR.length > 0 &&
@@ -1202,7 +1188,8 @@ function ReportGenerator() {
                                       setRegenerateLoading(false);
                                     }
                                   }}
-                                  className="w-full group relative"
+                                  disabled={regenerateLoading || loading}
+                                  className="w-full group relative cursor-pointer disabled:cursor-not-allowed"
                                 >
                                     <div
                                         className="absolute inset-0 bg-linear-to-r from-purple-500/0 to-blue-500/0 group-hover:from-purple-500/5 group-hover:to-blue-500/5 rounded-xl transition-all duration-300"/>
@@ -1291,18 +1278,16 @@ function ReportGenerator() {
                         {/* Copy Button */}
                         <button
                           onClick={handleCopyReport}
-                          disabled={copyLoading}
+                          disabled={regenerateLoading || loading}
                           className="relative overflow-hidden flex items-center justify-center w-8 h-8 bg-gray-50 hover:bg-gray-100 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200 focus:outline-hidden"
                           title="Copy report to clipboard"
                           aria-label="Copy report to clipboard"
                         >
-                          {copyLoading ? (
-                            <LoadingSpinner />
-                          ) : copySuccess ? (
-                              <LucideCheck className="w-4 h-4 text-purple-500"/>
-                          ) : (
-                              <LucideCopy className="w-4 h-4 text-gray-600"/>
-                          )}
+                            {copySuccess ? (
+                                <LucideCheck className="w-4 h-4 text-purple-500"/>
+                            ) : (
+                                <LucideCopy className="w-4 h-4 text-gray-600"/>
+                            )}
                         </button>
                         {copyError && (
                           <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-max">
@@ -1388,7 +1373,7 @@ function ReportGenerator() {
                             >
                                 <LucideArrowLeft className="w-4 h-4"/>
                             </button>
-                            <span className="text-black">
+                              <span className="text-black text-sm">
                               {currentGeneration} / {totalGenerations}
                             </span>
                             <button
@@ -1414,7 +1399,7 @@ function ReportGenerator() {
                             </button>
                             <button
                               onClick={handleCopyReport}
-                              disabled={copyLoading}
+                              disabled={regenerateLoading || loading}
                               className="relative overflow-hidden flex items-center justify-center w-8 h-8 bg-gray-50 hover:bg-gray-100 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200 focus:outline-hidden"
                               title="Copy report to clipboard"
                               aria-label="Copy report to clipboard"
