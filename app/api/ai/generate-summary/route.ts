@@ -155,8 +155,10 @@ export async function POST(request: Request): Promise<NextResponse> {
             }))
         };
 
+        // pixtral-12b-2409
+
         const result = await mistral.chat({
-            model: "pixtral-12b-2409",
+            model: "mistral-small-latest",
             messages: [
                 { role: "system", content: reportSystemPrompt },
                 { role: "user", content: `Please analyze these code changes and generate a structured report:\n${JSON.stringify(formattedChanges, null, 2)}` }
