@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '@/app/lib/prisma';
 
 // type UserSettings = {
 //     id: string;
@@ -75,8 +73,6 @@ export async function GET() {
             { error: 'Failed to fetch user settings' },
             { status: 500 }
         );
-    } finally {
-        await prisma.$disconnect();
     }
 }
 
@@ -126,7 +122,5 @@ export async function POST(request: Request) {
             { error: 'Failed to update generations' },
             { status: 500 }
         );
-    } finally {
-        await prisma.$disconnect();
     }
 }

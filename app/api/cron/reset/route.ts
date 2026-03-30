@@ -1,8 +1,6 @@
 import {NextResponse} from 'next/server';
-import {PrismaClient} from '@prisma/client';
 import {getNextMonthResetDate} from '@/utils/getNextMonthResetDate';
-
-const prisma = new PrismaClient();
+import prisma from '@/app/lib/prisma';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;

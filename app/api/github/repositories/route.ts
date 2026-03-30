@@ -118,7 +118,6 @@ export async function POST(request: NextRequest) {
             )
             .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
 
-        console.log('Accessible repos:', accessibleRepos.map((r) => ({ name: r.name, owner: r.owner.login })));
         return NextResponse.json(accessibleRepos);
     } catch (error) {
         console.error('Error in repositories route:', error);

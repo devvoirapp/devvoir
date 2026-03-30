@@ -115,8 +115,8 @@ export const authOptions: AuthOptions = {
                                 createdAt: new Date(),
                                 lastReportDate: null,
                                 monthlyReportCount: 0,
-                                monthlyReportLimit: 20,
-                                totalAvailableReports: 20,
+                                monthlyReportLimit: 15,
+                                totalAvailableReports: 15,
                                 reportCount: 0,
                             }
                         });
@@ -128,7 +128,6 @@ export const authOptions: AuthOptions = {
             return token;
         },
         async session({ session, token }: { session: Session; token: CustomToken }) {
-            console.log({token})
             if (token && session.user) {
                 session.access_token = token.access_token;
                 session.user.login = token.login || '';
@@ -149,5 +148,5 @@ export const authOptions: AuthOptions = {
         maxAge: 24 * 60 * 60, // 24 hours
     },
     secret: process.env.NEXTAUTH_SECRET,
-    debug: true,
+    debug: false,
 };

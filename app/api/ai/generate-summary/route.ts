@@ -1,11 +1,10 @@
 import {NextResponse} from 'next/server';
-import {PrismaClient} from '@prisma/client';
+import prisma from '@/app/lib/prisma';
 import {getServerSession} from 'next-auth';
 import {authOptions} from '@/app/api/auth/[...nextauth]/options';
 import MistralClient from '@mistralai/mistralai';
-import {reportSystemPrompt} from '@/app/prompts/report-system-prompt';
+import {reportSystemPrompt, buildSystemPrompt} from '@/app/prompts/report-system-prompt';
 
-const prisma = new PrismaClient();
 
 // Add logging for environment variable
 if (!process.env.MISTRAL_API_KEY) {
@@ -60,7 +59,7 @@ async function manageUserSettings(userId: string, email: string) {
     }
 
     const settings = user.settings;
-    const hasMonthlyGenerationsLeft = settings.monthlyReportCount < 20; // Default monthly limit
+    const hasMonthlyGenerationsLeft = settings.monthlyReportCount < settings.monthlyReportLimit;
     const hasPurchasedGenerationsLeft = settings.usedPurchasedReports < settings.additionalReportsPurchased;
 
     // If monthly generations are available, use those first
@@ -135,7 +134,7 @@ export async function POST(request: Request): Promise<NextResponse> {
             );
         }
 
-        const { prChanges } = body;
+        const { prChanges, tone, length } = body;
 
         if (!prChanges.files || !Array.isArray(prChanges.files)) {
             return NextResponse.json(
@@ -157,15 +156,17 @@ export async function POST(request: Request): Promise<NextResponse> {
 
         // pixtral-12b-2409
 
+        const systemPrompt = buildSystemPrompt(tone, length);
+
         const result = await mistral.chat({
-            model: "mistral-small-latest",
+            model: "mistral-medium-latest",
             messages: [
-                { role: "system", content: reportSystemPrompt },
+                { role: "system", content: systemPrompt },
                 { role: "user", content: `Please analyze these code changes and generate a structured report:\n${JSON.stringify(formattedChanges, null, 2)}` }
             ],
             temperature: 0.2,
             topP: 0.8,
-            maxTokens: 1024,
+            maxTokens: length === 'comprehensive' ? 2048 : length === 'concise' ? 512 : 1024,
         });
         
         const processedResponse = result.choices[0].message.content
@@ -281,7 +282,7 @@ ${stateEmoji} ${state.toUpperCase()} | PR #${prNumber}
             return NextResponse.json(
                 {
                     error: 'Monthly limit reached',
-                    message: `You have reached your monthly limit of 20 summaries. Your limit will reset on ${resetDate.toISOString().split('T')[0]}.`
+                    message: `You have reached your monthly limit of 15 summaries. Your limit will reset on ${resetDate.toISOString().split('T')[0]}.`
                 },
                 { status: 429 }
             );

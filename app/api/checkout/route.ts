@@ -22,10 +22,6 @@ export async function POST(req: Request) {
     const data: CheckoutData = await req.json();
     const {productId, user, product} = data;
 
-    console.log("Checkout Data:", data)
-
-    console.log('Creating checkout with variant:', productId);
-
     // Lemon Squeezy API endpoint
     const url = 'https://api.lemonsqueezy.com/v1/checkouts';
 
@@ -80,7 +76,6 @@ export async function POST(req: Request) {
     });
 
     const checkoutData = await response.json();
-    console.log('Checkout Response:', checkoutData?.errors || checkoutData);
 
     if (checkoutData.errors) {
       return NextResponse.json(checkoutData, { status: 400 });

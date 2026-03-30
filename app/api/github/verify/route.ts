@@ -26,7 +26,6 @@ export async function POST(request: NextRequest) {
         });
 
         if (!response.ok) {
-            console.log({responseStatus: response.status})
             if (response.status === 404) {
                 return NextResponse.json({ error: 'GitHub account not found' }, { status: 404 });
             }
@@ -37,7 +36,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(data, { status: 200 });
 
     } catch (error) {
-        console.log({error})
+        console.error('Error verifying GitHub account:', error);
         return NextResponse.json({ error: 'Failed to verify GitHub account' }, { status: 500 });
     }
 }
