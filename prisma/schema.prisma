@@ -7,7 +7,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Account {
@@ -76,8 +75,8 @@ model UserSettings {
   lastReportDate        DateTime?
   monthlyReportCount    Int       @default(0)
   monthlyResetDate      DateTime? @db.Date()
-  monthlyReportLimit    Int       @default(20)
-  totalAvailableReports Int      @default(20)
+  monthlyReportLimit    Int       @default(15)
+  totalAvailableReports Int      @default(15)
   additionalReportsPurchased     Int       @default(0)     // Total number of additional reports purchased
   usedPurchasedReports  Int       @default(0)     // Number of purchased reports that have been used
   createdAt             DateTime  @default(now())

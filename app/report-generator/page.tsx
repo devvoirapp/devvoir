@@ -17,6 +17,8 @@ import {
     LucideCircleCheck,
     LucideCircleX,
     LucideCopy,
+    LucideDownload,
+    LucideFileDown,
     LucideGitBranch,
     LucideGitPullRequest,
     LucideInfo,
@@ -133,6 +135,15 @@ function ReportGenerator() {
     const [generations, setGenerations] = useState<Generation[]>([]);
     const [totalGenerations, setTotalGenerations] = useState<number>(generations.length);
     const [currentGeneration, setCurrentGeneration] = useState<number>(1);
+
+    const [reportTone, setReportTone] = useState<'standup' | 'detailed' | 'executive'>('detailed');
+    const [reportLength, setReportLength] = useState<'concise' | 'standard' | 'comprehensive'>('standard');
+
+    const [startDate, setStartDate] = useState<string>('');
+    const [endDate, setEndDate] = useState<string>('');
+    const [branches, setBranches] = useState<DropdownOption[]>([]);
+    const [selectedBranch, setSelectedBranch] = useState<string>('');
+    const [isLoadingBranches, setIsLoadingBranches] = useState<boolean>(false);
 
     const reportRef = useRef<HTMLDivElement>(null);
 
@@ -416,8 +427,49 @@ function ReportGenerator() {
         }
     };
 
+    // Fetch branches for the selected repository
+    const fetchBranches = async ({ owner, repo }: { owner: string; repo: string }): Promise<void> => {
+        setIsLoadingBranches(true);
+        setBranches([]);
+        setSelectedBranch('');
+        try {
+            const response = await fetch('/api/github/branches', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ owner, repo }),
+            });
+            if (!response.ok) throw new Error('Failed to fetch branches');
+            const data = await response.json();
+            const formatted: DropdownOption[] = [
+                { value: '', label: 'All branches' },
+                ...data.map((b: { name: string }) => ({
+                    value: b.name,
+                    label: b.name,
+                    icon: 'lucide:git-branch',
+                })),
+            ];
+            setBranches(formatted);
+        } catch (error) {
+            console.error('Error fetching branches:', error);
+        } finally {
+            setIsLoadingBranches(false);
+        }
+    };
+
     // Fetch pull requests for the selected repository
-    const fetchPullRequests = async ({ owner, repo }: { owner: string; repo: string }): Promise<void> => {
+    const fetchPullRequests = async ({
+        owner,
+        repo,
+        start,
+        end,
+        branch,
+    }: {
+        owner: string;
+        repo: string;
+        start?: string;
+        end?: string;
+        branch?: string;
+    }): Promise<void> => {
         setIsLoadingPRs(true);
         setPullRequests([]);
         setSelectedPR('');
@@ -428,7 +480,7 @@ function ReportGenerator() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ owner, repo }),
+                body: JSON.stringify({ owner, repo, startDate: start, endDate: end, branch }),
             });
 
             if (!response.ok) {
@@ -468,7 +520,13 @@ function ReportGenerator() {
             setRepository(value);
             setSelectedPR('');
             setPrChanges([]);
-            await fetchPullRequests({owner: selectedOrg, repo: value});
+            setStartDate('');
+            setEndDate('');
+            setSelectedBranch('');
+            await Promise.all([
+                fetchBranches({ owner: selectedOrg, repo: value }),
+                fetchPullRequests({ owner: selectedOrg, repo: value }),
+            ]);
         }
     };
 
@@ -506,7 +564,7 @@ function ReportGenerator() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ prChanges: formattedPRChange }),
+                body: JSON.stringify({ prChanges: formattedPRChange, tone: reportTone, length: reportLength }),
             });
 
             const data = await response.json();
@@ -574,55 +632,91 @@ function ReportGenerator() {
         }
     };
 
+    const handleExportMarkdown = () => {
+        const content = aiSummary || generations[currentGeneration - 1]?.summary;
+        if (!content) return;
+
+        const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        const prLabel = selectedPR ? `pr-${selectedPR}` : 'report';
+        link.download = `devvoir-${prLabel}-${new Date().toISOString().split('T')[0]}.md`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    };
+
+    const handleExportPDF = () => {
+        const content = aiSummary || generations[currentGeneration - 1]?.summary;
+        if (!content) return;
+
+        const printWindow = window.open('', '_blank');
+        if (!printWindow) return;
+
+        const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Devvoir Report${selectedPR ? ` - PR #${selectedPR}` : ''}</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 700px; margin: 40px auto; color: #1f2937; line-height: 1.6; }
+    h1, h2, h3 { color: #6d28d9; }
+    blockquote { border-left: 4px solid #6d28d9; margin-left: 0; padding-left: 16px; color: #4b5563; }
+    code { background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #f3f4f6; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <div id="report-content"></div>
+  <script>
+    const { marked } = require ? require('marked') : { marked: null };
+  </script>
+</body>
+</html>`;
+
+        printWindow.document.write(htmlContent);
+        printWindow.document.close();
+
+        // Use marked to convert markdown — inject it via a script tag
+        const script = printWindow.document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+        script.onload = () => {
+            // @ts-ignore
+            printWindow.document.getElementById('report-content').innerHTML = printWindow.marked.parse(content);
+            setTimeout(() => {
+                printWindow.print();
+            }, 200);
+        };
+        printWindow.document.head.appendChild(script);
+    };
+
     return (
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            {/* {error && (
-                        <div className="fixed top-20 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-sm" role="alert">
-                            <strong className="font-bold">Error: </strong>
-                            <span className="block sm:inline">{error}</span>
-                            <button 
-                                onClick={() => setError('')} 
-                                className="absolute top-0 right-0 px-4 py-3"
-                            >
-                                <span className="sr-only">Close</span>
-                                <svg className="h-4 w-4 fill-current" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    )} */}
-              <div className="flex items-center justify-center gap-2">
-                {/*<LucideGitCommitHorizontal className="w-8 h-8 text-purple-600"/>*/}
+        <header className="bg-white/80 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-50">
+          <div className="container mx-auto px-4 max-w-3xl py-3.5 flex justify-between items-center">
+            <div className="flex items-center gap-2.5">
                 <Image
                     src={"https://res.cloudinary.com/db2dcqpub/image/upload/v1738306393/zi1exolnzswosyutcksf.png"}
                     alt={"Devvoir Logo"}
-                    width={32}
-                    height={32}
+                    width={26}
+                    height={26}
                     priority
                     loading="eager"
                     quality={90}
                 />
-              <div className="relative">
-                  <h1 className="text-3xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  Devvoir
-                  <div className="absolute -right-16 -top-1 transform rotate-12 group">
-                    <div className="relative">
-                        <span
-                            className="absolute inset-0 bg-purple-600 rounded-lg blur-xs group-hover:blur-md transition-all duration-300"></span>
-                        <span
-                            className="relative block px-2 py-1 text-xs font-bold text-white bg-linear-to-r from-purple-600 to-blue-600 rounded-lg shadow-lg transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300">
-                        BETA
-                      </span>
-                      <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-purple-600 rounded-full animate-ping"></span>
-                    </div>
-                  </div>
-                </h1>
-              </div>
+                <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    Devvoir
+                </span>
+                <span className="text-xs font-semibold text-white bg-gradient-to-r from-purple-600 to-blue-600 px-2 py-0.5 rounded-full">
+                    BETA
+                </span>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
                 <Button Icon={LucideUsers} text={"Account"} onClick={() => router.push("/account")} disabled={false}/>
                 <Button Icon={LucideLogOut} text={"Sign Out"} onClick={() => signOut({callbackUrl: "/"})}
                         disabled={false}/>
@@ -635,10 +729,9 @@ function ReportGenerator() {
               <QuotaWarning used={monthlyQuota.used + monthlyQuota.usedPurchasedReports} total={monthlyQuota.totalAvailableReports} resetDate={monthlyQuota.resetDate}/>
           )}
 
-          <main className={"container mx-auto px-4 pb-12 pt-8"}>
-          <div className="max-w-3xl mx-auto space-y-8">
-              <div
-                  className="bg-white/80 backdrop-blur-xs rounded-2xl border border-gray-200/80 p-8 shadow-xl shadow-purple-500/5">
+          <main className={"container mx-auto px-4 pb-12 pt-8 max-w-3xl"}>
+          <div className="space-y-6">
+              <div className="bg-white rounded-2xl border border-gray-100 p-7 shadow-sm">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Account Selection Dropdown */}
                 <Dropdown
@@ -679,64 +772,85 @@ function ReportGenerator() {
                 {/* Show other fields only when repository is selected */}
                 {
                   <div className="space-y-6 animate-fadeIn">
-                      {/*<div className={`relative flex rounded-lg px-5 py-4 shadow-md focus:outline-hidden border-2 border-gray-200 */}
-                    {/*    bg-gray-50/50 cursor-not-allowed transition-all duration-300 mt-6`}*/}
-                    {/*>*/}
-                    {/*    <span className="absolute -top-2.5 right-3 inline-flex items-center text-[8px] font-bold tracking-wider uppercase*/}
-                    {/*        bg-purple-600 text-white rounded-full px-2 py-0.5 shadow-sm">*/}
-                    {/*        Coming Soon*/}
-                    {/*    </span>*/}
-                    {/*    <div className="flex w-full items-center justify-between">*/}
-                    {/*        <div className="flex items-center">*/}
-                    {/*            <div className="text-sm">*/}
-                    {/*                <div className="flex items-center">*/}
-                    {/*                    <span className="font-medium text-gray-600">Date Range</span>*/}
-                    {/*                </div>*/}
-                    {/*                <div className="text-gray-400">*/}
-                    {/*                    Select time period for the report*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*        <div className="shrink-0 text-gray-300">*/}
-                    {/*            <Clock className="h-6 w-6" />*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                      {/*<div className="flex items-center bg-linear-to-r from-purple-50 to-blue-50 rounded-md px-3 py-2 -mt-2 mb-4 border border-purple-100">*/}
-                      {/*    <InfoIcon className="h-4 w-4 text-purple-600 mr-2 shrink-0" />*/}
-                    {/*    <span className="text-sm text-gray-700">*/}
-                    {/*        All pull requests are currently included. Date filtering will be enabled soon.*/}
-                    {/*    </span>*/}
-                    {/*</div>*/}
-
-                    <div
-                        className={`relative flex rounded-lg px-5 py-4 shadow-md focus:outline-hidden border-2 border-gray-200 
-                                        bg-gray-50/50 cursor-not-allowed transition-all duration-300 mt-6`}
-                    >
-                      <span
-                        className="absolute -top-2.5 right-3 inline-flex items-center text-[8px] font-bold tracking-wider uppercase
-                                            bg-purple-600 text-white rounded-full px-2 py-0.5 shadow-sm"
-                      >
-                        Coming Soon
-                      </span>
-                      <div className="flex w-full items-center justify-between">
-                        <div className="flex items-center">
-                          <div className="text-sm">
-                            <div className="flex items-center">
-                              <span className="font-medium text-gray-600">
-                                Select Branches
-                              </span>
+                    {/* Date Range Filter */}
+                    <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1.5">Date Range</label>
+                        <div className="grid grid-cols-2 gap-2">
+                            <div>
+                                <label className="block text-[10px] text-gray-400 mb-1">From</label>
+                                <input
+                                    type="date"
+                                    value={startDate}
+                                    onChange={(e) => {
+                                        setStartDate(e.target.value);
+                                        if (repository) {
+                                            fetchPullRequests({
+                                                owner: selectedOrg,
+                                                repo: repository,
+                                                start: e.target.value,
+                                                end: endDate,
+                                                branch: selectedBranch,
+                                            });
+                                        }
+                                    }}
+                                    disabled={!repository}
+                                    className="w-full rounded-lg border border-gray-200 px-3 py-2 text-xs text-gray-700 bg-white disabled:bg-gray-50 disabled:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-400 transition-colors"
+                                />
                             </div>
-                            <div className="text-gray-400">
-                              Choose branches to include in the report
+                            <div>
+                                <label className="block text-[10px] text-gray-400 mb-1">To</label>
+                                <input
+                                    type="date"
+                                    value={endDate}
+                                    min={startDate || undefined}
+                                    onChange={(e) => {
+                                        setEndDate(e.target.value);
+                                        if (repository) {
+                                            fetchPullRequests({
+                                                owner: selectedOrg,
+                                                repo: repository,
+                                                start: startDate,
+                                                end: e.target.value,
+                                                branch: selectedBranch,
+                                            });
+                                        }
+                                    }}
+                                    disabled={!repository}
+                                    className="w-full rounded-lg border border-gray-200 px-3 py-2 text-xs text-gray-700 bg-white disabled:bg-gray-50 disabled:text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-400 transition-colors"
+                                />
                             </div>
-                          </div>
                         </div>
-                        <div className="shrink-0 text-gray-300">
-                            <LucideGitBranch className="h-6 w-6"/>
-                        </div>
-                      </div>
                     </div>
+
+                    {/* Branch Selection */}
+                    <Dropdown
+                        Icon={LucideGitBranch}
+                        label="Base Branch"
+                        options={branches}
+                        value={selectedBranch}
+                        onChange={(value) => {
+                            if (typeof value === 'string') {
+                                setSelectedBranch(value);
+                                if (repository) {
+                                    fetchPullRequests({
+                                        owner: selectedOrg,
+                                        repo: repository,
+                                        start: startDate,
+                                        end: endDate,
+                                        branch: value,
+                                    });
+                                }
+                            }
+                        }}
+                        placeholder={
+                            isLoadingBranches
+                                ? 'Loading branches...'
+                                : 'All branches'
+                        }
+                        searchable
+                        loading={isLoadingBranches}
+                        disabled={!repository}
+                    />
 
                     {/* Pull Requests Dropdown */}
                       <div>
@@ -746,7 +860,6 @@ function ReportGenerator() {
                               options={pullRequests}
                               value={selectedPR}
                               onChange={(value) => {
-                                  console.log({value});
                                   if (typeof value === "string") {
                                       setSelectedPR(value);
                                   }
@@ -766,6 +879,48 @@ function ReportGenerator() {
                               only the first 10 files.
                           </div>
                       </div>
+
+                    {/* Report Style Options */}
+                    <div className="grid grid-cols-2 gap-3">
+                        <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1.5">Tone</label>
+                            <div className="flex rounded-lg border border-gray-200 overflow-hidden text-xs">
+                                {(['standup', 'detailed', 'executive'] as const).map((t) => (
+                                    <button
+                                        key={t}
+                                        type="button"
+                                        onClick={() => setReportTone(t)}
+                                        className={`flex-1 py-2 px-1 font-medium capitalize transition-colors ${
+                                            reportTone === t
+                                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white'
+                                                : 'bg-white text-gray-500 hover:bg-gray-50'
+                                        }`}
+                                    >
+                                        {t === 'standup' ? 'Standup' : t === 'detailed' ? 'Detailed' : 'Executive'}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <div>
+                            <label className="block text-xs font-medium text-gray-500 mb-1.5">Length</label>
+                            <div className="flex rounded-lg border border-gray-200 overflow-hidden text-xs">
+                                {(['concise', 'standard', 'comprehensive'] as const).map((l) => (
+                                    <button
+                                        key={l}
+                                        type="button"
+                                        onClick={() => setReportLength(l)}
+                                        className={`flex-1 py-2 px-1 font-medium capitalize transition-colors ${
+                                            reportLength === l
+                                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white'
+                                                : 'bg-white text-gray-500 hover:bg-gray-50'
+                                        }`}
+                                    >
+                                        {l === 'concise' ? 'Brief' : l === 'standard' ? 'Standard' : 'Full'}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
 
                     {/* Generate Report Button */}
                       {/*    <Button Icon={loading ? LucideRefreshCw : aiSummary ? LucideCheck : LucideSparkles}*/}
@@ -811,9 +966,9 @@ function ReportGenerator() {
                   </div>
                 }
               </form>
-                  <div className={'text-gray-600 text-sm text-center mt-3'}>Devvoir may make mistakes. Please verify
-                      important details.
-                  </div>
+                  <p className="text-xs text-gray-400 text-center mt-3">
+                      Devvoir may make mistakes. Please verify important details.
+                  </p>
             </div>
 
             {/* PR Changes Cards */}
@@ -1083,33 +1238,18 @@ function ReportGenerator() {
 
             {/* AI Summary Card */}
             {(aiSummary || isGeneratingSummary || error) && (
-              <div ref={reportRef} className="mt-8 relative">
-                {/* Decorative background elements */}
-                  <div
-                      className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-indigo-50/50 rounded-2xl"/>
-                  <div
-                      className="absolute -inset-0.5 bg-linear-to-r from-purple-500 to-indigo-500 rounded-2xl opacity-10 blur-xs group-hover:opacity-20 transition-opacity duration-500"/>
-
-                  <div
-                      className="bg-white/90 backdrop-blur-xs rounded-2xl overflow-hidden border border-gray-100/50 shadow-xl shadow-purple-100/30 relative z-0">
-                      <div
-                          className="bg-linear-to-br from-white via-white to-purple-50/30 px-8 py-6 border-b border-gray-100/50">
+              <div ref={reportRef} className="relative">
+                  <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                      <div className="h-0.5 bg-gradient-to-r from-purple-600 to-indigo-600"/>
+                      <div className="px-7 py-5 border-b border-gray-100">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className="relative z-0 group/icon">
-                            <div
-                                className="absolute -inset-0.5 bg-linear-to-r from-purple-600 to-indigo-600 rounded-full opacity-75 blur-sm group-hover/icon:opacity-100 transition-all duration-300"/>
-                            <div
-                                className="relative z-0 flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-purple-600 to-indigo-600 ring-2 ring-purple-400/50">
-                                <LucideBrain
-                                    className="w-5 h-5 text-white transform group-hover/icon:scale-110 transition-transform duration-300"/>
-                          </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                            <LucideBrain className="w-4 h-4 text-white"/>
                         </div>
                         <div>
-                            <h3 className="text-xl font-semibold bg-linear-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                            AI Generated Report
-                          </h3>
-                          <p className="text-sm text-gray-500 mt-0.5">
+                            <h3 className="text-base font-semibold text-gray-900">AI Generated Report</h3>
+                          <p className="text-xs text-gray-400 mt-0.5">
                             Generated on{" "}
                             {new Date(
                               generations[currentGeneration - 1]?.createdAt ||
@@ -1275,6 +1415,28 @@ function ReportGenerator() {
                           )}
                         </div>
 
+                        {/* Export Markdown Button */}
+                        <button
+                          onClick={handleExportMarkdown}
+                          disabled={regenerateLoading || loading}
+                          className="relative overflow-hidden flex items-center justify-center w-8 h-8 bg-gray-50 hover:bg-gray-100 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200 focus:outline-hidden"
+                          title="Download as Markdown"
+                          aria-label="Download as Markdown"
+                        >
+                            <LucideFileDown className="w-4 h-4 text-gray-600"/>
+                        </button>
+
+                        {/* Export PDF Button */}
+                        <button
+                          onClick={handleExportPDF}
+                          disabled={regenerateLoading || loading}
+                          className="relative overflow-hidden flex items-center justify-center w-8 h-8 bg-gray-50 hover:bg-gray-100 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200 focus:outline-hidden"
+                          title="Download as PDF"
+                          aria-label="Download as PDF"
+                        >
+                            <LucideDownload className="w-4 h-4 text-gray-600"/>
+                        </button>
+
                         {/* Copy Button */}
                         <button
                           onClick={handleCopyReport}
@@ -1306,35 +1468,27 @@ function ReportGenerator() {
 
                   <div className="relative">
                     {isGeneratingSummary ? (
-                      <div className="px-8 py-12">
-                        <div className="flex flex-col items-center justify-center gap-4">
-                          <div className="relative">
-                            <div className="absolute inset-0 rounded-full blur-xl opacity-20" />
-                            <div className="relative">
-                              <LoadingSpinner fullScreen={false} />
-                            </div>
-                          </div>
-                          <p className="text-gray-600 animate-pulse">
+                      <div className="px-7 py-12">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <LoadingSpinner fullScreen={false} />
+                          <p className="text-sm text-gray-400 animate-pulse">
                             Generating your report...
                           </p>
                         </div>
                       </div>
                     ) : error ? (
-                      <div className="px-8 py-6">
-                        <div className="flex items-start gap-3 text-red-600">
-                            <LucideCircleX className="w-5 h-5 mt-0.5"/>
+                      <div className="px-7 py-6">
+                        <div className="flex items-start gap-3 p-4 bg-red-50 rounded-xl border border-red-100">
+                            <LucideCircleX className="w-4 h-4 text-red-500 mt-0.5 shrink-0"/>
                           <div>
-                            <p className="font-medium">
-                              Error Generating Report
-                            </p>
-                            <p className="text-sm text-red-500 mt-1">{error}</p>
+                            <p className="text-sm font-medium text-red-700">Error Generating Report</p>
+                            <p className="text-xs text-red-500 mt-0.5">{error}</p>
                           </div>
                         </div>
                       </div>
                     ) : (
                       <div>
-                        <div className="divide-y divide-gray-100/50">
-                          <div className="px-8 py-6 prose prose-purple max-w-none">
+                        <div className="px-7 py-6">
                             <div
                               dangerouslySetInnerHTML={{
                                 __html: marked(
@@ -1343,15 +1497,11 @@ function ReportGenerator() {
                                   { breaks: true }
                                 ),
                               }}
-                              className="prose prose-purple prose-headings:text-purple-900 prose-a:text-purple-600 hover:prose-a:text-purple-700
-                                                                 prose-strong:text-purple-700 prose-code:text-purple-700 prose-pre:bg-purple-50
-                                                                 prose-blockquote:border-l-purple-500 prose-blockquote:bg-purple-50/50
-                                                                 prose-img:rounded-xl prose-hr:border-purple-200"
+                              className="prose prose-purple prose-sm max-w-none prose-headings:text-purple-900 prose-a:text-purple-600 hover:prose-a:text-purple-700 prose-strong:text-purple-700 prose-code:text-purple-700 prose-pre:bg-purple-50 prose-blockquote:border-l-purple-500 prose-blockquote:bg-purple-50/50 prose-hr:border-purple-100"
                             />
-                          </div>
                         </div>
                         {totalGenerations > 1 && (
-                          <div className="flex items-center justify-start gap-2 mt-4 px-8 pb-5">
+                          <div className="flex items-center gap-2 px-7 pb-5 border-t border-gray-100 pt-4">
                             <button
                               onClick={() => {
                                 if (currentGeneration > 1) {
@@ -1361,19 +1511,18 @@ function ReportGenerator() {
                                   );
                                   setTimeout(() => {
                                     window.scrollTo({
-                                      top: document.documentElement
-                                        .scrollHeight,
+                                      top: document.documentElement.scrollHeight,
                                       behavior: "smooth",
                                     });
                                   }, 100);
                                 }
                               }}
                               disabled={currentGeneration <= 1}
-                              className="p-2 rounded-lg bg-purple-50 text-purple-600 hover:bg-purple-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                              className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                             >
                                 <LucideArrowLeft className="w-4 h-4"/>
                             </button>
-                              <span className="text-black text-sm">
+                            <span className="text-xs text-gray-500 tabular-nums">
                               {currentGeneration} / {totalGenerations}
                             </span>
                             <button
@@ -1385,31 +1534,30 @@ function ReportGenerator() {
                                   );
                                   setTimeout(() => {
                                     window.scrollTo({
-                                      top: document.documentElement
-                                        .scrollHeight,
+                                      top: document.documentElement.scrollHeight,
                                       behavior: "smooth",
                                     });
                                   }, 100);
                                 }
                               }}
                               disabled={currentGeneration >= totalGenerations}
-                              className="p-2 rounded-lg bg-purple-50 text-purple-600 hover:bg-purple-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                              className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                             >
                                 <LucideArrowRight className="w-4 h-4"/>
                             </button>
                             <button
                               onClick={handleCopyReport}
                               disabled={regenerateLoading || loading}
-                              className="relative overflow-hidden flex items-center justify-center w-8 h-8 bg-gray-50 hover:bg-gray-100 rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200 focus:outline-hidden"
+                              className="flex items-center justify-center w-7 h-7 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                               title="Copy report to clipboard"
                               aria-label="Copy report to clipboard"
                             >
                               {copyLoading ? (
                                 <LoadingSpinner />
                               ) : copySuccess ? (
-                                  <LucideCheck className="w-4 h-4 text-purple-500"/>
+                                  <LucideCheck className="w-3.5 h-3.5 text-purple-500"/>
                               ) : (
-                                  <LucideCopy className="w-4 h-4 text-gray-600"/>
+                                  <LucideCopy className="w-3.5 h-3.5 text-gray-500"/>
                               )}
                             </button>
                           </div>
@@ -1434,8 +1582,9 @@ export default ReportGenerator;
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
-    
+
     .animate-gradient {
         animation: gradient 3s ease infinite;
     }
+
 `}</style>

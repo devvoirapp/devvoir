@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options';
-import prisma from '@/app/lib/prisma';
 import { Account } from '@/app/report-generator/page';
 
 interface GitHubRepo {
@@ -17,8 +16,6 @@ export async function GET() {
     try {
         const session = await getServerSession(authOptions);
 
-        console.log('Session:', session);
-
         if (!session?.access_token) {
             return NextResponse.json({ error: 'No access token found' }, { status: 401 });
         }
@@ -26,20 +23,6 @@ export async function GET() {
         if (!session?.user) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
-
-        // Get the account from the database to check scopes
-        const dbAccount = await prisma.account.findFirst({
-            where: {
-                userId: session.user.id,
-                provider: 'github',
-            },
-        });
-
-        console.log('Database Account:', {
-            provider: dbAccount?.provider,
-            scope: dbAccount?.scope,
-            tokenType: dbAccount?.token_type,
-        });
 
         const headers = {
             'Accept': 'application/vnd.github+json',
@@ -53,11 +36,6 @@ export async function GET() {
         });
 
         const userData = await userResponse.json();
-        console.log('GitHub User Data:', {
-            login: userData.login,
-            id: userData.id,
-            type: userData.type,
-        });
 
         let allAccounts: Account[] = [];
 

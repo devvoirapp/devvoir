@@ -2,7 +2,7 @@ import React from 'react';
 import {useRouter} from "next/navigation";
 import {LucideSparkles} from "@/utils/icons";
 
-const QuotaWarning = ({ used = 0, total = 20, resetDate }) => {
+const QuotaWarning = ({ used = 0, total = 15, resetDate }) => {
     const router = useRouter()
     const percentage = Math.round((used / total) * 100);
     const formattedDate = new Date(resetDate).toLocaleDateString("en-GB", {

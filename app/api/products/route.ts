@@ -25,8 +25,6 @@ export async function GET() {
 
     const products = await response.json();
 
-    console.log({products: products.data})
-
     return NextResponse.json(products.data);
 
   } catch (error) {
